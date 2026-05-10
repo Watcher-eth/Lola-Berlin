@@ -12,7 +12,6 @@ export default function ApartmentsPage() {
         title="Wohnungen"
         description="Wohnungen in Lola: interaktive Grundrissübersicht, exemplarische Verfügbarkeiten und Einblick in die Wohnungsqualitäten des Hauses."
         path="/apartments"
-        imagePath="/rooms/Wohnzimmer1.JPG"
       />
 
       <div className="bg-[#f7f3eb] text-[var(--ink)]">

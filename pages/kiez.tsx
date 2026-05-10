@@ -344,7 +344,6 @@ export default function KiezPage() {
         title="Kiez"
         description="Der Güntzelkiez rund um LOLA: Bildung, Parks, Cafés, Restaurants, Nahversorgung, Anbindung und Karte für Menschen, die hier wohnen möchten."
         path="/kiez"
-        imagePath="/neighbourhood/Volkspark.png"
       />
 
       <div className="bg-[#f7f3ea] text-[#171713]">
