@@ -11,6 +11,7 @@ export default function Home() {
         title="Lola"
         description="Lola ist ein neues Wohnhaus in Berlin mit zeitgemäßen Wohnungen, markanter Straßenpräsenz und einem Kiez für den echten Alltag."
         path="/"
+        imagePath="/Lola.jpg"
       />
 
       <div className="bg-[var(--paper)] text-[var(--ink)]">
