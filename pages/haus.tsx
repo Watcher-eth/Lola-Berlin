@@ -1,8 +1,8 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
+import { SeoHead } from "@/components/SeoHead";
 import { SiteHeader } from "@/components/SiteHeader";
 
 type RevealProps = {
@@ -72,14 +72,11 @@ function DetailList() {
 export default function HousePage() {
   return (
     <>
-      <Head>
-        <title>Haus | Lola</title>
-        <meta
-          name="description"
-          content="LOLA in Berlin-Wilmersdorf: Geschichte, Sanierung und Lage des Hauses in der Holsteinischen Straße 18."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+      <SeoHead
+        title="Haus"
+        description="LOLA in Berlin-Wilmersdorf: Geschichte, Sanierung und Lage des Hauses in der Holsteinischen Straße 18."
+        path="/haus"
+      />
 
       <div className="bg-[#f7f3ea] text-[#171713]">
         <div className="relative min-h-[108px] bg-[#f7f3ea] md:min-h-[124px]">

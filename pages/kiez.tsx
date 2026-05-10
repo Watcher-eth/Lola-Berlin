@@ -1,7 +1,7 @@
-import Head from "next/head";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
+import { SeoHead } from "@/components/SeoHead";
 import { SiteHeader } from "@/components/SiteHeader";
 
 type Section = {
@@ -340,14 +340,12 @@ function TransitPanel() {
 export default function KiezPage() {
   return (
     <>
-      <Head>
-        <title>Kiez | Lola</title>
-        <meta
-          name="description"
-          content="Der Güntzelkiez rund um LOLA: Bildung, Parks, Cafés, Restaurants, Nahversorgung, Anbindung und Karte für Menschen, die hier wohnen möchten."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+      <SeoHead
+        title="Kiez"
+        description="Der Güntzelkiez rund um LOLA: Bildung, Parks, Cafés, Restaurants, Nahversorgung, Anbindung und Karte für Menschen, die hier wohnen möchten."
+        path="/kiez"
+        imagePath="/neighbourhood/Volkspark.png"
+      />
 
       <div className="bg-[#f7f3ea] text-[#171713]">
         <div className="relative min-h-[108px] bg-[#f7f3ea] md:min-h-[124px]">
