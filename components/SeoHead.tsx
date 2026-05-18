@@ -4,21 +4,20 @@ type SeoHeadProps = {
   title: string;
   description: string;
   path?: string;
-  imagePath?: string;
 };
 
 const siteName = "Lola";
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://lola.berlin";
+const ogImagePath = "/Lola.jpg";
 
 export function SeoHead({
   title,
   description,
   path = "/",
-  imagePath = "/Lola.jpg",
 }: SeoHeadProps) {
   const canonicalUrl = new URL(path, baseUrl).toString();
   const fullTitle = title === siteName ? siteName : `${title} | ${siteName}`;
-  const ogImageUrl = new URL(imagePath, baseUrl).toString();
+  const ogImageUrl = new URL(ogImagePath, baseUrl).toString();
 
   return (
     <Head>
@@ -42,8 +41,14 @@ export function SeoHead({
       />
       <meta key="og:url" property="og:url" content={canonicalUrl} />
       <meta key="og:image" property="og:image" content={ogImageUrl} />
-      <meta key="og:image:width" property="og:image:width" content="1200" />
-      <meta key="og:image:height" property="og:image:height" content="630" />
+      <meta
+        key="og:image:secure_url"
+        property="og:image:secure_url"
+        content={ogImageUrl}
+      />
+      <meta key="og:image:type" property="og:image:type" content="image/jpeg" />
+      <meta key="og:image:width" property="og:image:width" content="2400" />
+      <meta key="og:image:height" property="og:image:height" content="1792" />
       <meta
         key="og:image:alt"
         property="og:image:alt"
