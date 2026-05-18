@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/router";
+import { LegalFooter } from "@/components/LegalFooter";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -23,6 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         />
         <Component {...pageProps} />
+        <LegalFooter />
       </motion.div>
     </AnimatePresence>
   );

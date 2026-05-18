@@ -37,18 +37,36 @@ export default async function handler(
     return res.status(405).json({ message: "Method not allowed." });
   }
 
-  const { name, email, apartmentCode, apartmentTitle, floorLabel } = req.body as {
+  const {
+    name,
+    email,
+    rooms,
+    message,
+    apartmentCode,
+    apartmentTitle,
+    floorLabel,
+    privacyAccepted,
+  } = req.body as {
     name?: string;
     email?: string;
+    rooms?: string;
+    message?: string;
     apartmentCode?: string;
     apartmentTitle?: string;
     floorLabel?: string;
+    privacyAccepted?: boolean;
   };
 
   if (!name?.trim() || !email?.trim()) {
     return res
       .status(400)
       .json({ message: "Name und E-Mail sind erforderlich." });
+  }
+
+  if (privacyAccepted !== true) {
+    return res
+      .status(400)
+      .json({ message: "Die Datenschutzhinweise müssen bestätigt werden." });
   }
 
   const transport = getTransport();
@@ -67,9 +85,12 @@ export default async function handler(
     "",
     `Name: ${name.trim()}`,
     `E-Mail: ${email.trim()}`,
+    `Größe/Zimmer: ${rooms?.trim() || "-"}`,
+    `Nachricht: ${message?.trim() || "-"}`,
     `Wohnung: ${apartmentCode?.trim() || "Allgemeine Anfrage"}`,
     `Titel: ${apartmentTitle?.trim() || "-"}`,
     `Etage: ${floorLabel?.trim() || "-"}`,
+    "Datenschutz bestätigt: ja",
   ].join("\n");
 
   try {

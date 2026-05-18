@@ -50,12 +50,12 @@ function CupIcon() {
 }
 
 const kiezFacts = [
-  { text: "2 Minuten zum Preußenpark", icon: <TramIcon /> },
+  { text: "4 Minuten zum Volkspark Wilmersdorf", icon: <TreeIcon /> },
   { text: "10 Minuten zum KaDeWe" },
-  { text: "15 Minuten bis zum Grunewald", icon: <TreeIcon /> },
-  { text: "8 Minuten zur U Güntzelstraße" },
+  { text: "17 Minuten bis zum Brandenburger Tor", icon: <TramIcon /> },
+  { text: "7 Minuten zur U-Bahn Güntzelstraße" },
   { text: "5 Minuten zum Wochenmarkt" },
-  { text: "1 Espresso bis zum Wachsein", icon: <CupIcon /> },
+  { text: "1 Minute zum nächsten Espresso und zum Wachwerden", icon: <CupIcon /> },
 ];
 
 export function LandingKiezSection() {
@@ -77,7 +77,7 @@ export function LandingKiezSection() {
              <div className="relative aspect-[1.78/1] overflow-hidden">
                 <Image
                   src="https://www.berlin.de/binaries/asset/image_assets/912168/source/1625477461/1000x500/"
-                  alt="Blick auf das Haus Lola"
+                  alt="Schwarz-Weiß-Foto aus dem Güntzelkiez"
                   fill
                   sizes="(min-width: 1024px) 38vw, 100vw"
                   className="object-cover object-center grayscale contrast-[1.05] brightness-[0.92]"
@@ -89,7 +89,7 @@ export function LandingKiezSection() {
               <div className="relative aspect-[1.78/1] overflow-hidden">
                 <Image
                   src="https://images.ctfassets.net/if6f7uzjzqut/3qQk0SK7UaDXkt0ZcbNJUY/fdc73a6a26cb47172fb9568f3175cc39/Berlin_WiIlmersdorf_Charlottenburg_Fassade_Wohnen.jpg"
-                  alt="Blick auf das Haus Lola"
+                  alt="Schwarz-Weiß-Foto aus Wilmersdorf"
                   fill
                   sizes="(min-width: 1024px) 38vw, 100vw"
                   className="object-cover object-[50%_30%] grayscale contrast-[1.05] brightness-[0.92]"

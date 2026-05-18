@@ -30,23 +30,23 @@ type MagazineRevealProps = {
 
 const sections: Section[] = [
   {
-    eyebrow: "01 Bildung",
-    title: "Ein Umfeld, in dem Familien langfristig planen können.",
+    eyebrow: "01 Kiez",
+    title: "Der Güntzelkiez - Ihr neues Zuhause im Herzen von Berlin.",
     iconKind: "education",
     intro:
-      "Wer in ein neues Zuhause zieht, denkt nicht nur an Quadratmeter. Es geht um Wege, Schulprofile, Betreuung, Sprachen, Alltagssicherheit und die Frage, ob Kinder hier gut groß werden können.",
+      "Das LOLA entsteht in einer ruhigen Seitenstraße im Güntzelkiez, nahe dem Kurfürstendamm.",
     body:
-      "Rund um LOLA liegt eine ungewöhnlich dichte Bildungslandschaft: Grundschulen, weiterführende Schulen, bilinguale und internationale Angebote sowie Kitas und Kinderläden im nahen Umfeld. Das macht den Güntzelkiez besonders für Familien attraktiv, die ein ruhiges Wohnumfeld suchen, ohne auf städtische Vielfalt zu verzichten.",
+      "Hier im Viertel gibt es alles, was ein gepflegtes und urbanes Lebensgefühl in den gehobenen und zeitgemäßen Wohnungen unterstützt. Kleine, inhabergeführte Läden in der direkten Umgebung bieten alles für den täglichen Bedarf oder auch das Besondere - und das immer mit einem Lächeln.",
     image: {
       src: "/neighbourhood/GoetheGym.png",
       alt: "Goethe-Gymnasium im Umfeld des Güntzelkiezes",
     },
     items: [
-      "Nelson Mandela School, staatlich bilingual mit Deutsch und Englisch",
-      "Comenius-Schule, Birger-Forell-Grundschule und weitere Grundschulen im Umfeld",
-      "Robert-Jungk-Oberschule, Goethe-Gymnasium, Friedrich-Ebert-Gymnasium und Marie-Curie-Gymnasium",
-      "Nederlandse School Berlijn, Wangari Maathai International School und Annie Heuser Schule",
-      "Kitas, Kinderläden und Hortangebote, darunter Ourania e.V. und KuBiS in der Holsteinischen Straße",
+      "Blumenläden, Schneideratelier, Weinladen, Lederreparatur, Drogerie und Mode für Groß und Klein",
+      "Verschiedene Cafés und leckere Restaurants in der direkten Nachbarschaft",
+      "Eine große Auswahl an deutschen und internationalen Schulen und Kitas",
+      "Parks und Spielplätze für Singles, Paare und Familien",
+      "LOLA wurde 1905 erbaut und verbindet nach der Kernsanierung Berliner Altbaucharme mit Design und technischem Neubaustandard",
     ],
   },
   {
@@ -70,15 +70,15 @@ const sections: Section[] = [
   },
   {
     eyebrow: "03 Läden & Unterhaltung",
-    title: "Nahversorgung mit Charakter statt anonymer Einkaufsroutine.",
+    title: "Nahversorgung mit einem Lächeln statt anonymer Einkaufsroutine.",
     iconKind: "shops",
     intro:
-      "Der Güntzelkiez funktioniert im Alltag, weil vieles in kurzer Distanz liegt: Feinkost, Supermarkt, Bäckerei, Buchhandlung, Blumen, Mode, Wein und kleine Dienstleistungen.",
+      "Der Güntzelkiez funktioniert im Alltag, weil vieles in kurzer Distanz liegt: Feinkost, Supermarkt, Bio-Bäcker und -Metzger, Wochenmarkt, Buchhandlung, Blumen, Mode, Wein, Kinderläden, Schneider und kleine Dienstleistungsanbieter.",
     body:
-      "Diese Mischung ist entscheidend für Menschen, die hier nicht nur eine Wohnung mieten, sondern wirklich ankommen möchten. Der Kiez wirkt gewachsen, alltagsnah und zugleich kultiviert. Dazu kommt die schnelle Nähe zur City West und zum Kurfürstendamm, wenn es größer, urbaner oder repräsentativer werden soll.",
+      "Diese Mischung ist entscheidend für Menschen, die hier nicht nur eine Wohnung mieten, sondern wirklich ankommen möchten. Der Kiez ist gewachsen, alltagsnah und zugleich kultiviert. Dazu kommt die schnelle Nähe zur City West und zum Kurfürstendamm, wenn es größer, vielfältiger oder repräsentativer werden soll.",
     image: {
-      src: "https://www.iz.de/news/media/40/Entwurf-Henning-Larsen-Kudamm-399304.jpeg",
-      alt: "Kurfürstendamm und City West als nahe Einkaufs- und Kulturadresse",
+      src: "/neighbourhood/shops.jpeg",
+      alt: "Läden und Nahversorgung im Güntzelkiez",
     },
     items: [
       "Güntzel Feinkost, Bellwinkel, Nah & gut mit Fleischerei, Bio Backhaus und Weinhandlung Bruhn",
@@ -93,12 +93,12 @@ const sections: Section[] = [
     title: "Ein Kiez für Frühstück, Feierabend und vertraute Lieblingsorte.",
     iconKind: "food",
     intro:
-      "Die Gastronomie im Umfeld ist nicht laut inszeniert. Sie lebt von Cafés, Restaurants und kleinen Adressen, die man regelmäßig nutzt.",
+      "Die Gastronomie im Umfeld ist nicht laut inszeniert. Sie lebt von persönlichen Cafés, Restaurants und kleinen Geschäften in der Nachbarschaft, die einfach einladen.",
     body:
-      "Für neue Bewohnerinnen und Bewohner ist genau das wertvoll: ein Frühstück um die Ecke, Kaffee zwischen Terminen, ein Restaurant für den Abend, ein Ort für Besuch aus der Familie. Der Güntzelkiez bietet diese Alltagskultur in einer Form, die persönlich und angenehm unaufgeregt bleibt.",
+      "Für neue Bewohnerinnen und Bewohner ist genau das wertvoll: die besten Croissants weit und breit, hier um die Ecke, der Espresso zwischen zwei Terminen, ein leckeres Restaurant für den Abend. Alles zu Fuß. Der Güntzelkiez bietet diese Alltagskultur in einer Form, die persönlich und angenehm unaufgeregt bleibt. Man kennt sich hier und plaudert auch gern mal.",
     image: {
-      src: "/neighbourhood/Uhland.png",
-      alt: "Uhland's Café im Güntzelkiez",
+      src: "/neighbourhood/kiez.jpeg",
+      alt: "Restaurant- und Cafészene im Güntzelkiez",
     },
     items: [
       "Uhland's Café, When Dreams Come True, Amo Coffee Shop, Adams Café und Café Eulinchen",
@@ -109,19 +109,19 @@ const sections: Section[] = [
     ],
   },
   {
-    eyebrow: "05 Alltag & Anbindung",
-    title: "Ruhig wohnen und trotzdem schnell in Berlin sein.",
+    eyebrow: "05 Anbindung",
+    title: "Kurze, einfache Wege in den Alltag.",
     iconKind: "transit",
     intro:
-      "Eine gute Lage zeigt sich in den Wegen, die man jeden Tag nicht erklären muss: zur Bahn, zum Bus, zum Fahrradkeller, zur Apotheke, zum Markt, zur Familie, zur Arbeit.",
+      "Eine gute Lage zeigt sich in kurzen, einfachen Wegen zur Bahn, zum Bus, zum Fahrradkeller, zur Apotheke, zum Markt, zur Familie, zur Arbeit.",
     body:
-      "LOLA liegt in einer ruhigen Seitenstraße und ist trotzdem sehr gut angebunden. U3, U7 und U9 liegen je nach Ziel in gut erreichbarer Entfernung, Bus- und Nachtlinien ergänzen die Mobilität. Die Ringbahn am Bundesplatz ist etwas weiter entfernt, bleibt aber erreichbar. Nur wenige Schritte vom Haus befinden sich zudem öffentliche Ladepunkte für Elektrofahrzeuge.",
+      "LOLA liegt in einer ruhigen Seitenstraße und ist trotzdem sehr gut angebunden. U3, U7 und U9 sind zu Fuß in wenigen Minuten erreichbar, Bus- und Nachtlinien ergänzen die Mobilität. Die Ringbahn am Bundesplatz ist ca. 15 Minuten zu Fuß entfernt. Nur wenige Meter vom Haus befinden sich zudem öffentliche Ladeplätze für Elektrofahrzeuge.",
     items: [
-      "U Hohenzollernplatz für die U3 in etwa sieben Minuten zu Fuß",
-      "U Blissestraße für die U7 in etwa sieben Minuten zu Fuß",
+      "U Hohenzollernplatz für die U3 in wenigen Minuten zu Fuß",
+      "U Blissestraße für die U7 in wenigen Minuten zu Fuß",
       "U Güntzelstraße und U9 für Verbindungen Richtung Osloer Straße und Rathaus Steglitz",
       "Buslinien und Nachtbusse wie N3, N7, N9, N43 und N7X im Umfeld",
-      "S Bundesplatz mit Ringbahn S41/S42 in rund 1,2 Kilometern Entfernung",
+      "S Bundesplatz mit Ringbahn S41/S42 in ca. 15 Minuten zu Fuß",
     ],
   },
 ];
@@ -356,10 +356,10 @@ export default function KiezPage() {
             <div className="mx-auto w-full max-w-7xl">
               <MagazineReveal>
                 <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#8a4432]">
-                  Leben im Güntzelkiez
+                  Leben im Güntzelkiez, Wilmersdorf
                 </p>
                 <h1 className="mt-5 w-full font-serif text-[2.9rem] leading-[0.92] tracking-[-0.045em] text-[#3f422d] sm:text-[5.4rem] lg:text-[7.2rem]">
-                  Dein Zuhause im Herzen von Berlin.
+                  Der Güntzelkiez - Ihr neues Zuhause im Herzen von Berlin.
                 </h1>
                 <motion.div
                   className="mt-9 w-full space-y-5 border-t border-[#3f422d]/20 pt-7"
@@ -379,11 +379,10 @@ export default function KiezPage() {
                     }}
                     transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    LOLA entsteht in einer ruhigen Seitenstraße des
-                    Güntzelkiezes in Wilmersdorf: ein außergewöhnliches
-                    Wohnobjekt, das klassischen Berliner Altbaucharme mit
-                    Neubaustandard, Energieeffizienzklasse A und einem hohen
-                    Komfortniveau verbindet.
+                    Das LOLA entsteht in einer ruhigen Seitenstraße im
+                    Güntzelkiez, nahe dem Kurfürstendamm. Hier im Viertel gibt
+                    es alles, was ein gepflegtes und urbanes Lebensgefühl in
+                    den gehobenen und zeitgemäßen Wohnungen unterstützt.
                   </motion.p>
                 </motion.div>
               </MagazineReveal>
@@ -449,18 +448,16 @@ export default function KiezPage() {
                       Karte
                     </p>
                     <h2 className="mt-5 font-serif text-4xl leading-none tracking-[-0.045em] sm:text-6xl">
-                      Alles, was den Alltag trägt.
+                      Karte und Fotos in Farbe aus dem Kiez.
                     </h2>
                   </div>
                 </MagazineReveal>
 
                 <MagazineReveal delay={0.08}>
                   <p className="max-w-3xl text-base leading-7 text-white/72 sm:text-xl sm:leading-9 lg:justify-self-end">
-                    Die Karte zeigt, warum die Lage von LOLA so gut
-                    funktioniert: Bildung, Grün, Cafés, Restaurants,
-                    Nahversorgung und Mobilität liegen in einem Radius, der
-                    Wohnen im Güntzelkiez bequem, ruhig und langfristig
-                    attraktiv macht.
+                    Die Karte zeigt die Lage von LOLA im Güntzelkiez und macht
+                    sichtbar, wie nah Alltag, Grünflächen, Cafés, Restaurants,
+                    Nahversorgung und Mobilität beieinanderliegen.
                   </p>
                 </MagazineReveal>
               </div>

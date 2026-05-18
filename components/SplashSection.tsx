@@ -115,8 +115,8 @@ export function SplashSection() {
         className="absolute bottom-28 left-6 right-6 z-10 max-w-sm text-white md:bottom-24 md:right-auto md:left-10 md:max-w-lg"
       >
         <p className="text-base leading-6 text-white sm:text-lg sm:leading-7 md:text-2xl md:leading-9">
-          Lola vereint zeitgemäße Wohnungen, ruhige Höfe und eine Berliner
-          Adresse mit Charakter.
+          LOLA vereint wunderschönen Altbau mit modernstem energetischen
+          Standard, ruhige Wohnungen und eine Berliner Adresse mit Charakter.
         </p>
       </motion.div>
 
@@ -127,8 +127,7 @@ export function SplashSection() {
         </div>
 
         <p className="max-w-[320px] font-mono text-[10px] leading-relaxed tracking-[0.12em] text-white drop-shadow-md md:text-right md:text-xs">
-          Jedes Zuhause, das wir schaffen, erzählt eine Geschichte, in der
-          jeder Raum und jeder Winkel vom Leben erzählt, das hier beginnt.
+          Wohnungen in Berlin-Wilmersdorf, mitten im gewachsenen Güntzelkiez.
         </p>
       </footer>
     </section>

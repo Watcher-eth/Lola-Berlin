@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 
 type ApartmentInquiryFormProps = {
   apartmentCode?: string;
@@ -17,6 +18,9 @@ export function ApartmentInquiryForm({
 }: ApartmentInquiryFormProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [rooms, setRooms] = useState("");
+  const [message, setMessage] = useState("");
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<{
     type: "idle" | "success" | "error";
@@ -25,6 +29,15 @@ export function ApartmentInquiryForm({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!privacyAccepted) {
+      setStatus({
+        type: "error",
+        message: "Bitte bestätige die Datenschutzhinweise.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setStatus({ type: "idle", message: "" });
 
@@ -35,9 +48,12 @@ export function ApartmentInquiryForm({
         body: JSON.stringify({
           name,
           email,
+          rooms,
+          message,
           apartmentCode,
           apartmentTitle,
           floorLabel,
+          privacyAccepted,
         }),
       });
 
@@ -53,6 +69,9 @@ export function ApartmentInquiryForm({
       });
       setName("");
       setEmail("");
+      setRooms("");
+      setMessage("");
+      setPrivacyAccepted(false);
       onSuccess?.();
     } catch (error) {
       setStatus({
@@ -109,7 +128,63 @@ export function ApartmentInquiryForm({
         </label>
       </div>
 
+      <div className="mt-4">
+        <label className="block">
+          <span className="sr-only">Größe in Zimmern</span>
+          <input
+            type="text"
+            name="rooms"
+            value={rooms}
+            onChange={(event) => setRooms(event.target.value)}
+            placeholder="Größe in Zimmern"
+            className="w-full border border-[var(--accent)]/44 bg-transparent px-4 py-4 text-base text-[var(--ink)] outline-none transition-colors duration-300 placeholder:text-black/54 focus:border-[var(--accent)]"
+          />
+        </label>
+      </div>
+
+      <div className="mt-4">
+        <label className="block">
+          <span className="sr-only">Nachricht</span>
+          <textarea
+            name="message"
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+            placeholder="Freies Textfeld"
+            rows={5}
+            className="w-full resize-y border border-[var(--accent)]/44 bg-transparent px-4 py-4 text-base text-[var(--ink)] outline-none transition-colors duration-300 placeholder:text-black/54 focus:border-[var(--accent)]"
+          />
+        </label>
+      </div>
+
       <div className="mt-6 grid gap-4">
+        <label className="flex gap-3 text-sm leading-6 text-black/62">
+          <input
+            type="checkbox"
+            name="privacyAccepted"
+            checked={privacyAccepted}
+            onChange={(event) => setPrivacyAccepted(event.target.checked)}
+            required
+            className="mt-1 h-4 w-4 shrink-0 accent-[var(--accent)]"
+          />
+          <span>
+            Ich habe die{" "}
+            <Link
+              href="/datenschutz"
+              className="text-[var(--accent)] underline decoration-[var(--accent)]/34 underline-offset-4 transition-colors hover:text-black"
+            >
+              Datenschutzerklärung
+            </Link>{" "}
+            gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung
+            der Anfrage verarbeitet werden.
+          </span>
+        </label>
+
+        <p className="text-xs leading-6 text-black/46">
+          Die Wohnungen werden unmöbliert angeboten. Küche und Bad sind fest
+          eingebaut; Angaben zu Verfügbarkeit, Flächen und Grundrissen sind bis
+          zum Vertragsabschluss unverbindlich.
+        </p>
+
         <button
           type="submit"
           disabled={isSubmitting}

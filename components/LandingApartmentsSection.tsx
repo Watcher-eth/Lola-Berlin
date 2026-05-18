@@ -16,12 +16,13 @@ export function LandingApartmentsSection() {
                 Wohnungen
               </p>
               <h2 className="mt-3 max-w-md font-serif text-3xl leading-none tracking-[-0.05em] text-balance text-[var(--accent)] sm:text-5xl">
-                Wohnräume mit Haltung.
+                Wohnräume mit Stil.
               </h2>
               <p className="mt-4 max-w-xl text-sm leading-7 text-black/68 sm:text-base sm:leading-8">
-                Lola verbindet großzügige Grundrisse, ruhige Materialien und
-                ein präzises architektonisches Gefühl zu Wohnungen, die offen
-                wirken und zugleich dauerhaft Geborgenheit vermitteln.
+                LOLA verbindet großzügige Grundrisse und hochwertige
+                Materialien mit der wunderschönen Architektur der Gründerzeit.
+                Die Wohnungen mit 1 bis 6 Zimmern sind weit und groß und
+                vermitteln zugleich dauerhaft Geborgenheit.
               </p>
             </div>
 
@@ -45,25 +46,25 @@ export function LandingApartmentsSection() {
             <div>
               <div className="relative aspect-[0.85/1] overflow-hidden bg-[var(--accent-soft)]">
                 <Image
-                  src="/rooms/Wohnzimmer3.png"
-                  alt="Wohnzimmer in Lola"
+                  src="/rooms/Bedroom2.png"
+                  alt="Schlafzimmer in Lola"
                   fill
                   sizes="(min-width: 1024px) 28vw, 100vw"
                   className="object-cover object-center"
                 />
               </div>
               <p className="mt-5 max-w-md text-sm leading-7 text-black/62">
-                Helle Wohnungen, grüne Höfe und eine klare Adresse formen ein
-                Zuhause, das Offenheit und Rückzug selbstverständlich
-                miteinander verbindet.
+                Helle Wohnungen, Fußbodenheizung, hohe Decken und ein grüner
+                Innenhof bieten hohen Wohnkomfort in einem der schönsten Kieze
+                Berlins.
               </p>
             </div>
 
             <div>
               <div className="relative aspect-[1.02/1] overflow-hidden bg-[var(--accent-soft)]">
                 <Image
-                  src="/rooms/Bedroom2.png"
-                  alt="Schlafzimmer in Lola"
+                  src="/rooms/Wohnzimmer3.png"
+                  alt="Wohnzimmer in Lola"
                   fill
                   sizes="(min-width: 1024px) 46vw, 100vw"
                   className="object-cover object-center"
@@ -71,10 +72,11 @@ export function LandingApartmentsSection() {
               </div>
               <div className="mt-6 flex flex-col items-start gap-5 sm:gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <p className="max-w-xl text-sm leading-7 text-black/68 sm:text-base sm:leading-8">
-                  Lola bringt großzügige Grundrisse, ruhige Materialien und ein
-                  präzises architektonisches Gefühl zusammen. Die Wohnungen
-                  wirken selbstverständlich statt inszeniert und geben dem
-                  Alltag Raum, statt ihn zu überformen.
+                  LOLA bringt Grundrisse für jedes Bedürfnis, wertige
+                  Materialien und ein modernes, urbanes Wohngefühl zusammen. Die
+                  Wohnungen orientieren sich an den alten großbürgerlichen
+                  Grundrissen und wirken selbstverständlich statt inszeniert:
+                  ästhetisch wohnen mit Platz, Raum, Ruhe und Halt.
                 </p>
                 <Link
                   href="/apartments"
