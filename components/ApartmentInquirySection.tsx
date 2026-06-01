@@ -40,14 +40,15 @@ export function ApartmentInquirySection({
             </h3>
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-black/62 sm:text-base sm:leading-8">
               Auf Anfrage teilen wir weitere Grundrisse, Details zur Ausstattung
-              und den aktuellen Stand der passenden Wohnungen.
+              und den aktuellen Stand der passenden Wohnungen. Besichtigungen
+              können aktuell direkt vereinbart werden.
             </p>
             <div className="mt-8">
               <a
                 href="mailto:hello@lola.berlin"
-                className="flex w-full justify-center bg-[var(--accent)] px-7 py-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-black"
+                className="flex w-full justify-center bg-[var(--accent)] px-7 py-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] !text-white transition-colors duration-300 hover:bg-black"
               >
-                Kontakt aufnehmen
+                Besichtigung vereinbaren
               </a>
             </div>
           </div>

@@ -10,9 +10,9 @@ import { ApartmentInquiryForm } from "@/components/ApartmentInquiryForm";
 type ApartmentInquiryDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  apartmentCode: string;
-  apartmentTitle: string;
-  floorLabel: string;
+  apartmentCode?: string;
+  apartmentTitle?: string;
+  floorLabel?: string;
 };
 
 export function ApartmentInquiryDialog({

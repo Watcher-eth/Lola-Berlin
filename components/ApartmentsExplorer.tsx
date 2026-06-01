@@ -64,9 +64,11 @@ function getFocus(apartment: ApartmentUnit): PlanFocus {
 function PlanImage({
   apartment,
   priority = false,
+  compact = false,
 }: {
   apartment: ApartmentUnit;
   priority?: boolean;
+  compact?: boolean;
 }) {
   return (
     <Image
@@ -75,9 +77,46 @@ function PlanImage({
       fill
       unoptimized
       priority={priority}
-      sizes="(min-width: 1024px) 70vw, 94vw"
-      className="object-contain p-4 contrast-[1.14] sm:p-8"
+      sizes={compact ? "250px" : "(min-width: 1024px) 70vw, 94vw"}
+      className={`object-contain contrast-[1.22] ${
+        compact ? "p-3 sm:p-4" : "p-4 sm:p-8"
+      }`}
     />
+  );
+}
+
+function ApartmentPlanOverlay({
+  apartment,
+  sharedLayout = true,
+}: {
+  apartment: ApartmentUnit;
+  sharedLayout?: boolean;
+}) {
+  const qualityLabel =
+    apartment.planQuality === "exact" ? "CAD-Plan" : "Modellgrundriss";
+  const layoutProps = sharedLayout
+    ? { layoutId: `apartment-plan-${apartment.id}` }
+    : {};
+  const placementClass =
+    "absolute right-3 top-3 z-40 w-[210px] max-w-[58%] sm:right-5 sm:top-5 sm:w-[250px] sm:max-w-[42%]";
+
+  return (
+    <motion.div
+      {...layoutProps}
+      className={`pointer-events-none overflow-hidden border border-[var(--accent)]/28 bg-white shadow-[0_22px_60px_rgba(75,73,45,0.22)] ${placementClass}`}
+      initial={{ opacity: 0, scale: 0.94, y: 8 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.96, y: 6 }}
+      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className="relative aspect-[4/5] bg-[#f8f6ef]">
+        <PlanImage apartment={apartment} compact />
+      </div>
+      <div className="flex items-center justify-between gap-3 border-t border-[var(--accent)]/14 bg-white px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--accent)]/70">
+        <span>{apartment.code}</span>
+        <span>{qualityLabel}</span>
+      </div>
+    </motion.div>
   );
 }
 
@@ -106,18 +145,20 @@ function getOutdoorSpaceLabel(apartment: ApartmentUnit) {
 
 function CadPlanSurface({
   floor,
-  activeApartment,
+  focusApartment,
+  hoverApartment,
   mode,
   onZoom,
   onBack,
 }: {
   floor: FloorPlanData;
-  activeApartment: ApartmentUnit;
+  focusApartment: ApartmentUnit | null;
+  hoverApartment: ApartmentUnit | null;
   mode: PlanMode;
   onZoom: () => void;
   onBack: () => void;
 }) {
-  const focus = getFocus(activeApartment);
+  const focus = focusApartment ? getFocus(focusApartment) : null;
   const detailMode = mode === "apartment";
 
   return (
@@ -129,9 +170,11 @@ function CadPlanSurface({
       <div className="relative aspect-[4/5] w-full overflow-hidden">
         <motion.div
           className="absolute inset-0"
-          style={{ transformOrigin: `${focus.x}% ${focus.y}%` }}
+          style={{
+            transformOrigin: focus ? `${focus.x}% ${focus.y}%` : "50% 50%",
+          }}
           animate={{
-            scale: detailMode ? focus.scale : 1,
+            scale: detailMode && focus ? focus.scale : 1,
             opacity: detailMode ? 0.18 : 1,
             filter: detailMode ? "blur(1px)" : "blur(0px)",
           }}
@@ -150,40 +193,58 @@ function CadPlanSurface({
 
         {!detailMode ? (
           <>
-            <motion.div
-              key={`${activeApartment.id}-label`}
-              className="pointer-events-none absolute z-30 -translate-x-1/2 -translate-y-1/2 bg-[#f8f6ef]/88 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent)] shadow-[0_10px_24px_rgba(75,73,45,0.12)] backdrop-blur-sm"
-              style={{
-                left: `${focus.x}%`,
-                top: `${focus.y}%`,
-              }}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={focusTransition}
-            >
-              {activeApartment.code}
-            </motion.div>
-            <button
-              type="button"
-              onClick={onZoom}
-              className="absolute inset-0 z-10 cursor-zoom-in outline-none"
-              aria-label={`In ${activeApartment.code} zoomen`}
-            />
+            {focusApartment && focus ? (
+              <motion.div
+                key={`${focusApartment.id}-label`}
+                className="pointer-events-none absolute z-30 -translate-x-1/2 -translate-y-1/2 border border-[var(--accent)]/26 bg-[#f8f6ef]/92 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent)] shadow-[0_10px_24px_rgba(75,73,45,0.16)] backdrop-blur-sm"
+                style={{
+                  left: `${focus.x}%`,
+                  top: `${focus.y}%`,
+                }}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={focusTransition}
+              >
+                {focusApartment.code}
+              </motion.div>
+            ) : null}
+            <AnimatePresence mode="wait">
+              {hoverApartment ? (
+                <ApartmentPlanOverlay
+                  key={hoverApartment.id}
+                  apartment={hoverApartment}
+                />
+              ) : null}
+            </AnimatePresence>
+            {focusApartment ? (
+              <button
+                type="button"
+                onClick={onZoom}
+                className="absolute inset-0 z-10 cursor-zoom-in outline-none"
+                aria-label={`In ${focusApartment.code} zoomen`}
+              />
+            ) : null}
           </>
         ) : null}
 
         <AnimatePresence>
-          {detailMode ? (
+          {detailMode && focusApartment ? (
             <motion.div
-              key={activeApartment.id}
+              key={focusApartment.id}
               className="absolute inset-0 z-30 bg-white"
               initial={{ opacity: 0, scale: 1.08 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.985 }}
               transition={{ duration: 0.44, ease: [0.22, 1, 0.36, 1] }}
             >
-              <PlanImage apartment={activeApartment} priority />
+              <motion.div
+                layoutId={`apartment-plan-${focusApartment.id}`}
+                className="absolute inset-0 bg-white"
+                transition={planTransition}
+              >
+                <PlanImage apartment={focusApartment} priority />
+              </motion.div>
               <button
                 type="button"
                 onClick={onBack}
@@ -199,7 +260,7 @@ function CadPlanSurface({
       <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-[var(--accent)]/12 bg-white/58 px-4 py-3 text-[10px] uppercase tracking-[0.16em] text-[var(--accent)]/64">
         <span className="inline-flex items-center gap-2">
           <span className="h-px w-8 bg-[var(--accent)]" />
-          WE-Vorschau
+          CAD-Vorschau
         </span>
       </div>
     </motion.div>
@@ -219,7 +280,7 @@ function ApartmentDetailsPanel({
   onInquiry,
 }: {
   floor: FloorPlanData;
-  activeApartment: ApartmentUnit;
+  activeApartment: ApartmentUnit | null;
   mode: PlanMode;
   previewApartmentId: string | null;
   onSelect: (apartmentId: string) => void;
@@ -234,55 +295,80 @@ function ApartmentDetailsPanel({
   return (
     <aside className="border border-[var(--accent)]/14 bg-white/54 p-5 sm:p-6">
       <AnimatePresence mode="wait">
-        <motion.div
-          key={activeApartment.id}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--accent)]/62">
-            Gewählte Wohnung
-          </p>
-          <h3 className="mt-4 font-serif text-4xl leading-none text-[var(--accent)] sm:text-5xl">
-            {activeApartment.code}
-          </h3>
-          <p className="mt-3 text-lg leading-7 text-black/72 sm:text-xl sm:leading-8">
-            {activeApartment.title}
-          </p>
+        {activeApartment ? (
+          <motion.div
+            key={activeApartment.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--accent)]/62">
+              Gewählte Wohnung
+            </p>
+            <h3 className="mt-4 font-serif text-4xl leading-none text-[var(--accent)] sm:text-5xl">
+              {activeApartment.code}
+            </h3>
+            <p className="mt-3 text-lg leading-7 text-black/72 sm:text-xl sm:leading-8">
+              {activeApartment.title}
+            </p>
 
-          <div className="mt-8 grid gap-6 text-sm leading-7 text-black/66 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-            <ApartmentFact label="Bauteil" value={activeApartment.section} />
-            <ApartmentFact label="Position" value={activeApartment.position} />
-            <ApartmentFact
-              label="Fläche"
-              value={`${activeApartment.sqm.toLocaleString("de-DE")} m²`}
-            />
-            <ApartmentFact label="Etage" value={activeApartment.floorLabel} />
-            <ApartmentFact label="Zimmer" value={activeApartment.rooms} />
-            <ApartmentFact label="Bäder" value={activeApartment.bathrooms} />
-            <ApartmentFact
-              label="Außenraum"
-              value={getOutdoorSpaceLabel(activeApartment)}
-            />
-            <ApartmentFact
-              label="Status"
-              value={activeApartment.availability}
-            />
-          </div>
+            <div className="mt-8 grid gap-6 text-sm leading-7 text-black/66 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              <ApartmentFact label="Bauteil" value={activeApartment.section} />
+              <ApartmentFact
+                label="Position"
+                value={activeApartment.position}
+              />
+              <ApartmentFact
+                label="Fläche"
+                value={`${activeApartment.sqm.toLocaleString("de-DE")} m²`}
+              />
+              <ApartmentFact label="Etage" value={activeApartment.floorLabel} />
+              <ApartmentFact label="Zimmer" value={activeApartment.rooms} />
+              <ApartmentFact label="Bäder" value={activeApartment.bathrooms} />
+              <ApartmentFact
+                label="Außenraum"
+                value={getOutdoorSpaceLabel(activeApartment)}
+              />
+              <ApartmentFact
+                label="Status"
+                value={activeApartment.availability}
+              />
+            </div>
 
-          <p className="mt-6 text-sm leading-7 text-black/64">
-            Unmöbliert, mit fest eingebauter Küche und hochwertig
-            ausgeführtem Bad. Weitere Informationen zur Wohnung teilen wir auf
-            Anfrage.
-          </p>
-        </motion.div>
+            <p className="mt-6 text-sm leading-7 text-black/64">
+              Unmöbliert, mit fest eingebauter Küche und hochwertig
+              ausgeführtem Bad. Weitere Informationen zur Wohnung teilen wir auf
+              Anfrage.
+            </p>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="empty"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--accent)]/62">
+              Wohnung wählen
+            </p>
+            <h3 className="mt-4 font-serif text-4xl leading-none text-[var(--accent)] sm:text-5xl">
+              Grundriss
+            </h3>
+            <p className="mt-3 text-lg leading-7 text-black/72 sm:text-xl sm:leading-8">
+              Wähle eine Wohneinheit, um Fläche, Lage und Detailgrundriss zu
+              sehen.
+            </p>
+          </motion.div>
+        )}
       </AnimatePresence>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
         <button
           type="button"
           onClick={detailMode ? onBack : onZoom}
+          disabled={!activeApartment}
           className="border border-[var(--accent)]/22 bg-white/64 px-6 py-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)] transition-colors duration-300 hover:border-[var(--accent)]/48 hover:bg-white"
         >
           {detailMode ? "Geschossplan" : "Grundriss öffnen"}
@@ -290,7 +376,8 @@ function ApartmentDetailsPanel({
         <button
           type="button"
           onClick={onInquiry}
-          className="bg-[var(--accent)] px-6 py-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-black"
+          disabled={!activeApartment}
+          className="bg-[var(--accent)] px-6 py-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-black disabled:cursor-not-allowed disabled:bg-[var(--accent)]/34"
         >
           Anfragen
         </button>
@@ -302,7 +389,7 @@ function ApartmentDetailsPanel({
         </p>
         <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
           {floor.apartments.map((apartment) => {
-            const active = apartment.id === activeApartment.id;
+            const active = apartment.id === activeApartment?.id;
             const preview = apartment.id === previewApartmentId && !active;
 
             return (
@@ -347,8 +434,8 @@ function ApartmentDetailsPanel({
 
 export function ApartmentsExplorer() {
   const [selectedFloorId, setSelectedFloorId] = useState(apartmentFloors[0].id);
-  const [selectedApartmentId, setSelectedApartmentId] = useState(
-    apartmentFloors[0].apartments[0]?.id ?? "",
+  const [selectedApartmentId, setSelectedApartmentId] = useState<string | null>(
+    null,
   );
   const [previewApartmentId, setPreviewApartmentId] = useState<string | null>(
     null,
@@ -363,19 +450,21 @@ export function ApartmentsExplorer() {
   const activeApartment =
     selectedFloor.apartments.find(
       (apartment) => apartment.id === selectedApartmentId,
-    ) ?? selectedFloor.apartments[0];
+    ) ?? null;
 
-  const previewApartment =
+  const hoverApartment =
     planMode === "floor"
       ? selectedFloor.apartments.find(
           (apartment) => apartment.id === previewApartmentId,
-        ) ?? activeApartment
-      : activeApartment;
+        ) ?? null
+      : null;
+
+  const previewApartment =
+    planMode === "floor" ? hoverApartment ?? activeApartment : activeApartment;
 
   const selectFloor = (floorId: string) => {
-    const floor = apartmentFloors.find((item) => item.id === floorId);
     setSelectedFloorId(floorId);
-    setSelectedApartmentId(floor?.apartments[0]?.id ?? "");
+    setSelectedApartmentId(null);
     setPreviewApartmentId(null);
     setPlanMode("floor");
   };
@@ -383,9 +472,11 @@ export function ApartmentsExplorer() {
   const selectApartment = (apartmentId: string) => {
     setSelectedApartmentId(apartmentId);
     setPreviewApartmentId(null);
+    setPlanMode("apartment");
   };
 
   const openPreviewApartment = () => {
+    if (!previewApartment) return;
     setSelectedApartmentId(previewApartment.id);
     setPreviewApartmentId(null);
     setPlanMode("apartment");
@@ -427,8 +518,9 @@ export function ApartmentsExplorer() {
 
           <div className="mt-8">
             <p className="max-w-3xl text-sm leading-6 text-black/54 sm:leading-7">
-              Wähle ein Geschoss und eine Wohnung. Beim Öffnen zoomt derselbe
-              Plan in den zugeordneten Grundrissausschnitt.
+              CAD-Grundrisse für die verfügbaren Wohneinheiten, ergänzt durch
+              passende Modellgrundrisse, wenn keine separate Wohnungsversion
+              vorliegt.
             </p>
           </div>
 
@@ -436,16 +528,17 @@ export function ApartmentsExplorer() {
             <div>
               <CadPlanSurface
                 floor={selectedFloor}
-                activeApartment={previewApartment}
+                focusApartment={previewApartment}
+                hoverApartment={hoverApartment}
                 mode={planMode}
                 onZoom={openPreviewApartment}
                 onBack={() => setPlanMode("floor")}
               />
 
               <p className="mt-4 max-w-2xl text-xs leading-6 text-black/46">
-                Die WE-Auswahl reagiert direkt beim Überfahren. Ein Klick auf
-                die Planfläche öffnet den vergrößerten Ausschnitt ohne separates
-                Dialogfenster.
+                Die Darstellung folgt den vorliegenden CAD-Unterlagen. Nicht
+                vollständig separat vorliegende Wohnungen werden als
+                Modellgrundriss gekennzeichnet.
               </p>
             </div>
 
@@ -467,9 +560,9 @@ export function ApartmentsExplorer() {
         <ApartmentInquiryDialog
           open={inquiryOpen}
           onOpenChange={setInquiryOpen}
-          apartmentCode={activeApartment.code}
-          apartmentTitle={activeApartment.title}
-          floorLabel={activeApartment.floorLabel}
+          apartmentCode={activeApartment?.code}
+          apartmentTitle={activeApartment?.title}
+          floorLabel={activeApartment?.floorLabel}
         />
       </section>
     </LayoutGroup>
