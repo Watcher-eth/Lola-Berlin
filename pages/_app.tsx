@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/router";
+import { CookieBanner } from "@/components/CookieBanner";
 import { LegalFooter } from "@/components/LegalFooter";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <Component {...pageProps} />
         <LegalFooter />
+        <CookieBanner />
       </motion.div>
     </AnimatePresence>
   );

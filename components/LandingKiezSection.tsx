@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { Reveal } from "@/components/Reveal";
 
 function TramIcon() {
@@ -59,10 +60,27 @@ const kiezFacts = [
 ];
 
 export function LandingKiezSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "start start"],
+  });
+  const weightedY = useTransform(scrollYProgress, [0, 1], ["0vh", "9vh"], {
+    ease: (t) => 1 - Math.pow(1 - t, 3),
+  });
+  const springY = useSpring(weightedY, {
+    stiffness: 82,
+    damping: 26,
+    mass: 0.55,
+    restDelta: 0.001,
+  });
+
   return (
-    <section
+    <motion.section
+      ref={sectionRef}
       id="kiez"
-      className="overflow-hidden bg-[#06160f] px-6 py-20 text-[#edf1ea] sm:px-8 lg:px-10 lg:py-28"
+      style={{ y: springY }}
+      className="relative z-20 overflow-hidden bg-[linear-gradient(180deg,#0b1f16_0%,#071810_42%,#05120c_100%)] px-6 py-20 text-[#edf1ea] shadow-[0_-18px_48px_rgba(0,0,0,0.18)] will-change-transform sm:px-8 lg:px-10 lg:py-28"
     >
       <div className="mx-auto w-full max-w-6xl">
         <Reveal>
@@ -73,8 +91,8 @@ export function LandingKiezSection() {
               </h2>
             </div>
 
-            <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:pt-2">
-             <div className="relative aspect-[1.78/1] overflow-hidden">
+            <div className="bg-white/70 p-2 backdrop-blur-sm lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:pt-2">
+              <div className="relative aspect-[1.78/1] overflow-hidden">
                 <Image
                   src="https://www.berlin.de/binaries/asset/image_assets/912168/source/1625477461/1000x500/"
                   alt="Schwarz-Weiß-Foto aus dem Güntzelkiez"
@@ -85,7 +103,7 @@ export function LandingKiezSection() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 lg:row-start-2">
+            <div className="bg-white/70 p-2 backdrop-blur-sm lg:col-span-5 lg:row-start-2">
               <div className="relative aspect-[1.78/1] overflow-hidden">
                 <Image
                   src="https://images.ctfassets.net/if6f7uzjzqut/3qQk0SK7UaDXkt0ZcbNJUY/fdc73a6a26cb47172fb9568f3175cc39/Berlin_WiIlmersdorf_Charlottenburg_Fassade_Wohnen.jpg"
@@ -157,6 +175,6 @@ export function LandingKiezSection() {
           </div>
         </Reveal>
       </div>
-    </section>
+    </motion.section>
   );
 }

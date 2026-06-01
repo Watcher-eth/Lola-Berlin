@@ -16,7 +16,7 @@ export default function Home() {
       <div className="bg-[var(--paper)] text-[var(--ink)]">
         <SplashSection />
 
-        <main>
+        <main className="relative z-10">
           <LandingKiezSection />
 
           <LandingApartmentsSection />

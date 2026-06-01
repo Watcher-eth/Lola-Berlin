@@ -181,8 +181,8 @@ export function ApartmentInquiryForm({
 
         <p className="text-xs leading-6 text-black/46">
           Die Wohnungen werden unmöbliert angeboten. Küche und Bad sind fest
-          eingebaut; Angaben zu Verfügbarkeit, Flächen und Grundrissen sind bis
-          zum Vertragsabschluss unverbindlich.
+          eingebaut; Angaben zu Flächen, Grundrissen und weiteren Details sind
+          bis zum Vertragsabschluss unverbindlich.
         </p>
 
         <button

@@ -157,6 +157,12 @@ export default function DatenschutzPage() {
                   Meta Pixel und kein Retargeting.
                 </p>
                 <p>
+                  Die Auswahl im Cookie-Banner wird lokal im Browser
+                  gespeichert, damit der Hinweis nicht bei jedem Seitenaufruf
+                  erneut erscheint. Je nach Browser erfolgt dies per Local
+                  Storage oder als technisch notwendiges Consent-Cookie.
+                </p>
+                <p>
                   Sollte künftig Tracking, Marketing, externe Karten,
                   eingebettete Medien oder vergleichbare Drittanbieter-Technik
                   eingesetzt werden, wird dies erst nach entsprechender
@@ -168,9 +174,9 @@ export default function DatenschutzPage() {
               <PrivacySection title="Schriftarten, Bilder und Grundrisse">
                 <p>
                   Die verwendeten Schriftarten und Projektbilder werden lokal
-                  über diese Website ausgeliefert. Grundrisse und PDF-Dokumente
-                  werden ebenfalls als statische Projektunterlagen bereitgestellt
-                  und lösen keine eigene Profilbildung aus.
+                  über diese Website ausgeliefert. Grundrisse werden ebenfalls
+                  als statische SVG-Projektunterlagen bereitgestellt und lösen
+                  keine eigene Profilbildung aus.
                 </p>
               </PrivacySection>
 

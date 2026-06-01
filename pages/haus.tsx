@@ -12,11 +12,11 @@ type RevealProps = {
 };
 
 const restorationDetails = [
-  "Kern- und energetische Sanierung mit hohem Energie- und Komfortniveau",
-  "Neubaustandard mit Energieeffizienzklasse A",
-  "Fernwärme und Fußbodenheizung für angenehme, effiziente Wärme",
-  "Drei Aufzüge, Fahrradkeller und geordneter Müllbereitstellungsraum",
-  "Glasfaser, hochwertige Böden und moderne Bäder",
+  "Behutsam restaurierte Altbaudetails mit Jugendstilcharakter",
+  "Kern- und energetische Sanierung auf Neubaustandard",
+  "Fernwärme und Fußbodenheizung für ruhigen, gleichmäßigen Komfort",
+  "Drei Aufzüge, Fahrradkeller und geordnete Hauslogistik",
+  "Glasfaser, hochwertige Böden und sorgfältig ausgeführte Bäder",
 ];
 
 function Reveal({ children, className, delay = 0 }: RevealProps) {
@@ -91,12 +91,12 @@ export default function HousePage() {
                   Das Haus
                 </p>
                 <h1 className="mt-5 max-w-6xl font-serif text-[2.9rem] leading-[0.92] tracking-[-0.045em] text-[#3f422d] sm:text-[5.4rem] lg:text-[7.2rem]">
-                  Altbaukultur, neu interpretiert.
+                  Altbaucharme, neu gedacht.
                 </h1>
                 <p className="mt-8 max-w-5xl border-t border-[#3f422d]/20 pt-7 text-lg leading-8 text-[#171713]/76 sm:text-2xl sm:leading-10 md:text-3xl md:leading-[1.22]">
-                  In der Holsteinischen Straße 18 entsteht ein Zuhause, das die
-                  Großzügigkeit klassischer Berliner Altbauwohnungen hält und
-                  sie mit zeitgemäßer Technik, Komfort und Energieeffizienz
+                  In der Holsteinischen Straße 18 entsteht ein Haus, das die
+                  Eleganz des Berliner Altbaus, feine Jugendstil-Anklänge und
+                  eine aufwendig restaurierte Substanz mit heutigem Komfort
                   verbindet.
                 </p>
               </Reveal>
@@ -110,7 +110,7 @@ export default function HousePage() {
                   01 Geschichte
                 </p>
                 <h2 className="mt-5 font-serif text-3xl leading-none tracking-[-0.04em] text-[#3f422d] sm:text-5xl">
-                  Ein Haus aus der Zeit der aufstrebenden City West.
+                  Ein Altbau aus der Blütezeit Wilmersdorfs.
                 </h2>
               </Reveal>
 
@@ -118,17 +118,16 @@ export default function HousePage() {
                 <div className="space-y-5 text-base leading-7 text-[#171713]/70 sm:text-lg sm:leading-8">
                   <p>
                     Der Güntzelkiez entstand Ende des 19. und Anfang des 20.
-                    Jahrhunderts im Zuge der rasanten Entwicklung der damaligen
-                    City West. Rund um die heutige Güntzelstraße entstanden
-                    großzügige Altbauten mit hohen Decken, repräsentativen
-                    Fassaden und weitläufigen Grundrissen.
+                    Jahrhunderts im Zuge der rasanten Entwicklung der City
+                    West. In dieser Zeit entstanden rund um die heutige
+                    Güntzelstraße elegante Berliner Wohnhäuser mit hohen
+                    Decken, gegliederten Fassaden und großzügigen Grundrissen.
                   </p>
                   <p>
-                    LOLA wurde 1905 in dieser Zeit erbaut. Die Wohnhäuser des
-                    Quartiers richteten sich an ein aufstrebendes, städtisches
-                    Publikum: Akademiker, Kaufleute, Ärzte, Künstler und
-                    Unternehmer. Diese großbürgerliche Haltung prägt den Kiez
-                    bis heute.
+                    LOLA gehört zu dieser Baukultur. Das Haus trägt noch heute
+                    den Charme des klassischen Altbaus in sich: Proportion,
+                    Ornament, Großzügigkeit und jene ruhige Selbstverständlichkeit,
+                    die viele Berliner Häuser dieser Epoche so besonders macht.
                   </p>
                 </div>
               </Reveal>
@@ -142,7 +141,7 @@ export default function HousePage() {
                   02 Restaurierung
                 </p>
                 <h2 className="mt-5 max-w-5xl font-serif text-3xl leading-none tracking-[-0.04em] text-[#3f422d] sm:text-5xl">
-                  Sorgfältig saniert, technisch auf Neubaustandard gebracht.
+                  Behutsam restauriert, technisch vollständig erneuert.
                 </h2>
               </Reveal>
 
@@ -169,16 +168,17 @@ export default function HousePage() {
                   <div>
                     <div className="space-y-5 text-base leading-7 text-[#171713]/70 sm:text-lg sm:leading-8">
                       <p>
-                        Das Haus wird von der Eigentümerin mit viel Liebe kern-
-                        und energetisch saniert. Von der Substanz über die
-                        Gebäudetechnik bis zu den Ausstattungsdetails entsteht
-                        ein sehr hohes Energie- und Komfortniveau.
+                        LOLA wird mit großer Sorgfalt kern- und energetisch
+                        saniert. Wo immer es möglich ist, werden prägende
+                        Elemente des Hauses restauriert und in ihrer Wirkung
+                        gestärkt, statt sie zu überformen.
                       </p>
                       <p>
-                        Zum Herbst 2026 und Jahresanfang 2027 erwartet LOLA
-                        seine neuen Bewohnerinnen und Bewohner als Altbau mit
-                        Neubaustandard: klassischer Charakter, aber moderne
-                        Technik für einen reibungslosen Alltag.
+                        So entsteht ein Altbau, der seine historische Haltung
+                        behält und zugleich technisch neu aufgestellt ist: mit
+                        hoher Energieeffizienz, zeitgemäßer Gebäudetechnik und
+                        einem Ausstattungsniveau, das den Charakter des Hauses
+                        nicht verdrängt, sondern präzise ergänzt.
                       </p>
                     </div>
                     <DetailList />
@@ -195,7 +195,7 @@ export default function HousePage() {
                   03 Lage
                 </p>
                 <h2 className="mt-5 font-serif text-3xl leading-none tracking-[-0.04em] text-white sm:text-5xl">
-                  Ruhig im Kiez, schnell in der City West.
+                  Ein restaurierter Altbau in einem gewachsenen Berliner Kiez.
                 </h2>
               </Reveal>
 
@@ -203,17 +203,17 @@ export default function HousePage() {
                 <div className="space-y-7">
                   <div className="space-y-5 text-base leading-7 text-white/72 sm:text-lg sm:leading-8">
                     <p>
-                      Der Güntzelkiez ist ruhig, gewachsen und authentisch:
-                      klassische Altbauarchitektur, begrünte Straßen, kleine
-                      Cafés, Feinkost, individuelle Läden und eine sehr gute
-                      Alltags-Infrastruktur.
+                      Der Güntzelkiez ist einer jener Berliner Stadtteile, in
+                      denen Altbaucharme nicht inszeniert wirkt, sondern
+                      selbstverständlich da ist: begrünte Straßen,
+                      wohnliche Fassaden, kleine Cafés und eine ruhige,
+                      kultivierte Alltagsstruktur.
                     </p>
                     <p>
-                      Gleichzeitig bleibt die Lage hervorragend angebunden:
-                      City West, Kurfürstendamm, Charlottenburg und weitere
-                      Bezirke sind schnell erreichbar. LOLA fügt sich genau
-                      hier ein: in einen Kiez, der Berliner Altbaukultur mit
-                      modernem Lebensstil verbindet.
+                      Genau in dieses Umfeld fügt sich LOLA ein. Das Haus ist
+                      nicht nur technisch erneuert, sondern auch atmosphärisch
+                      am richtigen Ort: mitten in einem Quartier, das die
+                      klassische Berliner Wohnkultur bis heute trägt.
                     </p>
                   </div>
 

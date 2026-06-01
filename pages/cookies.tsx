@@ -53,17 +53,18 @@ export default function CookiesPage() {
                 </p>
               </CookieSection>
 
-              <CookieSection title="Warum kein Cookie-Banner angezeigt wird">
+              <CookieSection title="Cookie-Banner und Auswahl">
                 <p>
-                  Ein Cookie- oder Consent-Banner ist auf dieser Website nur
-                  erforderlich, wenn einwilligungspflichtige Technologien
-                  eingesetzt werden, etwa Tracking, Retargeting, externe
-                  Marketing-Pixel oder vergleichbare Speicher- und
-                  Zugriffstechniken.
+                  Beim ersten Besuch zeigt diese Website einen Cookie-Hinweis.
+                  Dort können Sie entweder nur technisch notwendige Funktionen
+                  zulassen oder alle künftig angebotenen Cookie-Kategorien
+                  akzeptieren.
                 </p>
                 <p>
-                  Da solche Dienste derzeit nicht eingebunden sind, wird kein
-                  Cookie-Banner angezeigt.
+                  Die Auswahl wird lokal im Browser gespeichert, damit der
+                  Hinweis nicht bei jedem Seitenaufruf erneut erscheint. Je nach
+                  Browser kann dies per Local Storage oder als technisch
+                  notwendiges Consent-Cookie erfolgen.
                 </p>
               </CookieSection>
 

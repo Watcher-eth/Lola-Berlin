@@ -10,7 +10,7 @@ export default function ApartmentsPage() {
     <>
       <SeoHead
         title="Wohnungen"
-        description="Wohnungen in Lola: interaktive Grundrissübersicht, exemplarische Verfügbarkeiten und Einblick in die Wohnungsqualitäten des Hauses."
+        description="Wohnungen in Lola: interaktive Grundrissübersicht, Wohnungsanfragen und Einblick in die Wohnungsqualitäten des Hauses."
         path="/apartments"
       />
 

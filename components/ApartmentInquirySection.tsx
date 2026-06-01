@@ -24,8 +24,8 @@ export function ApartmentInquirySection({
           </h2>
           <p className="mt-5 text-sm leading-7 text-black/64 sm:text-base sm:leading-8 md:text-lg">
             Hinterlasse Name, E-Mail, gewünschte Zimmeranzahl und eine kurze
-            Nachricht. Wir melden uns mit Informationen zu Verfügbarkeit,
-            Grundrissen und passenden Wohnungen.
+            Nachricht. Wir melden uns mit weiteren Informationen, Grundrissen
+            und passenden Wohnungen.
           </p>
         </div>
 
@@ -40,7 +40,7 @@ export function ApartmentInquirySection({
             </h3>
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-black/62 sm:text-base sm:leading-8">
               Auf Anfrage teilen wir weitere Grundrisse, Details zur Ausstattung
-              und den aktuellen Stand der verfügbaren Wohnungen.
+              und den aktuellen Stand der passenden Wohnungen.
             </p>
             <div className="mt-8">
               <a

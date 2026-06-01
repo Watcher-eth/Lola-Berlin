@@ -53,7 +53,7 @@ export function SplashSection() {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="sticky top-0 z-0 h-screen w-full overflow-hidden">
       <video
         autoPlay
         muted
