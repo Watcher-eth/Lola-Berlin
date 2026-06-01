@@ -117,7 +117,7 @@ export function LandingApartmentsSection() {
               <div className="relative aspect-[1.34/1] overflow-hidden bg-[var(--accent-soft)]">
                 <Image
                   src="/balcon.png"
-                  alt="Balkon mit Blick zum Garten in Lola"
+                  alt="Außenbereich mit Blick zum Garten in Lola"
                   fill
                   sizes="(min-width: 1024px) 48vw, 100vw"
                   className="object-cover object-center"
