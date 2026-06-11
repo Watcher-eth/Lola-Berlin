@@ -116,7 +116,8 @@ export function SplashSection() {
       >
         <p className="text-base leading-6 text-white sm:text-lg sm:leading-7 md:text-2xl md:leading-9">
           LOLA vereint wunderschönen Altbau mit modernstem energetischen
-          Standard, ruhige Wohnungen und eine Berliner Adresse mit Charakter.
+          Standard, ruhigen Wohnungen und einem der begehrtesten Kieze im
+          Berliner Westen.
         </p>
       </motion.div>
 

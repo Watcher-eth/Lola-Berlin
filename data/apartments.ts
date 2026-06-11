@@ -1,3 +1,5 @@
+import generatedApartmentOutlines from "@/data/generated-apartment-outlines.json";
+
 export type ApartmentStatus = "Auf Anfrage";
 export type HouseSection = "Vorderhaus" | "Seitenflügel" | "Hinterhaus";
 export type PlanQuality = "exact" | "typology";
@@ -19,6 +21,7 @@ export type ApartmentUnit = {
   gardenAccess: boolean;
   note: string;
   cadPlanSrc: string;
+  outlineMaskSrc?: string;
   planQuality: PlanQuality;
   modelLabel: string;
 };
@@ -61,6 +64,13 @@ const cadPlans = {
   apt4Right: `${cadRoot}/apartment-4og-right.svg`,
   aptCombinedLong: `${cadRoot}/apartment-combined-long.svg`,
 } as const;
+
+type ApartmentOutlineManifest = Partial<
+  Record<string, Partial<Record<string, string>>>
+>;
+
+const apartmentOutlineManifest =
+  generatedApartmentOutlines as ApartmentOutlineManifest;
 
 function seed(input: ApartmentSeed): ApartmentSeed {
   return input;
@@ -484,6 +494,7 @@ function createFloor(
       floorId: id,
       floorLabel,
       availability: "Auf Anfrage",
+      outlineMaskSrc: apartmentOutlineManifest[id]?.[apartment.code],
     })),
   };
 }

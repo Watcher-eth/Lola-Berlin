@@ -30,6 +30,11 @@ const focusTransition = {
   mass: 0.78,
 } as const;
 
+const floorImageClassName = "object-contain p-4 contrast-[1.2] sm:p-7";
+const outlineImageClassName = "object-contain p-4 sm:p-7";
+const outlineTintFilter =
+  "brightness(0) saturate(100%) invert(25%) sepia(12%) saturate(898%) hue-rotate(16deg) brightness(96%) contrast(88%)";
+
 const planFocus: Record<string, PlanFocus> = {
   "WE 04": { x: 35, y: 18, scale: 3.6 },
   "WE 03.2": { x: 42, y: 31, scale: 3.4 },
@@ -120,6 +125,55 @@ function ApartmentPlanOverlay({
   );
 }
 
+function ApartmentOutlineOverlay({
+  apartment,
+}: {
+  apartment: ApartmentUnit;
+}) {
+  if (!apartment.outlineMaskSrc) {
+    return null;
+  }
+
+  return (
+    <motion.div
+      key={`outline-${apartment.id}`}
+      className="pointer-events-none absolute inset-0 z-20"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <Image
+        src={apartment.outlineMaskSrc}
+        alt=""
+        fill
+        unoptimized
+        sizes="(min-width: 1024px) 70vw, 94vw"
+        className={outlineImageClassName}
+        style={{
+          filter: outlineTintFilter,
+          opacity: 0.94,
+          transform: "scale(1.002)",
+        }}
+      />
+      <Image
+        src={apartment.outlineMaskSrc}
+        alt=""
+        fill
+        unoptimized
+        aria-hidden
+        sizes="(min-width: 1024px) 70vw, 94vw"
+        className={outlineImageClassName}
+        style={{
+          filter: outlineTintFilter,
+          opacity: 0.34,
+          transform: "scale(1.002)",
+        }}
+      />
+    </motion.div>
+  );
+}
+
 function ApartmentFact({
   label,
   value,
@@ -160,6 +214,7 @@ function CadPlanSurface({
 }) {
   const focus = focusApartment ? getFocus(focusApartment) : null;
   const detailMode = mode === "apartment";
+  const outlineApartment = hoverApartment ?? focusApartment;
 
   return (
     <motion.div
@@ -187,12 +242,20 @@ function CadPlanSurface({
             unoptimized
             priority
             sizes="(min-width: 1024px) 70vw, 94vw"
-            className="object-contain p-4 contrast-[1.2] sm:p-7"
+            className={floorImageClassName}
           />
         </motion.div>
 
         {!detailMode ? (
           <>
+            <AnimatePresence mode="wait">
+              {outlineApartment?.outlineMaskSrc ? (
+                <ApartmentOutlineOverlay
+                  key={outlineApartment.id}
+                  apartment={outlineApartment}
+                />
+              ) : null}
+            </AnimatePresence>
             {focusApartment && focus ? (
               <motion.div
                 key={`${focusApartment.id}-label`}
@@ -536,9 +599,9 @@ export function ApartmentsExplorer() {
               />
 
               <p className="mt-4 max-w-2xl text-xs leading-6 text-black/46">
-                Die Darstellung folgt den vorliegenden CAD-Unterlagen. Nicht
-                vollständig separat vorliegende Wohnungen werden als
-                Modellgrundriss gekennzeichnet.
+                Die Vollgeschossansicht zeigt die jeweilige Einheit direkt im
+                Plan. Beim Oeffnen erscheint der zugehoerige Wohnungsgrundriss
+                separat.
               </p>
             </div>
 

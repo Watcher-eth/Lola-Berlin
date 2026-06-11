@@ -31,11 +31,11 @@ export function SiteHeader({ theme = "overlay" }: SiteHeaderProps) {
             href={link.href}
             className={`group relative overflow-hidden px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] transition-[border-color,color,background-color] duration-500 md:px-4 md:text-xs ${
               isOverlay
-                ? "border border-[#111111] bg-white/10 text-[#111111] backdrop-blur-md hover:border-transparent"
+                ? "border border-white/75 bg-white/[0.08] text-[#111111] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-[6px] backdrop-saturate-150 hover:border-white/90 hover:bg-white/20"
                 : "border border-[var(--accent)]/24 bg-white/40 text-[var(--accent)] hover:border-transparent"
             }`}
           >
-            <span className="absolute inset-0 origin-left scale-x-0 bg-white transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
+            <span className="absolute inset-0 origin-left scale-x-0 bg-white/35 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
             <span
               className={`relative z-10 transition-colors duration-500 ${
                 isOverlay
@@ -51,11 +51,11 @@ export function SiteHeader({ theme = "overlay" }: SiteHeaderProps) {
           href="/haus"
           className={`group relative overflow-hidden px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] transition-[border-color,color,background-color] duration-500 md:px-4 md:text-xs ${
             isOverlay
-              ? "border border-[#111111] bg-white/10 text-[#111111] backdrop-blur-md hover:border-transparent"
+              ? "border border-white/75 bg-white/[0.08] text-[#111111] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-[6px] backdrop-saturate-150 hover:border-white/90 hover:bg-white/20"
               : "border border-[var(--accent)]/24 bg-white/40 text-[var(--accent)] hover:border-transparent"
           }`}
         >
-          <span className="absolute inset-0 origin-left scale-x-0 bg-white transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
+          <span className="absolute inset-0 origin-left scale-x-0 bg-white/35 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
           <span
             className={`relative z-10 transition-colors duration-500 ${
               isOverlay

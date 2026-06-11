@@ -49,7 +49,7 @@ export default function DatenschutzPage() {
                   ist:
                 </p>
                 <p>
-                  ImmoFriends GmbH
+                  AFG IA GmbH &amp; Co. KG
                   <br />
                   Holsteinische Straße 18
                   <br />

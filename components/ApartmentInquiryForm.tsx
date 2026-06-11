@@ -33,7 +33,7 @@ export function ApartmentInquiryForm({
     if (!privacyAccepted) {
       setStatus({
         type: "error",
-        message: "Bitte bestätige die Datenschutzhinweise.",
+        message: "Bitte bestätigen Sie die Datenschutzhinweise.",
       });
       return;
     }
@@ -180,9 +180,8 @@ export function ApartmentInquiryForm({
         </label>
 
         <p className="text-xs leading-6 text-black/46">
-          Die Wohnungen werden unmöbliert angeboten. Küche und Bad sind fest
-          eingebaut; Angaben zu Flächen, Grundrissen und weiteren Details sind
-          bis zum Vertragsabschluss unverbindlich.
+          Die Wohnungen sind unmöbliert. Angaben zu Flächen, Grundrissen und
+          weiteren Details sind bis zum Vertragsabschluss unverbindlich.
         </p>
 
         <button

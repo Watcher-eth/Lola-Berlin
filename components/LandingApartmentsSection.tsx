@@ -22,7 +22,7 @@ export function LandingApartmentsSection() {
                 <p className="mt-4 max-w-xl text-sm leading-7 text-black/68 sm:text-base sm:leading-8">
                   LOLA verbindet großzügige Grundrisse und hochwertige
                   Materialien mit der wunderschönen Architektur der Gründerzeit.
-                  Die Wohnungen mit 1 bis 6 Zimmern sind weit und groß und
+                  Die Wohnungen mit 1 bis 5 Zimmern sind weit und groß und
                   vermitteln zugleich dauerhaft Geborgenheit.
                 </p>
               </div>

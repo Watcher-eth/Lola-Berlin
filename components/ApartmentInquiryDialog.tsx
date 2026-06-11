@@ -31,8 +31,8 @@ export function ApartmentInquiryDialog({
           </p>
           <DialogTitle>Interesse an dieser Wohnung</DialogTitle>
           <DialogDescription>
-            Hinterlasse Name und E-Mail. Wir melden uns mit weiteren Details
-            zur Wohnung.
+            Hinterlassen Sie bitte Namen und E-Mail. Wir melden uns mit
+            weiteren Details zur Wohnung.
           </DialogDescription>
         </DialogHeader>
 

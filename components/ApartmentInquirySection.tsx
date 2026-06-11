@@ -19,13 +19,13 @@ export function ApartmentInquirySection({
             Anfrage
           </p>
           <h2 className="mt-5 font-serif text-3xl leading-none tracking-[-0.05em] text-[var(--accent)] sm:text-5xl lg:text-[4rem]">
-            Interesse an einer kernsanierten 1-6 Zimmer-Wohnung zur Miete im
+            Interesse an einer kernsanierten 1-5 Zimmer-Wohnung zur Miete im
             LOLA?
           </h2>
           <p className="mt-5 text-sm leading-7 text-black/64 sm:text-base sm:leading-8 md:text-lg">
-            Hinterlasse Name, E-Mail, gewünschte Zimmeranzahl und eine kurze
-            Nachricht. Wir melden uns mit weiteren Informationen, Grundrissen
-            und passenden Wohnungen.
+            Hinterlassen Sie bitte Namen, E-Mail, gewünschte Zimmeranzahl und
+            eine kurze Nachricht. Wir melden uns mit weiteren Informationen,
+            Grundrissen und passenden Wohnungen.
           </p>
         </div>
 

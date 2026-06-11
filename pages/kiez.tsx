@@ -31,7 +31,7 @@ type MagazineRevealProps = {
 const sections: Section[] = [
   {
     eyebrow: "01 Kiez",
-    title: "Der Güntzelkiez - Ihr neues Zuhause im Herzen von Berlin.",
+    title: "Der Güntzelkiez - Ihr neues Zuhause im Herzen von Berlin",
     iconKind: "education",
     intro:
       "Das LOLA entsteht in einer ruhigen Seitenstraße im Güntzelkiez, nahe dem Kurfürstendamm.",
@@ -359,7 +359,7 @@ export default function KiezPage() {
                   Leben im Güntzelkiez, Wilmersdorf
                 </p>
                 <h1 className="mt-5 w-full font-serif text-[2.9rem] leading-[0.92] tracking-[-0.045em] text-[#3f422d] sm:text-[5.4rem] lg:text-[7.2rem]">
-                  Der Güntzelkiez - Ihr neues Zuhause im Herzen von Berlin.
+                  Der Güntzelkiez - Ihr neues Zuhause im Herzen von Berlin
                 </h1>
                 <motion.div
                   className="mt-9 w-full space-y-5 border-t border-[#3f422d]/20 pt-7"

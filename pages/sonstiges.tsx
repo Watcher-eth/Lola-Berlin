@@ -40,9 +40,9 @@ export default function SonstigesPage() {
                 jeweiligen Wohnung entsprechen.
               </p>
               <p>
-                Die Wohnungen werden unmöbliert angeboten. Fest eingebaute
-                Küchen und Bäder sind Teil der beschriebenen Grundausstattung,
-                soweit dies in den jeweiligen Vertragsunterlagen bestätigt wird.
+                Die Wohnungen sind unmöbliert. Angaben zu Flächen,
+                Grundrissen, Ausstattungen und weiteren Details sind bis zum
+                Vertragsabschluss unverbindlich.
               </p>
               <p>
                 Diese Website begründet kein Angebot zum Abschluss eines
