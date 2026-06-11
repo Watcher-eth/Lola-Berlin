@@ -98,7 +98,7 @@ function ApartmentPlanOverlay({
   sharedLayout?: boolean;
 }) {
   const qualityLabel =
-    apartment.planQuality === "exact" ? "CAD-Plan" : "Modellgrundriss";
+    apartment.planQuality === "exact" ? "Originalplan" : "Typologie";
   const layoutProps = sharedLayout
     ? { layoutId: `apartment-plan-${apartment.id}` }
     : {};
@@ -194,7 +194,11 @@ function ApartmentFact({
 function getOutdoorSpaceLabel(apartment: ApartmentUnit) {
   if (apartment.gardenAccess) return "Gartenzugang";
   if (apartment.balcony) return "Balkon";
-  return "Auf Anfrage";
+  return "Nein";
+}
+
+function getPlanSourceLabel(apartment: ApartmentUnit) {
+  return apartment.planQuality === "exact" ? "Originalplan" : "Typologie";
 }
 
 function CadPlanSurface({
@@ -323,7 +327,7 @@ function CadPlanSurface({
       <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-[var(--accent)]/12 bg-white/58 px-4 py-3 text-[10px] uppercase tracking-[0.16em] text-[var(--accent)]/64">
         <span className="inline-flex items-center gap-2">
           <span className="h-px w-8 bg-[var(--accent)]" />
-          CAD-Vorschau
+          Grundrissvorschau
         </span>
       </div>
     </motion.div>
@@ -387,10 +391,14 @@ function ApartmentDetailsPanel({
                 value={`${activeApartment.sqm.toLocaleString("de-DE")} m²`}
               />
               <ApartmentFact label="Etage" value={activeApartment.floorLabel} />
+              <ApartmentFact
+                label="Planquelle"
+                value={getPlanSourceLabel(activeApartment)}
+              />
               <ApartmentFact label="Zimmer" value={activeApartment.rooms} />
               <ApartmentFact label="Bäder" value={activeApartment.bathrooms} />
               <ApartmentFact
-                label="Außenraum"
+                label="Balkon/Garten"
                 value={getOutdoorSpaceLabel(activeApartment)}
               />
               <ApartmentFact
@@ -401,8 +409,9 @@ function ApartmentDetailsPanel({
 
             <p className="mt-6 text-sm leading-7 text-black/64">
               Unmöbliert, mit fest eingebauter Küche und hochwertig
-              ausgeführtem Bad. Weitere Informationen zur Wohnung teilen wir auf
-              Anfrage.
+              ausgeführtem Bad. Die Flächenangaben folgen der Excel-Übersicht,
+              und Einzelpläne zeigen wir dort, wo ein verifizierter
+              Originalgrundriss vorliegt.
             </p>
           </motion.div>
         ) : (
@@ -485,6 +494,9 @@ function ApartmentDetailsPanel({
                 </span>
                 <span className="mt-2 block text-xs leading-5 text-black/54">
                   {apartment.sqm.toLocaleString("de-DE")} m²
+                </span>
+                <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent)]/54">
+                  {getPlanSourceLabel(apartment)}
                 </span>
               </motion.button>
             );
@@ -581,9 +593,9 @@ export function ApartmentsExplorer() {
 
           <div className="mt-8">
             <p className="max-w-3xl text-sm leading-6 text-black/54 sm:leading-7">
-              CAD-Grundrisse für die verfügbaren Wohneinheiten, ergänzt durch
-              passende Modellgrundrisse, wenn keine separate Wohnungsversion
-              vorliegt.
+              Die Quadratmeterangaben folgen der Excel-Liste. Wo ein eigener
+              Wohnungsgrundriss vorliegt, zeigen wir den Originalplan direkt;
+              fehlende Einzelpläne bleiben als Typologie markiert.
             </p>
           </div>
 
@@ -599,9 +611,9 @@ export function ApartmentsExplorer() {
               />
 
               <p className="mt-4 max-w-2xl text-xs leading-6 text-black/46">
-                Die Vollgeschossansicht zeigt die jeweilige Einheit direkt im
-                Plan. Beim Oeffnen erscheint der zugehoerige Wohnungsgrundriss
-                separat.
+                Die Vollgeschossansicht bleibt die Orientierungsebene. Beim
+                Öffnen erscheint der zugehörige Originalgrundriss oder die
+                passende Typologie separat.
               </p>
             </div>
 
