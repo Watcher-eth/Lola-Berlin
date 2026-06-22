@@ -179,8 +179,34 @@ const apartmentSelectionZones = {
     { minX: 190.8, minY: -221.6, maxX: 204.0, maxY: -211.0 },
   ],
   "2og:WE 07": [
-    { minX: 233.0, minY: -235.4, maxX: 248.2, maxY: -217.4 },
+    { minX: 233.0, minY: -235.4, maxX: 247.65, maxY: -221.5 },
   ],
+  "2og:WE 06": [
+    { minX: 233.2, minY: -221.4, maxX: 244.9, maxY: -212.8 },
+  ],
+  "2og:WE 26": [
+    { minX: 233.1, minY: -212.7, maxX: 243.25, maxY: -203.65 },
+  ],
+  "2og:WE 27": [
+    { minX: 235.4, minY: -203.55, maxX: 248.25, maxY: -193.55 },
+    { minX: 243.65, minY: -208.65, maxX: 248.25, maxY: -203.55 },
+  ],
+  "2og:WE 28": [
+    { minX: 248.25, minY: -209.0, maxX: 256.8, maxY: -196.2 },
+  ],
+};
+
+const apartmentExclusionZones = {
+  "2og:WE 07": [
+    { minX: 232.0, minY: -220.2, maxX: 245.0, maxY: -211.8 },
+  ],
+  "2og:WE 27": [
+    { minX: 232.0, minY: -212.8, maxX: 243.45, maxY: -203.75 },
+  ],
+};
+
+const apartmentHighlightColors = {
+  "2og:WE 27": "#FF3B30",
 };
 
 function unionBounds(boundsList) {
@@ -347,6 +373,7 @@ for (const floor of floors) {
   manifest.apartments[floor.id] = {};
 
   for (const code of floor.apartments) {
+    const apartmentKey = `${floor.id}:${code}`;
     const labelPoints = textEntities
       .filter((entity) => normalizeLayerName(entity.layerName).includes("beschriftung-räume"))
       .filter((entity) => intersectsBounds(boundsForPoints([entity.point]), floorBounds, 0))
@@ -359,7 +386,8 @@ for (const floor of floors) {
 
     const labelBounds = boundsForPoints(labelPoints);
     const expand = code.includes("/") ? 2.2 : 1.6;
-    const selectionZones = apartmentSelectionZones[`${floor.id}:${code}`];
+    const selectionZones = apartmentSelectionZones[apartmentKey];
+    const exclusionZones = apartmentExclusionZones[apartmentKey] ?? [];
     const apartmentBounds = selectionZones
       ? unionBounds(selectionZones)
       : {
@@ -373,7 +401,11 @@ for (const floor of floors) {
       if (!intersectsBounds(item.bounds, floorBounds, 0)) return false;
 
       if (selectionZones) {
-        return pointInAnyBounds(boundsCenter(item.bounds), selectionZones, 0.18);
+        const center = boundsCenter(item.bounds);
+        return (
+          pointInAnyBounds(center, selectionZones, 0) &&
+          !pointInAnyBounds(center, exclusionZones, 0)
+        );
       }
 
       return intersectsBounds(item.bounds, apartmentBounds, 0.28);
@@ -392,13 +424,14 @@ for (const floor of floors) {
 
     const fileName = `${floor.id}-${slugifyCode(code)}.svg`;
     const outputPath = `${outputDir}${fileName}`;
+    const highlightColor = apartmentHighlightColors[apartmentKey] ?? "#007AFF";
     const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" aria-hidden="true">
   <style>
     path,
     circle {
       fill: none;
-      stroke: #007AFF;
+      stroke: ${highlightColor};
       stroke-width: 1.55;
       stroke-linecap: round;
       stroke-linejoin: round;

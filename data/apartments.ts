@@ -1,6 +1,6 @@
 import generatedCadApartmentHighlights from "@/data/generated-cad-apartment-highlights.json";
 
-export type ApartmentStatus = "Auf Anfrage";
+export type ApartmentStatus = "Auf Anfrage" | "Vermietet";
 export type HouseSection = "Vorderhaus" | "Seitenflügel" | "Hinterhaus";
 export type PlanQuality = "exact" | "typology";
 
@@ -52,7 +52,9 @@ export type FloorPlanData = {
 type ApartmentSeed = Omit<
   ApartmentUnit,
   "id" | "floorId" | "floorLabel" | "availability" | "highlight"
->;
+> & {
+  availability?: ApartmentStatus;
+};
 
 const cadRoot = "/cad-floorplans";
 
@@ -307,6 +309,7 @@ const floor2Apartments = [
     cadPlanSrc: cadPlans.floor2,
     planQuality: "typology",
     modelLabel: "Typologie Hinterhaus links",
+    availability: "Vermietet",
   }),
   seed({
     code: "WE 28",
@@ -515,7 +518,7 @@ function createFloor(
       id: `${id}-${apartment.code.replaceAll(/[^\d]+/g, "-")}`,
       floorId: id,
       floorLabel,
-      availability: "Auf Anfrage",
+      availability: apartment.availability ?? "Auf Anfrage",
       highlight: cadHighlightManifest.apartments[id][apartment.code],
     })),
   };

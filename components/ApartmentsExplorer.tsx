@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, ReactNode, useState } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { ApartmentInquiryDialog } from "@/components/ApartmentInquiryDialog";
 import {
@@ -17,13 +17,16 @@ const planTransition = {
 
 const floorMediaClassName = "absolute inset-0 px-4 py-9 sm:px-7 sm:py-11";
 const floorImageClassName = "object-contain contrast-[1.18]";
+function apartmentHighlightValue(apartment: ApartmentUnit | null) {
+  return apartment?.availability === "Vermietet" ? "#FF3B30" : "#007AFF";
+}
 
 function ApartmentFact({
   label,
   value,
 }: {
   label: string;
-  value: string | number;
+  value: ReactNode;
 }) {
   return (
     <div>
@@ -139,7 +142,8 @@ function ApartmentFloorOverlay({
                 y={highlightedApartment.highlight.label.y}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                className="fill-[#007AFF] font-mono text-[1.25px] uppercase tracking-[0.16em]"
+                fill={apartmentHighlightValue(highlightedApartment)}
+                className="font-mono text-[1.25px] uppercase tracking-[0.16em]"
                 paintOrder="stroke"
                 stroke="#f8f6ef"
                 strokeWidth="0.54"
@@ -216,7 +220,10 @@ function CadPlanSurface({
 
       <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-[var(--accent)]/12 bg-white/58 px-4 py-3 text-[10px] uppercase tracking-[0.16em] text-[var(--accent)]/64">
         <span className="inline-flex items-center gap-2">
-          <span className="h-px w-8 bg-[#007AFF]" />
+          <span
+            className="h-px w-8"
+            style={{ backgroundColor: apartmentHighlightValue(displayedApartment) }}
+          />
           {displayedApartment
             ? `${displayedApartment.code} · ${displayedApartment.title}`
             : "Wohnung auswählen"}
@@ -244,6 +251,9 @@ function ApartmentDetailsPanel({
   onPreviewEnd: () => void;
   onInquiry: () => void;
 }) {
+  const inquiryDisabled =
+    !activeApartment || activeApartment.availability === "Vermietet";
+
   return (
     <aside className="border border-[var(--accent)]/14 bg-white/54 p-5 sm:p-6">
       <AnimatePresence mode="wait">
@@ -284,7 +294,17 @@ function ApartmentDetailsPanel({
               />
               <ApartmentFact
                 label="Status"
-                value={activeApartment.availability}
+                value={
+                  <span
+                    className={`inline-flex border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] ${
+                      activeApartment.availability === "Vermietet"
+                        ? "border-[#FF3B30]/32 bg-[#FF3B30]/10 text-[#FF3B30]"
+                        : "border-[var(--accent)]/18 bg-white/58 text-[var(--accent)]"
+                    }`}
+                  >
+                    {activeApartment.availability}
+                  </span>
+                }
               />
             </div>
 
@@ -320,10 +340,16 @@ function ApartmentDetailsPanel({
         <button
           type="button"
           onClick={onInquiry}
-          disabled={!activeApartment}
-          className="w-full bg-[var(--accent)] px-6 py-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-black disabled:cursor-not-allowed disabled:bg-[var(--accent)]/34"
+          disabled={inquiryDisabled}
+          className={`w-full px-6 py-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-white transition-colors duration-300 ${
+            activeApartment?.availability === "Vermietet"
+              ? "cursor-not-allowed bg-[#FF3B30]"
+              : "bg-[var(--accent)] hover:bg-black disabled:cursor-not-allowed disabled:bg-[var(--accent)]/34"
+          }`}
         >
-          Anfragen
+          {activeApartment?.availability === "Vermietet"
+            ? "Vermietet"
+            : "Anfragen"}
         </button>
       </div>
 
@@ -335,6 +361,7 @@ function ApartmentDetailsPanel({
           {floor.apartments.map((apartment) => {
             const active = apartment.id === activeApartment?.id;
             const preview = apartment.id === previewApartmentId && !active;
+            const sold = apartment.availability === "Vermietet";
 
             return (
               <motion.button
@@ -352,7 +379,13 @@ function ApartmentDetailsPanel({
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
                 className={`min-h-[72px] border px-4 py-3 text-left transition-colors duration-300 ${
-                  active
+                  sold && active
+                    ? "border-[#FF3B30] bg-[#FF3B30]/8 text-[#FF3B30]"
+                    : sold && preview
+                      ? "border-[#FF3B30]/58 bg-white text-[#FF3B30] shadow-[0_12px_30px_rgba(255,59,48,0.08)]"
+                    : sold
+                      ? "border-[#FF3B30]/18 bg-white/42 text-black/62 hover:border-[#FF3B30]/48 hover:bg-white"
+                    : active
                     ? "border-[var(--accent)] bg-[#f7f3eb] text-[var(--accent)]"
                     : preview
                       ? "border-[var(--accent)]/58 bg-white text-[var(--accent)] shadow-[0_12px_30px_rgba(75,73,45,0.08)]"
@@ -363,6 +396,11 @@ function ApartmentDetailsPanel({
                   <span className="font-serif text-2xl leading-none">
                     {apartment.code}
                   </span>
+                  {sold ? (
+                    <span className="border border-[#FF3B30]/28 bg-[#FF3B30]/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-[#FF3B30]">
+                      Vermietet
+                    </span>
+                  ) : null}
                 </span>
                 <span className="mt-2 block text-xs leading-5 text-black/54">
                   {apartment.sqm.toLocaleString("de-DE")} m²
