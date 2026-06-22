@@ -309,9 +309,9 @@ function ApartmentDetailsPanel({
             </div>
 
             <p className="mt-6 text-sm leading-7 text-black/64">
-              Der Geschossplan stammt direkt aus den aktuellen CAD-Dateien.
-              Auswahl und Hervorhebung bleiben auf diesem Plan, damit Fenster,
-              Räume, Wände und Wohnungsgrenzen zusammen lesbar bleiben.
+              Auswahl und Hervorhebung bleiben im vollständigen Grundriss,
+              damit Fenster, Räume, Wände und Wohnungsgrenzen zusammen lesbar
+              bleiben.
             </p>
           </motion.div>
         ) : (
@@ -329,8 +329,8 @@ function ApartmentDetailsPanel({
               Grundriss
             </h3>
             <p className="mt-3 text-lg leading-7 text-black/72 sm:text-xl sm:leading-8">
-              Wähle eine Einheit im CAD-Geschossplan oder über die Liste, um
-              Fläche, Lage und Anfrageoption zu sehen.
+              Wähle eine Einheit im Grundriss oder über die Liste, um Fläche,
+              Lage und Anfrageoption zu sehen.
             </p>
           </motion.div>
         )}
@@ -485,10 +485,9 @@ export function ApartmentsExplorer() {
 
           <div className="mt-8">
             <p className="max-w-3xl text-sm leading-6 text-black/54 sm:leading-7">
-              Die CAD-Geschosspläne sind die visuelle Grundlage. Beim Anklicken
-              einer Wohneinheit werden ihre Grenzen direkt im vollständigen
-              Plan hervorgehoben; die Flächenangaben bleiben aus der
-              Excel-Übersicht übernommen.
+              Wähle ein Geschoss und klicke eine Wohneinheit an. Die
+              Wohnungsgrenzen werden direkt im vollständigen Grundriss
+              hervorgehoben.
             </p>
           </div>
 
@@ -504,9 +503,9 @@ export function ApartmentsExplorer() {
               />
 
               <p className="mt-4 max-w-2xl text-xs leading-6 text-black/46">
-                Die Darstellung nutzt die neuen DWG-Unterlagen als Quelle. Alte
-                Einzelplan- und Maskenbilder werden für diese Ansicht nicht
-                mehr verwendet.
+                Die Übersicht zeigt die Wohnungen im Zusammenhang des gesamten
+                Geschosses, damit Lage, Erschließung und Außenbereiche schnell
+                erfassbar bleiben.
               </p>
             </div>
 
