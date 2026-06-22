@@ -4,7 +4,7 @@ const apartmentStandards = [
   "Fernwärme und Fußbodenheizung für effiziente, angenehme Wärme",
   "Energieeffizienzklasse A und energetisch saniertes Haus auf Neubaustandard",
   "Glasfaser- und Highspeed-Internet für einen zeitgemäßen Alltag",
-  "Moderne, voll geflieste Badezimmer und fest eingebaute Küchen",
+  "Moderne, voll geflieste Badezimmer und großzügige Berliner Zimmer",
   "Zertifizierter Bio-Boden oder Parkett mit ruhiger, hochwertiger Haptik",
 ];
 
