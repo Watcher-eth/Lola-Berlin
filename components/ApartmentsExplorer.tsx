@@ -437,6 +437,7 @@ export function ApartmentsExplorer() {
     selectedFloor.apartments.find(
       (apartment) => apartment.id === previewApartmentId,
     ) ?? null;
+  const displayedApartment = hoverApartment ?? activeApartment;
 
   const selectFloor = (floorId: string) => {
     setSelectedFloorId(floorId);
@@ -511,7 +512,7 @@ export function ApartmentsExplorer() {
 
             <ApartmentDetailsPanel
               floor={selectedFloor}
-              activeApartment={activeApartment}
+              activeApartment={displayedApartment}
               previewApartmentId={previewApartmentId}
               onSelect={selectApartment}
               onPreview={setPreviewApartmentId}
@@ -524,9 +525,9 @@ export function ApartmentsExplorer() {
         <ApartmentInquiryDialog
           open={inquiryOpen}
           onOpenChange={setInquiryOpen}
-          apartmentCode={activeApartment?.code}
-          apartmentTitle={activeApartment?.title}
-          floorLabel={activeApartment?.floorLabel}
+          apartmentCode={displayedApartment?.code}
+          apartmentTitle={displayedApartment?.title}
+          floorLabel={displayedApartment?.floorLabel}
         />
       </section>
     </LayoutGroup>

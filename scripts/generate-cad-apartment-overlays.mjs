@@ -55,6 +55,14 @@ function formatNumber(value) {
   return Number(value).toFixed(3).replace(/\.?0+$/, "");
 }
 
+function contentHash(value) {
+  let hash = 5381;
+  for (let index = 0; index < value.length; index += 1) {
+    hash = (hash * 33) ^ value.charCodeAt(index);
+  }
+  return (hash >>> 0).toString(36);
+}
+
 function slugifyCode(code) {
   return code
     .toLowerCase()
@@ -102,6 +110,105 @@ function intersectsBounds(a, b, margin = 0) {
   );
 }
 
+function lineIntersectsBounds(start, end, bounds) {
+  const lineBounds = boundsForPoints([start, end]);
+  return intersectsBounds(lineBounds, bounds, 0);
+}
+
+function clipLineToBounds(start, end, bounds) {
+  let t0 = 0;
+  let t1 = 1;
+  const dx = end[0] - start[0];
+  const dy = end[1] - start[1];
+  const checks = [
+    [-dx, start[0] - bounds.minX],
+    [dx, bounds.maxX - start[0]],
+    [-dy, start[1] - bounds.minY],
+    [dy, bounds.maxY - start[1]],
+  ];
+
+  for (const [p, q] of checks) {
+    if (p === 0) {
+      if (q < 0) return null;
+      continue;
+    }
+
+    const r = q / p;
+    if (p < 0) {
+      if (r > t1) return null;
+      if (r > t0) t0 = r;
+    } else {
+      if (r < t0) return null;
+      if (r < t1) t1 = r;
+    }
+  }
+
+  const clippedStart = [start[0] + t0 * dx, start[1] + t0 * dy];
+  const clippedEnd = [start[0] + t1 * dx, start[1] + t1 * dy];
+  if (Math.hypot(clippedEnd[0] - clippedStart[0], clippedEnd[1] - clippedStart[1]) < 0.001) {
+    return null;
+  }
+
+  return [clippedStart, clippedEnd];
+}
+
+function clipSegmentToZones(start, end, zones) {
+  const clipped = [];
+  for (const zone of zones) {
+    if (!lineIntersectsBounds(start, end, zone)) continue;
+    const segment = clipLineToBounds(start, end, zone);
+    if (segment) clipped.push(segment);
+  }
+  return clipped;
+}
+
+function segmentParameterForPoint(start, end, point) {
+  const dx = end[0] - start[0];
+  const dy = end[1] - start[1];
+  if (Math.abs(dx) >= Math.abs(dy)) return dx === 0 ? 0 : (point[0] - start[0]) / dx;
+  return dy === 0 ? 0 : (point[1] - start[1]) / dy;
+}
+
+function subtractExclusionZones(start, end, zones) {
+  let ranges = [[0, 1]];
+
+  for (const zone of zones) {
+    if (!lineIntersectsBounds(start, end, zone)) continue;
+    const clipped = clipLineToBounds(start, end, zone);
+    if (!clipped) continue;
+
+    const tA = segmentParameterForPoint(start, end, clipped[0]);
+    const tB = segmentParameterForPoint(start, end, clipped[1]);
+    const removeStart = Math.max(0, Math.min(tA, tB));
+    const removeEnd = Math.min(1, Math.max(tA, tB));
+    if (removeEnd <= removeStart) continue;
+
+    const nextRanges = [];
+    for (const [rangeStart, rangeEnd] of ranges) {
+      if (removeEnd <= rangeStart || removeStart >= rangeEnd) {
+        nextRanges.push([rangeStart, rangeEnd]);
+        continue;
+      }
+      if (removeStart > rangeStart) nextRanges.push([rangeStart, removeStart]);
+      if (removeEnd < rangeEnd) nextRanges.push([removeEnd, rangeEnd]);
+    }
+    ranges = nextRanges;
+  }
+
+  return ranges
+    .map(([rangeStart, rangeEnd]) => {
+      const dx = end[0] - start[0];
+      const dy = end[1] - start[1];
+      const clippedStart = [start[0] + dx * rangeStart, start[1] + dy * rangeStart];
+      const clippedEnd = [start[0] + dx * rangeEnd, start[1] + dy * rangeEnd];
+      if (Math.hypot(clippedEnd[0] - clippedStart[0], clippedEnd[1] - clippedStart[1]) < 0.001) {
+        return null;
+      }
+      return [clippedStart, clippedEnd];
+    })
+    .filter(Boolean);
+}
+
 function pointsToPath(points, close = false) {
   if (!Array.isArray(points) || points.length === 0) return "";
   const [first, ...rest] = points;
@@ -112,6 +219,44 @@ function pointsToPath(points, close = false) {
   }
   if (close) commands.push("Z");
   return commands.join(" ");
+}
+
+function segmentsForPoints(points, close = false) {
+  const segments = [];
+  for (let index = 0; index < points.length - 1; index += 1) {
+    if (Array.isArray(points[index]) && Array.isArray(points[index + 1])) {
+      segments.push([points[index], points[index + 1]]);
+    }
+  }
+
+  const first = points[0];
+  const last = points.at(-1);
+  if (close && Array.isArray(first) && Array.isArray(last)) {
+    segments.push([last, first]);
+  }
+
+  return segments;
+}
+
+function clippedPathsForItem(item, zones, exclusionZones, boundaryZones, boundaryMargin = 1000) {
+  if (!item.segments?.length) return [];
+  const paths = [];
+
+  for (const [start, end] of item.segments) {
+    for (const clipped of clipSegmentToZones(start, end, zones)) {
+      const remainingSegments = subtractExclusionZones(clipped[0], clipped[1], exclusionZones);
+      for (const segment of remainingSegments) {
+        const midpoint = {
+          x: (segment[0][0] + segment[1][0]) / 2,
+          y: (segment[0][1] + segment[1][1]) / 2,
+        };
+        if (!pointNearExternalBoundary(midpoint, boundaryZones, boundaryMargin)) continue;
+        paths.push(pointsToPath(segment));
+      }
+    }
+  }
+
+  return paths;
 }
 
 function arcToPath(center, radius, startAngle, endAngle) {
@@ -163,7 +308,32 @@ function svgPathForBounds(bounds) {
   ].join(" ");
 }
 
+function expandBounds(bounds, amount) {
+  return {
+    minX: bounds.minX - amount,
+    minY: bounds.minY - amount,
+    maxX: bounds.maxX + amount,
+    maxY: bounds.maxY + amount,
+  };
+}
+
 const apartmentSelectionZones = {
+  "1og:WE 22": [
+    { minX: 170.6, minY: -211.0, maxX: 179.0, maxY: -196.0 },
+    { minX: 179.0, minY: -211.0, maxX: 181.0, maxY: -203.8 },
+  ],
+  "1og:WE 23": [
+    { minX: 178.75, minY: -203.8, maxX: 186.9, maxY: -194.2 },
+    { minX: 180.75, minY: -210.8, maxX: 186.9, maxY: -203.8 },
+  ],
+  "1og:WE 24": [
+    { minX: 192.7, minY: -211.0, maxX: 199.65, maxY: -203.8 },
+    { minX: 193.2, minY: -203.8, maxX: 199.65, maxY: -196.0 },
+  ],
+  "1og:WE 25": [
+    { minX: 186.45, minY: -203.8, maxX: 192.1, maxY: -194.2 },
+    { minX: 186.45, minY: -210.8, maxX: 191.7, maxY: -203.8 },
+  ],
   "1og:WE 03.1": [
     { minX: 178.1, minY: -235.4, maxX: 186.9, maxY: -217.7 },
   ],
@@ -175,38 +345,171 @@ const apartmentSelectionZones = {
     { minX: 186.7, minY: -235.4, maxX: 195.3, maxY: -217.7 },
   ],
   "1og:WE 05": [
-    { minX: 195.0, minY: -231.5, maxX: 204.0, maxY: -221.1 },
-    { minX: 190.8, minY: -221.6, maxX: 204.0, maxY: -211.0 },
+    { minX: 194.55, minY: -231.5, maxX: 199.65, maxY: -221.1 },
+    { minX: 190.45, minY: -221.6, maxX: 199.65, maxY: -213.25 },
   ],
   "2og:WE 07": [
-    { minX: 233.0, minY: -235.4, maxX: 247.65, maxY: -221.5 },
+    { minX: 233.0, minY: -235.4, maxX: 241.0, maxY: -225.8 },
+    { minX: 240.6, minY: -235.4, maxX: 247.65, maxY: -227.0 },
+    { minX: 241.0, minY: -227.2, maxX: 247.65, maxY: -221.5 },
+  ],
+  "2og:WE 08": [
+    { minX: 247.65, minY: -235.4, maxX: 257.1, maxY: -217.7 },
   ],
   "2og:WE 06": [
-    { minX: 233.2, minY: -221.4, maxX: 244.9, maxY: -212.8 },
+    { minX: 233.9, minY: -221.4, maxX: 242.85, maxY: -216.8 },
+    { minX: 233.9, minY: -216.8, maxX: 244.45, maxY: -212.8 },
+  ],
+  "2og:WE 09": [
+    { minX: 257.1, minY: -223.2, maxX: 265.4, maxY: -217.7 },
+    { minX: 255.85, minY: -217.7, maxX: 263.25, maxY: -213.2 },
   ],
   "2og:WE 26": [
-    { minX: 233.1, minY: -212.7, maxX: 243.25, maxY: -203.65 },
+    { minX: 234.0, minY: -212.7, maxX: 243.25, maxY: -207.6 },
+    { minX: 235.0, minY: -207.6, maxX: 243.25, maxY: -203.65 },
   ],
   "2og:WE 27": [
     { minX: 235.4, minY: -203.55, maxX: 248.25, maxY: -193.55 },
     { minX: 243.65, minY: -208.65, maxX: 248.25, maxY: -203.55 },
   ],
   "2og:WE 28": [
-    { minX: 248.25, minY: -209.0, maxX: 256.8, maxY: -196.2 },
+    { minX: 249.0, minY: -209.0, maxX: 253.7, maxY: -203.65 },
+    { minX: 249.05, minY: -203.65, maxX: 256.8, maxY: -196.2 },
+  ],
+  "2og:WE 29": [
+    { minX: 253.7, minY: -211.0, maxX: 265.3, maxY: -203.65 },
+    { minX: 256.8, minY: -203.65, maxX: 265.3, maxY: -194.8 },
+  ],
+  "3og:WE 10/11": [
+    { minX: 170.6, minY: -300.0, maxX: 186.35, maxY: -276.0 },
+  ],
+  "3og:WE 12/13": [
+    { minX: 186.35, minY: -300.0, maxX: 204.4, maxY: -276.0 },
+  ],
+  "3og:WE 30": [
+    { minX: 170.6, minY: -275.1, maxX: 186.35, maxY: -258.2 },
+  ],
+  "3og:WE 31/32": [
+    { minX: 186.35, minY: -275.1, maxX: 204.4, maxY: -258.2 },
+  ],
+  "4og:WE 14/15": [
+    { minX: 232.6, minY: -300.0, maxX: 248.45, maxY: -276.0 },
+  ],
+  "4og:WE 16/17": [
+    { minX: 248.45, minY: -300.0, maxX: 266.4, maxY: -276.0 },
+  ],
+  "4og:WE 33/34": [
+    { minX: 232.6, minY: -275.1, maxX: 248.45, maxY: -258.2 },
+  ],
+  "4og:WE 35/36": [
+    { minX: 248.45, minY: -275.1, maxX: 266.4, maxY: -258.2 },
+  ],
+};
+
+const apartmentHitZones = {
+  "1og:WE 03.1": [
+    { minX: 178.9, minY: -235.4, maxX: 186.7, maxY: -217.7 },
+  ],
+  "1og:WE 03.2": [
+    { minX: 170.6, minY: -231.5, maxX: 178.9, maxY: -221.1 },
+    { minX: 170.6, minY: -221.1, maxX: 178.9, maxY: -217.7 },
+    { minX: 170.6, minY: -217.7, maxX: 182.4, maxY: -211.0 },
+  ],
+  "1og:WE 04": [
+    { minX: 186.7, minY: -235.4, maxX: 195.0, maxY: -217.7 },
+  ],
+  "1og:WE 05": [
+    { minX: 195.0, minY: -231.5, maxX: 204.0, maxY: -221.1 },
+    { minX: 195.0, minY: -221.1, maxX: 204.0, maxY: -217.7 },
+    { minX: 190.8, minY: -217.7, maxX: 204.0, maxY: -211.0 },
   ],
 };
 
 const apartmentExclusionZones = {
+  "1og:WE 03.2": [
+    { minX: 178.9, minY: -221.6, maxX: 186.9, maxY: -217.2 },
+  ],
+  "1og:WE 05": [
+    { minX: 199.7, minY: -239.0, maxX: 204.5, maxY: -210.5 },
+    { minX: 190.2, minY: -213.15, maxX: 200.0, maxY: -210.5 },
+  ],
+  "1og:WE 24": [
+    { minX: 199.7, minY: -211.3, maxX: 204.5, maxY: -195.7 },
+  ],
+  "1og:WE 25": [
+    { minX: 192.1, minY: -204.2, maxX: 194.3, maxY: -193.9 },
+  ],
   "2og:WE 07": [
     { minX: 232.0, minY: -220.2, maxX: 245.0, maxY: -211.8 },
+    { minX: 247.6, minY: -229.2, maxX: 249.1, maxY: -220.9 },
+  ],
+  "2og:WE 06": [
+    { minX: 232.0, minY: -222.0, maxX: 233.85, maxY: -212.4 },
+    { minX: 236.2, minY: -222.0, maxX: 236.9, maxY: -212.4 },
+    { minX: 244.45, minY: -212.4, maxX: 246.0, maxY: -209.8 },
+  ],
+  "2og:WE 26": [
+    { minX: 232.0, minY: -213.1, maxX: 233.85, maxY: -203.3 },
+    { minX: 244.0, minY: -213.1, maxX: 246.3, maxY: -203.3 },
   ],
   "2og:WE 27": [
     { minX: 232.0, minY: -212.8, maxX: 243.45, maxY: -203.75 },
+  ],
+  "2og:WE 28": [
+    { minX: 247.8, minY: -205.6, maxX: 249.15, maxY: -198.9 },
+  ],
+  "2og:WE 09": [
+    { minX: 253.5, minY: -218.0, maxX: 257.0, maxY: -211.0 },
+    { minX: 253.5, minY: -213.1, maxX: 265.6, maxY: -210.5 },
+    { minX: 259.45, minY: -216.5, maxX: 260.35, maxY: -213.2 },
+    { minX: 261.0, minY: -223.8, maxX: 262.0, maxY: -213.0 },
+    { minX: 263.25, minY: -223.6, maxX: 266.0, maxY: -213.0 },
   ],
 };
 
 const apartmentHighlightColors = {
   "2og:WE 27": "#FF3B30",
+};
+
+const apartmentLayerExclusionFragments = {
+  "2og:WE 06": ["wändegk"],
+  "2og:WE 09": ["wändegk"],
+};
+
+const apartmentBalconyZones = {
+  "1og:WE 03.1": [
+    { minX: 180.2, minY: -236.2, maxX: 186.9, maxY: -232.8 },
+  ],
+  "1og:WE 03.2": [
+    { minX: 170.4, minY: -236.2, maxX: 178.9, maxY: -232.8 },
+  ],
+  "1og:WE 04": [
+    { minX: 186.9, minY: -236.2, maxX: 195.2, maxY: -232.8 },
+  ],
+  "1og:WE 23": [
+    { minX: 178.9, minY: -197.4, maxX: 186.9, maxY: -193.4 },
+  ],
+  "1og:WE 24": [
+    { minX: 193.2, minY: -197.4, maxX: 199.65, maxY: -193.4 },
+  ],
+  "1og:WE 25": [
+    { minX: 186.45, minY: -197.4, maxX: 192.1, maxY: -193.4 },
+  ],
+  "2og:WE 07": [
+    { minX: 233.0, minY: -236.2, maxX: 241.0, maxY: -232.8 },
+  ],
+  "2og:WE 08": [
+    { minX: 247.65, minY: -236.2, maxX: 257.1, maxY: -232.8 },
+  ],
+  "2og:WE 27": [
+    { minX: 235.4, minY: -197.4, maxX: 248.6, maxY: -193.4 },
+  ],
+  "2og:WE 28": [
+    { minX: 248.6, minY: -197.4, maxX: 256.4, maxY: -193.4 },
+  ],
+  "2og:WE 29": [
+    { minX: 256.4, minY: -197.4, maxX: 265.3, maxY: -193.4 },
+  ],
 };
 
 function unionBounds(boundsList) {
@@ -249,6 +552,37 @@ function pointInAnyBounds(point, boundsList, margin = 0) {
   return boundsList.some((bounds) => pointInBounds(point, bounds, margin));
 }
 
+function pointNearRange(value, min, max, margin) {
+  return value >= min - margin && value <= max + margin;
+}
+
+function pointNearExternalBoundary(point, zones, margin = 1000) {
+  const epsilon = 0.02;
+
+  for (const zone of zones) {
+    const nearLeft =
+      Math.abs(point.x - zone.minX) <= margin &&
+      pointNearRange(point.y, zone.minY, zone.maxY, margin) &&
+      !pointInAnyBounds({ x: zone.minX - epsilon, y: point.y }, zones, 0);
+    const nearRight =
+      Math.abs(point.x - zone.maxX) <= margin &&
+      pointNearRange(point.y, zone.minY, zone.maxY, margin) &&
+      !pointInAnyBounds({ x: zone.maxX + epsilon, y: point.y }, zones, 0);
+    const nearBottom =
+      Math.abs(point.y - zone.minY) <= margin &&
+      pointNearRange(point.x, zone.minX, zone.maxX, margin) &&
+      !pointInAnyBounds({ x: point.x, y: zone.minY - epsilon }, zones, 0);
+    const nearTop =
+      Math.abs(point.y - zone.maxY) <= margin &&
+      pointNearRange(point.x, zone.minX, zone.maxX, margin) &&
+      !pointInAnyBounds({ x: point.x, y: zone.maxY + epsilon }, zones, 0);
+
+    if (nearLeft || nearRight || nearBottom || nearTop) return true;
+  }
+
+  return false;
+}
+
 const layers = new Map();
 for (const object of drawing.OBJECTS ?? []) {
   if (object.object === "LAYER") layers.set(handleKey(object.handle), object.name ?? "");
@@ -277,6 +611,10 @@ function shouldUseHighlightLayer(layerName) {
   const layer = normalizeLayerName(layerName);
   if (!layer || layer === "defpoints") return false;
   if (layer.includes("treppen") || layer.includes("beschrift") || layer.includes("text")) return false;
+  if (layer.includes("masse") || layer.includes("elektro") || layer.includes("befestigung")) {
+    return false;
+  }
+  if (layer.includes("sani") || layer.includes("moeb") || layer.includes("fliesen")) return false;
   return [
     "wand",
     "wände",
@@ -288,13 +626,24 @@ function shouldUseHighlightLayer(layerName) {
     "außenhaut",
     "tür",
     "fenster",
+    "geländer",
     "glas",
   ].some((fragment) => layer.includes(fragment));
 }
 
+function isBalconyLayer(layerName) {
+  const layer = normalizeLayerName(layerName);
+  return layer.includes("geländer") || layer.includes("glas");
+}
+
 function objectGeometry(object) {
   if (Array.isArray(object.start) && Array.isArray(object.end)) {
-    return { path: pointsToPath([object.start, object.end]), points: [object.start, object.end] };
+    const points = [object.start, object.end];
+    return {
+      path: pointsToPath(points),
+      points,
+      segments: segmentsForPoints(points),
+    };
   }
 
   if (Array.isArray(object.points)) {
@@ -307,20 +656,33 @@ function objectGeometry(object) {
         last &&
         Math.abs(first[0] - last[0]) < 0.0001 &&
         Math.abs(first[1] - last[1]) < 0.0001);
-    return { path: pointsToPath(points, isClosed), points };
+    return {
+      path: pointsToPath(points, isClosed),
+      points,
+      segments: segmentsForPoints(points, isClosed),
+    };
   }
 
   if (Array.isArray(object.vertex)) {
     const points = object.vertex
       .map((handle) => vertices.get(handleKey(handle)))
       .filter((point) => Array.isArray(point));
-    return { path: pointsToPath(points, Boolean(object.flag && (object.flag & 1))), points };
+    const isClosed = Boolean(object.flag && (object.flag & 1));
+    return {
+      path: pointsToPath(points, isClosed),
+      points,
+      segments: segmentsForPoints(points, isClosed),
+    };
   }
 
   if (Array.isArray(object.center) && Number.isFinite(object.radius)) {
     if (Number.isFinite(object.start_angle) && Number.isFinite(object.end_angle)) {
       return {
         path: arcToPath(object.center, object.radius, object.start_angle, object.end_angle),
+        pathCenter: {
+          x: object.center[0],
+          y: object.center[1],
+        },
         points: [
           [object.center[0] - object.radius, object.center[1] - object.radius],
           [object.center[0] + object.radius, object.center[1] + object.radius],
@@ -369,14 +731,16 @@ const manifest = {
 for (const floor of floors) {
   const floorBounds = cropBounds(floor.crop);
   const viewBox = viewBoxForCrop(floor.crop);
+  const floorRoomLabels = textEntities
+    .filter((entity) => normalizeLayerName(entity.layerName).includes("beschriftung-räume"))
+    .filter((entity) => intersectsBounds(boundsForPoints([entity.point]), floorBounds, 0));
+
   manifest.floors[floor.id] = { viewBox };
   manifest.apartments[floor.id] = {};
 
   for (const code of floor.apartments) {
     const apartmentKey = `${floor.id}:${code}`;
-    const labelPoints = textEntities
-      .filter((entity) => normalizeLayerName(entity.layerName).includes("beschriftung-räume"))
-      .filter((entity) => intersectsBounds(boundsForPoints([entity.point]), floorBounds, 0))
+    const labelPoints = floorRoomLabels
       .filter((entity) => textMatchesApartment(entity.text, code))
       .map((entity) => entity.point);
 
@@ -387,7 +751,10 @@ for (const floor of floors) {
     const labelBounds = boundsForPoints(labelPoints);
     const expand = code.includes("/") ? 2.2 : 1.6;
     const selectionZones = apartmentSelectionZones[apartmentKey];
+    const hitZones = apartmentHitZones[apartmentKey] ?? selectionZones;
     const exclusionZones = apartmentExclusionZones[apartmentKey] ?? [];
+    const balconyZones = apartmentBalconyZones[apartmentKey] ?? [];
+    const excludedLayerFragments = apartmentLayerExclusionFragments[apartmentKey] ?? [];
     const apartmentBounds = selectionZones
       ? unionBounds(selectionZones)
       : {
@@ -396,16 +763,14 @@ for (const floor of floors) {
           maxX: Math.min(floorBounds.maxX, labelBounds.maxX + expand),
           maxY: Math.min(floorBounds.maxY, labelBounds.maxY + expand),
         };
+    const boundaryZones = selectionZones ?? [apartmentBounds];
+    const clippingZones = boundaryZones.map((zone) => expandBounds(zone, 0.22));
 
     const selected = drawableObjects.filter((item) => {
       if (!intersectsBounds(item.bounds, floorBounds, 0)) return false;
 
       if (selectionZones) {
-        const center = boundsCenter(item.bounds);
-        return (
-          pointInAnyBounds(center, selectionZones, 0) &&
-          !pointInAnyBounds(center, exclusionZones, 0)
-        );
+        return clippingZones.some((zone) => intersectsBounds(item.bounds, zone, 0));
       }
 
       return intersectsBounds(item.bounds, apartmentBounds, 0.28);
@@ -413,12 +778,43 @@ for (const floor of floors) {
 
     const body = [];
     for (const item of selected) {
-      if (item.path) {
-        body.push(`<path d="${item.path}" />`);
+      const normalizedLayer = normalizeLayerName(item.layerName);
+      if (excludedLayerFragments.some((fragment) => normalizedLayer.includes(fragment))) {
+        continue;
+      }
+
+      const balconyItem = isBalconyLayer(item.layerName);
+      if (balconyItem && !balconyZones.length) continue;
+
+      const itemZones = (balconyItem ? balconyZones : clippingZones).map((zone) =>
+        expandBounds(zone, 0.08),
+      );
+      const itemExclusionZones = balconyItem ? [] : exclusionZones;
+
+      if (item.segments?.length) {
+        for (const path of clippedPathsForItem(item, itemZones, itemExclusionZones, itemZones)) {
+          body.push(`<path d="${path}" />`);
+        }
       } else if (item.circle) {
-        body.push(
-          `<circle cx="${formatNumber(item.circle.cx)}" cy="${formatNumber(item.circle.cy)}" r="${formatNumber(item.circle.r)}" />`,
-        );
+        const center = { x: item.circle.cx, y: item.circle.cy };
+        if (
+          pointInAnyBounds(center, itemZones, 0) &&
+          !pointInAnyBounds(center, itemExclusionZones, 0) &&
+          pointNearExternalBoundary(center, itemZones)
+        ) {
+          body.push(
+            `<circle cx="${formatNumber(item.circle.cx)}" cy="${formatNumber(item.circle.cy)}" r="${formatNumber(item.circle.r)}" />`,
+          );
+        }
+      } else if (item.path) {
+        const center = item.pathCenter ?? boundsCenter(item.bounds);
+        if (
+          pointInAnyBounds(center, itemZones, 0) &&
+          !pointInAnyBounds(center, itemExclusionZones, 0) &&
+          pointNearExternalBoundary(center, itemZones)
+        ) {
+          body.push(`<path d="${item.path}" />`);
+        }
       }
     }
 
@@ -454,8 +850,8 @@ for (const floor of floors) {
       )?.point ?? labelPoints[Math.floor(labelPoints.length / 2)];
 
     manifest.apartments[floor.id][code] = {
-      overlaySrc: `/cad-floorplans/highlights/${fileName}`,
-      hitPath: selectionZones ? pathForZones(selectionZones) : svgPathForBounds(apartmentBounds),
+      overlaySrc: `/cad-floorplans/highlights/${fileName}?v=${contentHash(svg)}`,
+      hitPath: hitZones ? pathForZones(hitZones) : svgPathForBounds(apartmentBounds),
       label: {
         x: Number(formatNumber(unitLabel[0])),
         y: Number(formatNumber(-unitLabel[1])),

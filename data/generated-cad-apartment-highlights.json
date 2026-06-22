@@ -16,250 +16,250 @@
   "apartments": {
     "1og": {
       "WE 03.1": {
-        "overlaySrc": "/cad-floorplans/highlights/1og-we-03-1.svg",
-        "hitPath": "M 178.1 235.4 L 186.9 235.4 L 186.9 217.7 L 178.1 217.7 Z",
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-03-1.svg?v=1qbubdp",
+        "hitPath": "M 178.9 235.4 L 186.7 235.4 L 186.7 217.7 L 178.9 217.7 Z",
         "label": {
           "x": 185.255,
           "y": 225.936
         },
         "labelCount": 8,
-        "entityCount": 406
+        "entityCount": 548
       },
       "WE 03.2": {
-        "overlaySrc": "/cad-floorplans/highlights/1og-we-03-2.svg",
-        "hitPath": "M 170.6 231.5 L 179.7 231.5 L 179.7 221.1 L 170.6 221.1 Z M 170.6 221.6 L 182.4 221.6 L 182.4 211 L 170.6 211 Z",
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-03-2.svg?v=1yurdw6",
+        "hitPath": "M 170.6 231.5 L 178.9 231.5 L 178.9 221.1 L 170.6 221.1 Z M 170.6 221.1 L 178.9 221.1 L 178.9 217.7 L 170.6 217.7 Z M 170.6 217.7 L 182.4 217.7 L 182.4 211 L 170.6 211 Z",
         "label": {
           "x": 174.641,
           "y": 212.692
         },
         "labelCount": 6,
-        "entityCount": 289
+        "entityCount": 429
       },
       "WE 04": {
-        "overlaySrc": "/cad-floorplans/highlights/1og-we-04.svg",
-        "hitPath": "M 186.7 235.4 L 195.3 235.4 L 195.3 217.7 L 186.7 217.7 Z",
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-04.svg?v=1bqble7",
+        "hitPath": "M 186.7 235.4 L 195 235.4 L 195 217.7 L 186.7 217.7 Z",
         "label": {
           "x": 187.244,
           "y": 225.936
         },
         "labelCount": 8,
-        "entityCount": 401
+        "entityCount": 571
       },
       "WE 05": {
-        "overlaySrc": "/cad-floorplans/highlights/1og-we-05.svg",
-        "hitPath": "M 195 231.5 L 204 231.5 L 204 221.1 L 195 221.1 Z M 190.8 221.6 L 204 221.6 L 204 211 L 190.8 211 Z",
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-05.svg?v=rkmco5",
+        "hitPath": "M 195 231.5 L 204 231.5 L 204 221.1 L 195 221.1 Z M 195 221.1 L 204 221.1 L 204 217.7 L 195 217.7 Z M 190.8 217.7 L 204 217.7 L 204 211 L 190.8 211 Z",
         "label": {
           "x": 198.045,
           "y": 212.668
         },
         "labelCount": 6,
-        "entityCount": 277
+        "entityCount": 456
       },
       "WE 22": {
-        "overlaySrc": "/cad-floorplans/highlights/1og-we-22.svg",
-        "hitPath": "M 171.304 212.532 L 182.094 212.532 L 182.094 197.408 L 171.304 197.408 Z",
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-22.svg?v=1jm7naz",
+        "hitPath": "M 170.6 211 L 179 211 L 179 196 L 170.6 196 Z M 179 211 L 181 211 L 181 203.8 L 179 203.8 Z",
         "label": {
           "x": 174.651,
           "y": 210.932
         },
         "labelCount": 6,
-        "entityCount": 245
+        "entityCount": 438
       },
       "WE 23": {
-        "overlaySrc": "/cad-floorplans/highlights/1og-we-23.svg",
-        "hitPath": "M 178.185 209.096 L 186.945 209.096 L 186.945 193.57 L 178.185 193.57 Z",
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-23.svg?v=3550yi",
+        "hitPath": "M 178.75 203.8 L 186.9 203.8 L 186.9 194.2 L 178.75 194.2 Z M 180.75 210.8 L 186.9 210.8 L 186.9 203.8 L 180.75 203.8 Z",
         "label": {
           "x": 185.345,
           "y": 201.306
         },
         "labelCount": 7,
-        "entityCount": 450
+        "entityCount": 732
       },
       "WE 24": {
-        "overlaySrc": "/cad-floorplans/highlights/1og-we-24.svg",
-        "hitPath": "M 196.445 212.532 L 199.645 212.532 L 199.645 209.332 L 196.445 209.332 Z",
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-24.svg?v=5vsrhk",
+        "hitPath": "M 192.7 211 L 199.65 211 L 199.65 203.8 L 192.7 203.8 Z M 193.2 203.8 L 199.65 203.8 L 199.65 196 L 193.2 196 Z",
         "label": {
           "x": 198.045,
           "y": 210.932
         },
         "labelCount": 1,
-        "entityCount": 12
+        "entityCount": 553
       },
       "WE 25": {
-        "overlaySrc": "/cad-floorplans/highlights/1og-we-25.svg",
-        "hitPath": "M 185.562 209.003 L 192.584 209.003 L 192.584 193.57 L 185.562 193.57 Z",
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-25.svg?v=11xyr2c",
+        "hitPath": "M 186.45 203.8 L 192.1 203.8 L 192.1 194.2 L 186.45 194.2 Z M 186.45 210.8 L 191.7 210.8 L 191.7 203.8 L 186.45 203.8 Z",
         "label": {
           "x": 187.162,
           "y": 201.306
         },
         "labelCount": 6,
-        "entityCount": 333
+        "entityCount": 440
       }
     },
     "2og": {
       "WE 08": {
-        "overlaySrc": "/cad-floorplans/highlights/2og-we-08.svg",
-        "hitPath": "M 247.742 235.459 L 260.627 235.459 L 260.627 217.536 L 247.742 217.536 Z",
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-08.svg?v=eutymw",
+        "hitPath": "M 247.65 235.4 L 257.1 235.4 L 257.1 217.7 L 247.65 217.7 Z",
         "label": {
           "x": 249.342,
           "y": 226.101
         },
         "labelCount": 8,
-        "entityCount": 476
+        "entityCount": 551
       },
       "WE 07": {
-        "overlaySrc": "/cad-floorplans/highlights/2og-we-07.svg",
-        "hitPath": "M 233 235.4 L 247.65 235.4 L 247.65 221.5 L 233 221.5 Z",
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-07.svg?v=k42cep",
+        "hitPath": "M 233 235.4 L 241 235.4 L 241 225.8 L 233 225.8 Z M 240.6 235.4 L 247.65 235.4 L 247.65 227 L 240.6 227 Z M 241 227.2 L 247.65 227.2 L 247.65 221.5 L 241 221.5 Z",
         "label": {
           "x": 247.353,
           "y": 226.101
         },
         "labelCount": 1,
-        "entityCount": 258
+        "entityCount": 264
       },
       "WE 06": {
-        "overlaySrc": "/cad-floorplans/highlights/2og-we-06.svg",
-        "hitPath": "M 233.2 221.4 L 244.9 221.4 L 244.9 212.8 L 233.2 212.8 Z",
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-06.svg?v=19corw5",
+        "hitPath": "M 233.9 221.4 L 242.85 221.4 L 242.85 216.8 L 233.9 216.8 Z M 233.9 216.8 L 244.45 216.8 L 244.45 212.8 L 233.9 212.8 Z",
         "label": {
           "x": 236.742,
           "y": 212.615
         },
         "labelCount": 5,
-        "entityCount": 250
+        "entityCount": 370
       },
       "WE 26": {
-        "overlaySrc": "/cad-floorplans/highlights/2og-we-26.svg",
-        "hitPath": "M 233.1 212.7 L 243.25 212.7 L 243.25 203.65 L 233.1 203.65 Z",
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-26.svg?v=1exdbpx",
+        "hitPath": "M 234 212.7 L 243.25 212.7 L 243.25 207.6 L 234 207.6 Z M 235 207.6 L 243.25 207.6 L 243.25 203.65 L 235 203.65 Z",
         "label": {
           "x": 236.742,
           "y": 210.877
         },
         "labelCount": 5,
-        "entityCount": 196
+        "entityCount": 335
       },
       "WE 27": {
-        "overlaySrc": "/cad-floorplans/highlights/2og-we-27.svg",
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-27.svg?v=1lkk4h8",
         "hitPath": "M 235.4 203.55 L 248.25 203.55 L 248.25 193.55 L 235.4 193.55 Z M 243.65 208.65 L 248.25 208.65 L 248.25 203.55 L 243.65 203.55 Z",
         "label": {
           "x": 247.353,
           "y": 201.306
         },
         "labelCount": 8,
-        "entityCount": 396
+        "entityCount": 740
       },
       "WE 28": {
-        "overlaySrc": "/cad-floorplans/highlights/2og-we-28.svg",
-        "hitPath": "M 248.25 209 L 256.8 209 L 256.8 196.2 L 248.25 196.2 Z",
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-28.svg?v=cp4v1m",
+        "hitPath": "M 249 209 L 253.7 209 L 253.7 203.65 L 249 203.65 Z M 249.05 203.65 L 256.8 203.65 L 256.8 196.2 L 249.05 196.2 Z",
         "label": {
           "x": 249.342,
           "y": 201.306
         },
         "labelCount": 6,
-        "entityCount": 363
+        "entityCount": 328
       },
       "WE 09": {
-        "overlaySrc": "/cad-floorplans/highlights/2og-we-09.svg",
-        "hitPath": "M 252.518 221.723 L 263.527 221.723 L 263.527 211.001 L 252.518 211.001 Z",
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-09.svg?v=3vtbon",
+        "hitPath": "M 257.1 223.2 L 265.4 223.2 L 265.4 217.7 L 257.1 217.7 Z M 255.85 217.7 L 263.25 217.7 L 263.25 213.2 L 255.85 213.2 Z",
         "label": {
           "x": 260.092,
           "y": 212.601
         },
         "labelCount": 5,
-        "entityCount": 315
+        "entityCount": 138
       },
       "WE 29": {
-        "overlaySrc": "/cad-floorplans/highlights/2og-we-29.svg",
-        "hitPath": "M 252.523 212.567 L 263.65 212.567 L 263.65 193.861 L 252.523 193.861 Z",
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-29.svg?v=14upb06",
+        "hitPath": "M 253.7 211 L 265.3 211 L 265.3 203.65 L 253.7 203.65 Z M 256.8 203.65 L 265.3 203.65 L 265.3 194.8 L 256.8 194.8 Z",
         "label": {
           "x": 260.092,
           "y": 210.967
         },
         "labelCount": 7,
-        "entityCount": 467
+        "entityCount": 618
       }
     },
     "3og": {
       "WE 12/13": {
-        "overlaySrc": "/cad-floorplans/highlights/3og-we-12-13.svg",
-        "hitPath": "M 185.044 295.737 L 201.982 295.737 L 201.982 276.232 L 185.044 276.232 Z",
+        "overlaySrc": "/cad-floorplans/highlights/3og-we-12-13.svg?v=1tdlcg7",
+        "hitPath": "M 186.35 300 L 204.4 300 L 204.4 276 L 186.35 276 Z",
         "label": {
           "x": 187.244,
           "y": 290.05
         },
         "labelCount": 12,
-        "entityCount": 448
+        "entityCount": 747
       },
       "WE 10/11": {
-        "overlaySrc": "/cad-floorplans/highlights/3og-we-10-11.svg",
-        "hitPath": "M 170.128 295.709 L 187.455 295.709 L 187.455 275.803 L 170.128 275.803 Z",
+        "overlaySrc": "/cad-floorplans/highlights/3og-we-10-11.svg?v=4px4yq",
+        "hitPath": "M 170.6 300 L 186.35 300 L 186.35 276 L 170.6 276 Z",
         "label": {
           "x": 185.255,
           "y": 290.049
         },
         "labelCount": 12,
-        "entityCount": 438
+        "entityCount": 736
       },
       "WE 30": {
-        "overlaySrc": "/cad-floorplans/highlights/3og-we-30.svg",
-        "hitPath": "M 173.131 274.627 L 186.959 274.627 L 186.959 260 L 173.131 260 Z",
+        "overlaySrc": "/cad-floorplans/highlights/3og-we-30.svg?v=hfzbmp",
+        "hitPath": "M 170.6 275.1 L 186.35 275.1 L 186.35 258.2 L 170.6 258.2 Z",
         "label": {
           "x": 185.359,
           "y": 265.17
         },
         "labelCount": 11,
-        "entityCount": 638
+        "entityCount": 1074
       },
       "WE 31/32": {
-        "overlaySrc": "/cad-floorplans/highlights/3og-we-31-32.svg",
-        "hitPath": "M 185.044 275.227 L 201.968 275.227 L 201.968 259.512 L 185.044 259.512 Z",
+        "overlaySrc": "/cad-floorplans/highlights/3og-we-31-32.svg?v=g6aoum",
+        "hitPath": "M 186.35 275.1 L 204.4 275.1 L 204.4 258.2 L 186.35 258.2 Z",
         "label": {
           "x": 187.244,
           "y": 265.17
         },
         "labelCount": 11,
-        "entityCount": 696
+        "entityCount": 1089
       }
     },
     "4og": {
       "WE 14/15": {
-        "overlaySrc": "/cad-floorplans/highlights/4og-we-14-15.svg",
-        "hitPath": "M 232.226 300.085 L 249.635 300.085 L 249.635 275.803 L 232.226 275.803 Z",
+        "overlaySrc": "/cad-floorplans/highlights/4og-we-14-15.svg?v=cedrzh",
+        "hitPath": "M 232.6 300 L 248.45 300 L 248.45 276 L 232.6 276 Z",
         "label": {
           "x": 247.435,
           "y": 290.049
         },
         "labelCount": 13,
-        "entityCount": 634
+        "entityCount": 730
       },
       "WE 16/17": {
-        "overlaySrc": "/cad-floorplans/highlights/4og-we-16-17.svg",
-        "hitPath": "M 247.224 300.085 L 263.921 300.085 L 263.921 275.803 L 247.224 275.803 Z",
+        "overlaySrc": "/cad-floorplans/highlights/4og-we-16-17.svg?v=h21r6c",
+        "hitPath": "M 248.45 300 L 266.4 300 L 266.4 276 L 248.45 276 Z",
         "label": {
           "x": 249.424,
           "y": 290.05
         },
         "labelCount": 13,
-        "entityCount": 656
+        "entityCount": 736
       },
       "WE 33/34": {
-        "overlaySrc": "/cad-floorplans/highlights/4og-we-33-34.svg",
-        "hitPath": "M 234.446 275.227 L 249.635 275.227 L 249.635 256.884 L 234.446 256.884 Z",
+        "overlaySrc": "/cad-floorplans/highlights/4og-we-33-34.svg?v=1i18t2d",
+        "hitPath": "M 232.6 275.1 L 248.45 275.1 L 248.45 258.2 L 232.6 258.2 Z",
         "label": {
           "x": 247.435,
           "y": 265.314
         },
         "labelCount": 12,
-        "entityCount": 688
+        "entityCount": 1080
       },
       "WE 35/36": {
-        "overlaySrc": "/cad-floorplans/highlights/4og-we-35-36.svg",
-        "hitPath": "M 247.224 275.227 L 262.372 275.227 L 262.372 259.512 L 247.224 259.512 Z",
+        "overlaySrc": "/cad-floorplans/highlights/4og-we-35-36.svg?v=1737sfp",
+        "hitPath": "M 248.45 275.1 L 266.4 275.1 L 266.4 258.2 L 248.45 258.2 Z",
         "label": {
           "x": 249.424,
           "y": 265.314
         },
         "labelCount": 11,
-        "entityCount": 721
+        "entityCount": 1112
       }
     }
   }

@@ -579,10 +579,10 @@ export const apartmentRenderGallery = [
   {
     id: "kitchen",
     title: "Küche",
-    subtitle: "Fest eingebaut, nicht aufgesetzt",
+    subtitle: "Einrichtungsbeispiel für kleinere Apartments",
     imageSrc: "/rooms/kitchen.jpg",
     description:
-      "Jede Wohnung kommt mit integrierter Küche. Sie ist Teil der Architektur und nicht nur ein späteres Add-on, damit der Alltag präzise und ruhig organisiert bleibt.",
+      "Die Visualisierung zeigt, wie die Küche in den kleineren Apartments aussehen könnte – kompakt, funktional und auf die Anforderungen modernen Wohnens abgestimmt.",
   },
   {
     id: "bathroom",
