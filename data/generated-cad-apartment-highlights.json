@@ -1,0 +1,266 @@
+{
+  "floors": {
+    "1og": {
+      "viewBox": "169.06 191.06 35.88 48.88"
+    },
+    "2og": {
+      "viewBox": "231.06 191.06 35.88 48.88"
+    },
+    "3og": {
+      "viewBox": "169.06 255.06 36.88 48.88"
+    },
+    "4og": {
+      "viewBox": "231.06 255.06 36.88 48.88"
+    }
+  },
+  "apartments": {
+    "1og": {
+      "WE 03.1": {
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-03-1.svg",
+        "hitPath": "M 178.1 235.4 L 186.9 235.4 L 186.9 217.7 L 178.1 217.7 Z",
+        "label": {
+          "x": 185.255,
+          "y": 225.936
+        },
+        "labelCount": 8,
+        "entityCount": 413
+      },
+      "WE 03.2": {
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-03-2.svg",
+        "hitPath": "M 170.6 231.5 L 179.7 231.5 L 179.7 221.1 L 170.6 221.1 Z M 170.6 221.6 L 182.4 221.6 L 182.4 211 L 170.6 211 Z",
+        "label": {
+          "x": 174.641,
+          "y": 212.692
+        },
+        "labelCount": 6,
+        "entityCount": 291
+      },
+      "WE 04": {
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-04.svg",
+        "hitPath": "M 186.7 235.4 L 195.3 235.4 L 195.3 217.7 L 186.7 217.7 Z",
+        "label": {
+          "x": 187.244,
+          "y": 225.936
+        },
+        "labelCount": 8,
+        "entityCount": 414
+      },
+      "WE 05": {
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-05.svg",
+        "hitPath": "M 195 231.5 L 204 231.5 L 204 221.1 L 195 221.1 Z M 190.8 221.6 L 204 221.6 L 204 211 L 190.8 211 Z",
+        "label": {
+          "x": 198.045,
+          "y": 212.668
+        },
+        "labelCount": 6,
+        "entityCount": 288
+      },
+      "WE 22": {
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-22.svg",
+        "hitPath": "M 171.304 212.532 L 182.094 212.532 L 182.094 197.408 L 171.304 197.408 Z",
+        "label": {
+          "x": 174.651,
+          "y": 210.932
+        },
+        "labelCount": 6,
+        "entityCount": 245
+      },
+      "WE 23": {
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-23.svg",
+        "hitPath": "M 178.185 209.096 L 186.945 209.096 L 186.945 193.57 L 178.185 193.57 Z",
+        "label": {
+          "x": 185.345,
+          "y": 201.306
+        },
+        "labelCount": 7,
+        "entityCount": 450
+      },
+      "WE 24": {
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-24.svg",
+        "hitPath": "M 196.445 212.532 L 199.645 212.532 L 199.645 209.332 L 196.445 209.332 Z",
+        "label": {
+          "x": 198.045,
+          "y": 210.932
+        },
+        "labelCount": 1,
+        "entityCount": 12
+      },
+      "WE 25": {
+        "overlaySrc": "/cad-floorplans/highlights/1og-we-25.svg",
+        "hitPath": "M 185.562 209.003 L 192.584 209.003 L 192.584 193.57 L 185.562 193.57 Z",
+        "label": {
+          "x": 187.162,
+          "y": 201.306
+        },
+        "labelCount": 6,
+        "entityCount": 333
+      }
+    },
+    "2og": {
+      "WE 08": {
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-08.svg",
+        "hitPath": "M 247.742 235.459 L 260.627 235.459 L 260.627 217.536 L 247.742 217.536 Z",
+        "label": {
+          "x": 249.342,
+          "y": 226.101
+        },
+        "labelCount": 8,
+        "entityCount": 476
+      },
+      "WE 07": {
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-07.svg",
+        "hitPath": "M 233 235.4 L 248.2 235.4 L 248.2 217.4 L 233 217.4 Z",
+        "label": {
+          "x": 247.353,
+          "y": 226.101
+        },
+        "labelCount": 1,
+        "entityCount": 435
+      },
+      "WE 06": {
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-06.svg",
+        "hitPath": "M 233.342 221.24 L 244.817 221.24 L 244.817 211.015 L 233.342 211.015 Z",
+        "label": {
+          "x": 236.742,
+          "y": 212.615
+        },
+        "labelCount": 5,
+        "entityCount": 290
+      },
+      "WE 26": {
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-26.svg",
+        "hitPath": "M 233.262 212.477 L 244.221 212.477 L 244.221 203.139 L 233.262 203.139 Z",
+        "label": {
+          "x": 236.742,
+          "y": 210.877
+        },
+        "labelCount": 5,
+        "entityCount": 219
+      },
+      "WE 27": {
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-27.svg",
+        "hitPath": "M 235.57 209.098 L 248.953 209.098 L 248.953 193.57 L 235.57 193.57 Z",
+        "label": {
+          "x": 247.353,
+          "y": 201.306
+        },
+        "labelCount": 8,
+        "entityCount": 575
+      },
+      "WE 28": {
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-28.svg",
+        "hitPath": "M 247.742 209 L 256.68 209 L 256.68 196.269 L 247.742 196.269 Z",
+        "label": {
+          "x": 249.342,
+          "y": 201.306
+        },
+        "labelCount": 6,
+        "entityCount": 446
+      },
+      "WE 09": {
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-09.svg",
+        "hitPath": "M 252.518 221.723 L 263.527 221.723 L 263.527 211.001 L 252.518 211.001 Z",
+        "label": {
+          "x": 260.092,
+          "y": 212.601
+        },
+        "labelCount": 5,
+        "entityCount": 315
+      },
+      "WE 29": {
+        "overlaySrc": "/cad-floorplans/highlights/2og-we-29.svg",
+        "hitPath": "M 252.523 212.567 L 263.65 212.567 L 263.65 193.861 L 252.523 193.861 Z",
+        "label": {
+          "x": 260.092,
+          "y": 210.967
+        },
+        "labelCount": 7,
+        "entityCount": 467
+      }
+    },
+    "3og": {
+      "WE 12/13": {
+        "overlaySrc": "/cad-floorplans/highlights/3og-we-12-13.svg",
+        "hitPath": "M 185.044 295.737 L 201.982 295.737 L 201.982 276.232 L 185.044 276.232 Z",
+        "label": {
+          "x": 187.244,
+          "y": 290.05
+        },
+        "labelCount": 12,
+        "entityCount": 448
+      },
+      "WE 10/11": {
+        "overlaySrc": "/cad-floorplans/highlights/3og-we-10-11.svg",
+        "hitPath": "M 170.128 295.709 L 187.455 295.709 L 187.455 275.803 L 170.128 275.803 Z",
+        "label": {
+          "x": 185.255,
+          "y": 290.049
+        },
+        "labelCount": 12,
+        "entityCount": 438
+      },
+      "WE 30": {
+        "overlaySrc": "/cad-floorplans/highlights/3og-we-30.svg",
+        "hitPath": "M 173.131 274.627 L 186.959 274.627 L 186.959 260 L 173.131 260 Z",
+        "label": {
+          "x": 185.359,
+          "y": 265.17
+        },
+        "labelCount": 11,
+        "entityCount": 638
+      },
+      "WE 31/32": {
+        "overlaySrc": "/cad-floorplans/highlights/3og-we-31-32.svg",
+        "hitPath": "M 185.044 275.227 L 201.968 275.227 L 201.968 259.512 L 185.044 259.512 Z",
+        "label": {
+          "x": 187.244,
+          "y": 265.17
+        },
+        "labelCount": 11,
+        "entityCount": 696
+      }
+    },
+    "4og": {
+      "WE 14/15": {
+        "overlaySrc": "/cad-floorplans/highlights/4og-we-14-15.svg",
+        "hitPath": "M 232.226 300.085 L 249.635 300.085 L 249.635 275.803 L 232.226 275.803 Z",
+        "label": {
+          "x": 247.435,
+          "y": 290.049
+        },
+        "labelCount": 13,
+        "entityCount": 634
+      },
+      "WE 16/17": {
+        "overlaySrc": "/cad-floorplans/highlights/4og-we-16-17.svg",
+        "hitPath": "M 247.224 300.085 L 263.921 300.085 L 263.921 275.803 L 247.224 275.803 Z",
+        "label": {
+          "x": 249.424,
+          "y": 290.05
+        },
+        "labelCount": 13,
+        "entityCount": 656
+      },
+      "WE 33/34": {
+        "overlaySrc": "/cad-floorplans/highlights/4og-we-33-34.svg",
+        "hitPath": "M 234.446 275.227 L 249.635 275.227 L 249.635 256.884 L 234.446 256.884 Z",
+        "label": {
+          "x": 247.435,
+          "y": 265.314
+        },
+        "labelCount": 12,
+        "entityCount": 688
+      },
+      "WE 35/36": {
+        "overlaySrc": "/cad-floorplans/highlights/4og-we-35-36.svg",
+        "hitPath": "M 247.224 275.227 L 262.372 275.227 L 262.372 259.512 L 247.224 259.512 Z",
+        "label": {
+          "x": 249.424,
+          "y": 265.314
+        },
+        "labelCount": 11,
+        "entityCount": 721
+      }
+    }
+  }
+}

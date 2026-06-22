@@ -40,48 +40,19 @@ function normalizeLayerName(name) {
 
 function shouldRenderLayer(name) {
   const layer = normalizeLayerName(name);
-  if (!layer || layer === "0") return false;
+  if (!layer) return false;
 
-  const excluded = [
-    "beschrift",
-    "text",
-    "bem",
-    "fahrr",
-    "fliesen",
-    "geländer",
-    "entw",
-    "verdeckt",
-    "ansicht",
-    "stahl",
-    "marki",
-    "nachbar",
-    "fassade",
-    "putz",
-    "aufzug",
-    "aussenhaut",
-    "außenhaut",
-    "platten",
-    "uprofil",
-  ];
+  const hiddenLayers = ["defpoints", "elektro"];
+  return !hiddenLayers.includes(layer);
+}
 
-  if (excluded.some((fragment) => layer.includes(fragment))) return false;
-
-  const included = [
-    "wand",
-    "wände",
-    "wändebestand",
-    "wändeneu",
-    "schrwand",
-    "schrbestand",
-    "tür",
-    "treppen",
-    "fenster",
-    "sani",
-    "moeb",
-    "glas",
-  ];
-
-  return included.some((fragment) => layer.includes(fragment));
+function layerClassName(name) {
+  const layer = normalizeLayerName(name);
+  if (layer.includes("beschrift") || layer.includes("text")) return "cad-label";
+  if (layer.includes("sani") || layer.includes("moeb") || layer.includes("fliesen")) return "cad-detail";
+  if (layer.includes("fenster") || layer.includes("tür") || layer.includes("treppen")) return "cad-fixture";
+  if (layer.includes("wand") || layer.includes("aussenhaut") || layer.includes("außenhaut")) return "cad-structure";
+  return "cad-context";
 }
 
 function formatNumber(value) {
@@ -108,6 +79,36 @@ function pointsToPath(points, close = false) {
   return commands.join(" ");
 }
 
+function isLayerZeroDiagonalGuide(layerName, points) {
+  if (normalizeLayerName(layerName) !== "0" || points.length !== 2) return false;
+
+  const [start, end] = points;
+  if (!Array.isArray(start) || !Array.isArray(end)) return false;
+
+  const width = Math.abs(end[0] - start[0]);
+  const height = Math.abs(end[1] - start[1]);
+  const length = Math.hypot(width, height);
+
+  return length > 5 && width > 2 && height > 2;
+}
+
+function arcToPath(center, radius, startAngle, endAngle) {
+  if (!Array.isArray(center) || !Number.isFinite(radius) || radius <= 0) return "";
+  if (!Number.isFinite(startAngle) || !Number.isFinite(endAngle)) return "";
+  const start = [
+    center[0] + Math.cos(startAngle) * radius,
+    center[1] + Math.sin(startAngle) * radius,
+  ];
+  const end = [
+    center[0] + Math.cos(endAngle) * radius,
+    center[1] + Math.sin(endAngle) * radius,
+  ];
+  let delta = endAngle - startAngle;
+  if (delta < 0) delta += Math.PI * 2;
+  const largeArc = delta > Math.PI ? 1 : 0;
+  return `M ${formatNumber(start[0])} ${formatNumber(start[1])} A ${formatNumber(radius)} ${formatNumber(radius)} 0 ${largeArc} 1 ${formatNumber(end[0])} ${formatNumber(end[1])}`;
+}
+
 function collectPoint(bounds, x, y) {
   if (!Number.isFinite(x) || !Number.isFinite(y)) return;
   bounds.minX = Math.min(bounds.minX, x);
@@ -127,6 +128,10 @@ function boundsForPoints(points) {
     if (Array.isArray(point)) collectPoint(pointBounds, point[0], point[1]);
   }
   return pointBounds;
+}
+
+function boundsForPathLike(points) {
+  return boundsForPoints(points.filter((point) => Array.isArray(point)));
 }
 
 function intersectsBounds(a, b, margin = 0) {
@@ -154,8 +159,17 @@ for (const object of drawing.OBJECTS ?? []) {
   }
 }
 
+const vertices = new Map();
+for (const object of drawing.OBJECTS ?? []) {
+  if (object.entity === "VERTEX_2D" && Array.isArray(object.point)) {
+    vertices.set(handleKey(object.handle), object.point);
+  }
+}
+
 const pathsByLayer = new Map();
 const circlesByLayer = new Map();
+const hatchesByLayer = new Map();
+const textByLayer = new Map();
 const layerStats = new Map();
 const bounds = {
   minX: Infinity,
@@ -166,6 +180,8 @@ const bounds = {
 
 function addPath(layerName, path, points) {
   if (!path) return;
+  if (isLayerZeroDiagonalGuide(layerName, points)) return;
+
   const pointBounds = boundsForPoints(points);
   if (!Number.isFinite(pointBounds.minX) || !shouldKeepBounds(pointBounds)) return;
 
@@ -198,11 +214,114 @@ function addCircle(layerName, center, radius) {
   collectPoint(bounds, center[0] + radius, center[1] + radius);
 }
 
+function addHatch(layerName, path, points) {
+  if (!path) return;
+  const pointBounds = boundsForPathLike(points);
+  if (!Number.isFinite(pointBounds.minX) || !shouldKeepBounds(pointBounds)) return;
+
+  if (!hatchesByLayer.has(layerName)) hatchesByLayer.set(layerName, []);
+  hatchesByLayer.get(layerName).push(path);
+
+  const current = layerStats.get(layerName) ?? { entities: 0, segments: 0 };
+  current.entities += 1;
+  current.segments += Math.max(1, points.length - 1);
+  layerStats.set(layerName, current);
+
+  for (const point of points) {
+    if (Array.isArray(point)) collectPoint(bounds, point[0], point[1]);
+  }
+}
+
+function cleanText(value) {
+  return String(value ?? "")
+    .replaceAll("\\P", " ")
+    .replaceAll("\\A1;", "")
+    .replaceAll("\\pi5.5511e-017,l0.25,t0.25;", "")
+    .replaceAll(/\\H[\d.]+x;\\S2\^;/g, "²")
+    .replaceAll(/[{}]/g, "")
+    .replaceAll("\\", "")
+    .replaceAll(/\s+/g, " ")
+    .trim();
+}
+
+function textAngle(object) {
+  if (Number.isFinite(object.rotation)) return object.rotation;
+  if (Array.isArray(object.x_axis_dir)) {
+    return Math.atan2(object.x_axis_dir[1] ?? 0, object.x_axis_dir[0] ?? 1);
+  }
+  return 0;
+}
+
+function addText(layerName, object) {
+  const value = cleanText(object.text ?? object.text_value);
+  const point = object.ins_pt;
+  if (!value || !Array.isArray(point)) return;
+
+  const size = Number(object.text_height ?? object.height ?? 0.16);
+  const width = Number(object.extents_width ?? object.rect_width ?? value.length * size * 0.55);
+  const height = Number(object.extents_height ?? object.rect_height ?? size);
+  const pointBounds = {
+    minX: point[0] - width * 0.2,
+    minY: point[1] - height * 0.6,
+    maxX: point[0] + width * 1.2,
+    maxY: point[1] + height * 1.2,
+  };
+  if (!shouldKeepBounds(pointBounds)) return;
+
+  if (!textByLayer.has(layerName)) textByLayer.set(layerName, []);
+  textByLayer.get(layerName).push({
+    value,
+    x: point[0],
+    y: point[1],
+    angle: textAngle(object),
+    size,
+  });
+
+  const current = layerStats.get(layerName) ?? { entities: 0, segments: 0 };
+  current.entities += 1;
+  current.segments += 1;
+  layerStats.set(layerName, current);
+
+  collectPoint(bounds, pointBounds.minX, pointBounds.minY);
+  collectPoint(bounds, pointBounds.maxX, pointBounds.maxY);
+}
+
+function hatchPath(path) {
+  const points = [];
+  const pathChunks = [];
+
+  if (Array.isArray(path.polyline_paths)) {
+    const polyPoints = path.polyline_paths
+      .map((entry) => entry?.point)
+      .filter((point) => Array.isArray(point));
+    points.push(...polyPoints);
+    pathChunks.push(pointsToPath(polyPoints, Boolean(path.closed)));
+  }
+
+  if (Array.isArray(path.segs)) {
+    for (const segment of path.segs) {
+      const first = segment.first_endpoint ?? segment.start ?? segment.first;
+      const second = segment.second_endpoint ?? segment.end ?? segment.second;
+      if (Array.isArray(first) && Array.isArray(second)) {
+        points.push(first, second);
+        pathChunks.push(pointsToPath([first, second]));
+      }
+    }
+  }
+
+  return { path: pathChunks.filter(Boolean).join(" "), points };
+}
+
 for (const object of drawing.OBJECTS ?? []) {
   if (object.object || object.invisible) continue;
 
   const layerName = layers.get(layerHandleKey(object.layer)) ?? "";
   if (!shouldRenderLayer(layerName)) continue;
+
+  if (object.entity === "MTEXT" || object.entity === "TEXT") {
+    addText(layerName, object);
+    continue;
+  }
 
   if (Array.isArray(object.start) && Array.isArray(object.end)) {
     addPath(layerName, pointsToPath([object.start, object.end]), [object.start, object.end]);
@@ -223,7 +342,33 @@ for (const object of drawing.OBJECTS ?? []) {
     continue;
   }
 
+  if (Array.isArray(object.vertex)) {
+    const points = object.vertex
+      .map((handle) => vertices.get(handleKey(handle)))
+      .filter((point) => Array.isArray(point));
+    const isClosed = Boolean(object.flag && (object.flag & 1));
+    addPath(layerName, pointsToPath(points, isClosed), points);
+    continue;
+  }
+
+  if (object.entity === "HATCH" && Array.isArray(object.paths)) {
+    for (const path of object.paths) {
+      const hatch = hatchPath(path);
+      addHatch(layerName, hatch.path, hatch.points);
+    }
+    continue;
+  }
+
   if (Array.isArray(object.center) && Number.isFinite(object.radius)) {
+    if (Number.isFinite(object.start_angle) && Number.isFinite(object.end_angle)) {
+      const path = arcToPath(object.center, object.radius, object.start_angle, object.end_angle);
+      const points = [
+        [object.center[0] - object.radius, object.center[1] - object.radius],
+        [object.center[0] + object.radius, object.center[1] + object.radius],
+      ];
+      addPath(layerName, path, points);
+      continue;
+    }
     addCircle(layerName, object.center, object.radius);
   }
 }
@@ -244,18 +389,40 @@ const viewBox = [
   formatNumber(height + padding * 2),
 ].join(" ");
 
-const sortedLayerNames = Array.from(pathsByLayer.keys()).sort((a, b) => a.localeCompare(b));
+const sortedLayerNames = Array.from(
+  new Set([
+    ...pathsByLayer.keys(),
+    ...circlesByLayer.keys(),
+    ...hatchesByLayer.keys(),
+  ]),
+).sort((a, b) => a.localeCompare(b));
 const body = [];
 
 for (const layerName of sortedLayerNames) {
-  const className = normalizeLayerName(layerName).includes("sani") || normalizeLayerName(layerName).includes("moeb") ? "cad-detail" : "cad-structure";
+  const className = layerClassName(layerName);
   body.push(`<g class="${className}" data-layer="${escapeXml(layerName)}">`);
+  for (const path of hatchesByLayer.get(layerName) ?? []) {
+    body.push(`<path class="cad-hatch" d="${path}" />`);
+  }
   for (const path of pathsByLayer.get(layerName) ?? []) {
     body.push(`<path d="${path}" />`);
   }
   for (const circle of circlesByLayer.get(layerName) ?? []) {
     body.push(
       `<circle cx="${formatNumber(circle.center[0])}" cy="${formatNumber(circle.center[1])}" r="${formatNumber(circle.radius)}" />`,
+    );
+  }
+  body.push("</g>");
+}
+
+const sortedTextLayerNames = Array.from(textByLayer.keys()).sort((a, b) => a.localeCompare(b));
+for (const layerName of sortedTextLayerNames) {
+  const className = layerClassName(layerName);
+  body.push(`<g class="${className}" data-layer="${escapeXml(layerName)}">`);
+  for (const item of textByLayer.get(layerName) ?? []) {
+    const rotate = formatNumber((-item.angle * 180) / Math.PI);
+    body.push(
+      `<text x="${formatNumber(item.x)}" y="${formatNumber(-item.y)}" transform="rotate(${rotate} ${formatNumber(item.x)} ${formatNumber(-item.y)})" font-size="${formatNumber(Math.max(item.size * 1.7, 0.18))}">${escapeXml(item.value)}</text>`,
     );
   }
   body.push("</g>");
@@ -286,6 +453,34 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
       stroke-linecap: round;
       stroke-linejoin: round;
       vector-effect: non-scaling-stroke;
+    }
+    .cad-fixture path,
+    .cad-fixture circle {
+      fill: none;
+      stroke: rgba(29, 27, 24, 0.76);
+      stroke-width: 0.52;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .cad-context path,
+    .cad-context circle {
+      fill: none;
+      stroke: rgba(29, 27, 24, 0.34);
+      stroke-width: 0.38;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .cad-hatch {
+      fill: rgba(29, 27, 24, 0.045);
+      stroke: rgba(29, 27, 24, 0.16);
+      stroke-width: 0.22;
+    }
+    .cad-label text {
+      fill: rgba(29, 27, 24, 0.58);
+      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: 0;
     }
   </style>
   <g transform="scale(1 -1)">

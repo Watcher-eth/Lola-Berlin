@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="169.06 191.06 35.88 48.88" aria-hidden="true">
+  <style>
+    path,
+    circle {
+      fill: none;
+      stroke: #007AFF;
+      stroke-width: 1.55;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+  </style>
+  <g transform="scale(1 -1)">
+    <path d="M 199.146 -213.11 L 199.146 -210.82" />
+    <path d="M 193.886 -210.82 L 198.051 -210.82" />
+    <path d="M 198.981 -210.82 L 199.146 -210.82" />
+    <path d="M 198.981 -210.82 L 198.981 -210.54" />
+    <path d="M 198.051 -210.82 L 198.051 -210.54" />
+    <path d="M 198.981 -210.54 L 198.996 -210.54" />
+    <path d="M 198.996 -210.54 L 198.996 -206.05" />
+    <path d="M 197.866 -210.54 L 197.866 -209.08" />
+    <path d="M 197.866 -209.08 L 197.796 -209.08" />
+    <path d="M 197.796 -210.27 L 197.796 -209.08" />
+    <path d="M 197.796 -210.27 L 195.696 -210.27" />
+    <path d="M 197.866 -210.54 L 198.051 -210.54" />
+  </g>
+</svg>

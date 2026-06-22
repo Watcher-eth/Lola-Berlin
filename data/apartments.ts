@@ -1,8 +1,19 @@
-import generatedApartmentOutlines from "@/data/generated-apartment-outlines.json";
+import generatedCadApartmentHighlights from "@/data/generated-cad-apartment-highlights.json";
 
 export type ApartmentStatus = "Auf Anfrage";
 export type HouseSection = "Vorderhaus" | "Seitenflügel" | "Hinterhaus";
 export type PlanQuality = "exact" | "typology";
+
+export type ApartmentHighlight = {
+  overlaySrc: string;
+  hitPath: string;
+  label: {
+    x: number;
+    y: number;
+  };
+  labelCount: number;
+  entityCount: number;
+};
 
 export type ApartmentUnit = {
   id: string;
@@ -24,6 +35,7 @@ export type ApartmentUnit = {
   outlineMaskSrc?: string;
   planQuality: PlanQuality;
   modelLabel: string;
+  highlight: ApartmentHighlight;
 };
 
 export type FloorPlanData = {
@@ -33,12 +45,13 @@ export type FloorPlanData = {
   note: string;
   modelNote: string;
   cadFloorSrc: string;
+  highlightViewBox: string;
   apartments: ApartmentUnit[];
 };
 
 type ApartmentSeed = Omit<
   ApartmentUnit,
-  "id" | "floorId" | "floorLabel" | "availability"
+  "id" | "floorId" | "floorLabel" | "availability" | "highlight"
 >;
 
 const cadRoot = "/cad-floorplans";
@@ -66,12 +79,18 @@ const cadPlans = {
   aptCombinedLong: `${cadRoot}/apartment-combined-long.svg`,
 } as const;
 
-type ApartmentOutlineManifest = Partial<
-  Record<string, Partial<Record<string, string>>>
+type ApartmentHighlightManifest = Record<
+  string,
+  Record<string, ApartmentHighlight>
 >;
 
-const apartmentOutlineManifest =
-  generatedApartmentOutlines as ApartmentOutlineManifest;
+type GeneratedCadApartmentHighlights = {
+  floors: Record<string, { viewBox: string }>;
+  apartments: ApartmentHighlightManifest;
+};
+
+const cadHighlightManifest =
+  generatedCadApartmentHighlights as GeneratedCadApartmentHighlights;
 
 function seed(input: ApartmentSeed): ApartmentSeed {
   return input;
@@ -79,20 +98,20 @@ function seed(input: ApartmentSeed): ApartmentSeed {
 
 const floor1Apartments = [
   seed({
-    code: "WE 04",
+    code: "WE 03.1",
     title: "2-Zimmer-Wohnung im Vorderhaus",
     section: "Vorderhaus",
-    position: "Vorderhaus links",
-    sqm: 88,
+    position: "Vorderhaus rechts",
+    sqm: 88.1,
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
     balcony: true,
     gardenAccess: false,
-    note: "CAD-Vektorplan aus den neuen DWG-Unterlagen. Die Fläche stammt aus der Excel-Übersicht.",
-    cadPlanSrc: cadPlans.apt1VhLeft,
-    planQuality: "exact",
-    modelLabel: "Vorderhaus links, 1. Obergeschoss",
+    note: "Aus Excel erfasste Einheit; angezeigt wird ein passender CAD-Vektorplan aus den DWG-Unterlagen.",
+    cadPlanSrc: cadPlans.apt1VhRight,
+    planQuality: "typology",
+    modelLabel: "Typologie Vorderhaus rechts, 1. Obergeschoss",
   }),
   seed({
     code: "WE 03.2",
@@ -111,20 +130,36 @@ const floor1Apartments = [
     modelLabel: "Typologie Vorderhaus plus linker Seitenflügel",
   }),
   seed({
-    code: "WE 03.1",
+    code: "WE 04",
     title: "2-Zimmer-Wohnung im Vorderhaus",
     section: "Vorderhaus",
-    position: "Vorderhaus rechts",
-    sqm: 88.1,
+    position: "Vorderhaus links",
+    sqm: 88,
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
     balcony: true,
     gardenAccess: false,
-    note: "Aus Excel erfasste Einheit; angezeigt wird ein passender CAD-Vektorplan aus den DWG-Unterlagen.",
-    cadPlanSrc: cadPlans.apt1VhRight,
+    note: "CAD-Vektorplan aus den neuen DWG-Unterlagen. Die Fläche stammt aus der Excel-Übersicht.",
+    cadPlanSrc: cadPlans.apt1VhLeft,
+    planQuality: "exact",
+    modelLabel: "Vorderhaus links, 1. Obergeschoss",
+  }),
+  seed({
+    code: "WE 05",
+    title: "2-Zimmer-Wohnung im Seitenflügel",
+    section: "Seitenflügel",
+    position: "rechter Seitenflügel rechts",
+    sqm: 86.5,
+    rooms: 2,
+    bedrooms: 1,
+    bathrooms: 1,
+    balcony: false,
+    gardenAccess: false,
+    note: "Aus Excel erfasste Seitenflügel-Einheit. Der Detailausschnitt nutzt den CAD-Vollgeschossplan.",
+    cadPlanSrc: cadPlans.floor1,
     planQuality: "typology",
-    modelLabel: "Typologie Vorderhaus rechts, 1. Obergeschoss",
+    modelLabel: "Typologie rechter Seitenflügel",
   }),
   seed({
     code: "WE 22",
@@ -189,22 +224,6 @@ const floor1Apartments = [
     cadPlanSrc: cadPlans.apt1GhRight,
     planQuality: "exact",
     modelLabel: "Hinterhaus rechts, 1. Obergeschoss",
-  }),
-  seed({
-    code: "WE 05",
-    title: "2-Zimmer-Wohnung im Seitenflügel",
-    section: "Seitenflügel",
-    position: "rechter Seitenflügel rechts",
-    sqm: 86.5,
-    rooms: 2,
-    bedrooms: 1,
-    bathrooms: 1,
-    balcony: false,
-    gardenAccess: false,
-    note: "Aus Excel erfasste Seitenflügel-Einheit. Der Detailausschnitt nutzt den CAD-Vollgeschossplan.",
-    cadPlanSrc: cadPlans.floor1,
-    planQuality: "typology",
-    modelLabel: "Typologie rechter Seitenflügel",
   }),
 ];
 
@@ -480,6 +499,7 @@ function createFloor(
   note: string,
   modelNote: string,
   cadFloorSrc: string,
+  highlightViewBox: string,
   apartments: ApartmentSeed[],
 ): FloorPlanData {
   return {
@@ -489,13 +509,14 @@ function createFloor(
     note,
     modelNote,
     cadFloorSrc,
+    highlightViewBox,
     apartments: apartments.map((apartment) => ({
       ...apartment,
       id: `${id}-${apartment.code.replaceAll(/[^\d]+/g, "-")}`,
       floorId: id,
       floorLabel,
       availability: "Auf Anfrage",
-      outlineMaskSrc: apartmentOutlineManifest[id]?.[apartment.code],
+      highlight: cadHighlightManifest.apartments[id][apartment.code],
     })),
   };
 }
@@ -508,6 +529,7 @@ export const apartmentFloors: FloorPlanData[] = [
     "Der Vollgeschossplan stammt aus den aktuellen CAD-Unterlagen. Flächen und Wohnungsnummern folgen der Excel-Übersicht.",
     "Wo ein separater Originalgrundriss vorliegt, wird er direkt angezeigt. Sonst bleibt die Ansicht typologisch.",
     cadPlans.floor1,
+    cadHighlightManifest.floors["1og"].viewBox,
     floor1Apartments,
   ),
   createFloor(
@@ -517,6 +539,7 @@ export const apartmentFloors: FloorPlanData[] = [
     "Der Vollgeschossplan ist aus den aktuellen CAD-Dateien exportiert. Die Flächen bleiben mit den Excel-Werten synchron.",
     "Originalpläne werden direkt gezeigt; fehlende Einzelpläne bleiben als Typologie markiert.",
     cadPlans.floor2,
+    cadHighlightManifest.floors["2og"].viewBox,
     floor2Apartments,
   ),
   createFloor(
@@ -526,6 +549,7 @@ export const apartmentFloors: FloorPlanData[] = [
     "Der Vollgeschossplan bildet die zusammengelegten Einheiten des 3. Obergeschosses direkt aus den CAD-Unterlagen ab.",
     "Die Detailansicht zeigt vorhandene Originalpläne, sonst eine passende Typologie.",
     cadPlans.floor3,
+    cadHighlightManifest.floors["3og"].viewBox,
     floor3Apartments,
   ),
   createFloor(
@@ -535,6 +559,7 @@ export const apartmentFloors: FloorPlanData[] = [
     "Das obere Geschoss fasst die großen Verbundwohnungen aus den aktuellen Planunterlagen zusammen.",
     "Originalpläne und Typologien werden sauber voneinander getrennt.",
     cadPlans.floor4,
+    cadHighlightManifest.floors["4og"].viewBox,
     floor4Apartments,
   ),
 ];
