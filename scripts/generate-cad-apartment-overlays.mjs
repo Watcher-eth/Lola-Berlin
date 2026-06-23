@@ -361,8 +361,8 @@ const apartmentSelectionZones = {
     { minX: 233.9, minY: -216.8, maxX: 244.45, maxY: -212.8 },
   ],
   "2og:WE 09": [
-    { minX: 257.1, minY: -223.2, maxX: 265.4, maxY: -217.7 },
-    { minX: 255.85, minY: -217.7, maxX: 263.25, maxY: -213.2 },
+    { minX: 255.15, minY: -221.45, maxX: 262.0, maxY: -217.7 },
+    { minX: 255.15, minY: -217.7, maxX: 263.25, maxY: -213.2 },
   ],
   "2og:WE 26": [
     { minX: 234.0, minY: -212.7, maxX: 243.25, maxY: -207.6 },
@@ -445,7 +445,7 @@ const apartmentExclusionZones = {
   ],
   "2og:WE 06": [
     { minX: 232.0, minY: -222.0, maxX: 233.85, maxY: -212.4 },
-    { minX: 236.2, minY: -222.0, maxX: 236.9, maxY: -212.4 },
+    { minX: 236.0, minY: -222.0, maxX: 236.24, maxY: -212.4 },
     { minX: 244.45, minY: -212.4, maxX: 246.0, maxY: -209.8 },
   ],
   "2og:WE 26": [
@@ -459,10 +459,8 @@ const apartmentExclusionZones = {
     { minX: 247.8, minY: -205.6, maxX: 249.15, maxY: -198.9 },
   ],
   "2og:WE 09": [
-    { minX: 253.5, minY: -218.0, maxX: 257.0, maxY: -211.0 },
+    { minX: 253.5, minY: -218.0, maxX: 255.15, maxY: -211.0 },
     { minX: 253.5, minY: -213.1, maxX: 265.6, maxY: -210.5 },
-    { minX: 259.45, minY: -216.5, maxX: 260.35, maxY: -213.2 },
-    { minX: 261.0, minY: -223.8, maxX: 262.0, maxY: -213.0 },
     { minX: 263.25, minY: -223.6, maxX: 266.0, maxY: -213.0 },
   ],
 };
@@ -472,9 +470,11 @@ const apartmentHighlightColors = {
 };
 
 const apartmentLayerExclusionFragments = {
-  "2og:WE 06": ["wändegk"],
-  "2og:WE 09": ["wändegk"],
+  "2og:WE 06": ["tür"],
+  "2og:WE 09": ["tür"],
 };
+
+const apartmentSkipSymbolGeometry = new Set(["2og:WE 06", "2og:WE 09"]);
 
 const apartmentBalconyZones = {
   "1og:WE 03.1": [
@@ -755,6 +755,7 @@ for (const floor of floors) {
     const exclusionZones = apartmentExclusionZones[apartmentKey] ?? [];
     const balconyZones = apartmentBalconyZones[apartmentKey] ?? [];
     const excludedLayerFragments = apartmentLayerExclusionFragments[apartmentKey] ?? [];
+    const skipSymbolGeometry = apartmentSkipSymbolGeometry.has(apartmentKey);
     const apartmentBounds = selectionZones
       ? unionBounds(selectionZones)
       : {
@@ -782,6 +783,7 @@ for (const floor of floors) {
       if (excludedLayerFragments.some((fragment) => normalizedLayer.includes(fragment))) {
         continue;
       }
+      if (skipSymbolGeometry && !item.segments?.length) continue;
 
       const balconyItem = isBalconyLayer(item.layerName);
       if (balconyItem && !balconyZones.length) continue;
