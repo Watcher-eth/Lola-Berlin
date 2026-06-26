@@ -30,8 +30,8 @@ export function LandingApartmentsSection() {
               <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)]">
                 <div className="relative aspect-[1.68/1] overflow-hidden bg-[var(--accent-soft)]">
                   <Image
-                    src="/rooms/kitchen2.png"
-                    alt="Küche in Lola"
+                    src="/rooms/Wohnzimmer1.JPG"
+                    alt="Wohnraum in Lola"
                     fill
                     priority={false}
                     sizes="(min-width: 1024px) 62vw, 100vw"

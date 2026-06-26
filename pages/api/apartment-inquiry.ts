@@ -70,7 +70,9 @@ export default async function handler(
   }
 
   const transport = getTransport();
-  const to = "afg@afg-ia.de";
+  const to =
+    process.env.INQUIRY_TO_EMAIL || "LOLA@jeremyzimmer-immobilien.de";
+  const bcc = process.env.INQUIRY_BCC_EMAIL;
   const from =
     process.env.INQUIRY_FROM_EMAIL ||
     process.env.SMTP_USER ||
@@ -96,6 +98,7 @@ export default async function handler(
   try {
     await transport.sendMail({
       to,
+      bcc,
       from,
       replyTo: email.trim(),
       subject,

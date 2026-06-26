@@ -98,6 +98,8 @@ export default function HousePage() {
                   Eleganz des Berliner Altbaus, feine Jugendstil-Anklänge und
                   eine aufwendig restaurierte Substanz mit heutigem Komfort
                   verbindet.
+                  Wunderschöne Altbauwohnungen mit Neubaustandard sind von der
+                  Eigentümerin provisionsfrei zu mieten.
                 </p>
               </Reveal>
             </div>

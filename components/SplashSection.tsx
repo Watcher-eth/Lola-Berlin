@@ -115,9 +115,8 @@ export function SplashSection() {
         className="absolute bottom-28 left-6 right-6 z-10 max-w-sm text-white md:bottom-24 md:right-auto md:left-10 md:max-w-lg"
       >
         <p className="text-base leading-6 text-white sm:text-lg sm:leading-7 md:text-2xl md:leading-9">
-          LOLA vereint wunderschönen Altbau mit modernstem energetischen
-          Standard, ruhigen Wohnungen und einem der begehrtesten Kieze im
-          Berliner Westen.
+          Altbaucharme, neu gedacht: wunderschöne Altbauwohnungen mit
+          Neubaustandard, provisionsfrei von der Eigentümerin zu mieten.
         </p>
       </motion.div>
 

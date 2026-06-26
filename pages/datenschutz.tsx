@@ -60,10 +60,10 @@ export default function DatenschutzPage() {
                 <p>
                   E-Mail:{" "}
                   <a
-                    href="mailto:hello@lola.berlin"
+                    href="mailto:LOLA@jeremyzimmer-immobilien.de"
                     className="text-[#3f422d] underline decoration-[#3f422d]/30 underline-offset-4"
                   >
-                    hello@lola.berlin
+                    LOLA@jeremyzimmer-immobilien.de
                   </a>
                 </p>
               </PrivacySection>

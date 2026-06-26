@@ -6722,57 +6722,57 @@
     <g class="cad-label" data-layer="Beschriftung-R�ume">
     <text x="190.853" y="259.084" transform="rotate(0 190.853 259.084)" font-size="0.212">Balkon 5.70/2=2.85m²</text>
     <text x="181.489" y="259.084" transform="rotate(0 181.489 259.084)" font-size="0.212">Balkon 5.70/2=2.85m²</text>
-    <text x="187.244" y="265.17" transform="rotate(0 187.244 265.17)" font-size="0.255">WE 31/32 121.85m²</text>
-    <text x="185.359" y="265.17" transform="rotate(0 185.359 265.17)" font-size="0.255">WE 30 122.42m²</text>
-    <text x="184.08" y="261.6" transform="rotate(0 184.08 261.6)" font-size="0.212">Zi 30-01 F 17.04m² U 16.98m</text>
-    <text x="179.432" y="263.646" transform="rotate(0 179.432 263.646)" font-size="0.212">Zi 30-02 F 20.13m² U 18.64m</text>
-    <text x="176.82" y="263.646" transform="rotate(0 176.82 263.646)" font-size="0.212">Zi 30-03 F 20.35m² U 18.32m</text>
-    <text x="177.125" y="266.784" transform="rotate(0 177.125 266.784)" font-size="0.212">K�/Es 30-06 F 23.94m² U 21.59m</text>
-    <text x="182.307" y="264.835" transform="rotate(0 182.307 264.835)" font-size="0.212">Di/Gard 30-05 F 8.11m² U 15.05m</text>
-    <text x="184.331" y="271.411" transform="rotate(0 184.331 271.411)" font-size="0.212">HWR/AR 30-07 F 2.55m² U 6.36m</text>
-    <text x="182.812" y="271.396" transform="rotate(0 182.812 271.396)" font-size="0.212">Bad 30-08 F 7.72m² U 15.07m</text>
-    <text x="174.731" y="269.899" transform="rotate(0 174.731 269.899)" font-size="0.212">Flur 30-09 F 2.56m² U 6.58m</text>
-    <text x="180.5" y="271.349" transform="rotate(0 180.5 271.349)" font-size="0.212">Du-B 30-10 F 4.76m² U 10.97m</text>
-    <text x="178.23" y="273.027" transform="rotate(0 178.23 273.027)" font-size="0.212">Zi 30-04 F 12.41m² U 16.56m</text>
-    <text x="189.339" y="261.712" transform="rotate(0 189.339 261.712)" font-size="0.212">Zi 31/32-01 F 16.71m² U 16.70m</text>
-    <text x="193.038" y="263.646" transform="rotate(0 193.038 263.646)" font-size="0.212">Zi 31/32-02 F 19.72m² U 18.10m</text>
-    <text x="196.978" y="263.646" transform="rotate(0 196.978 263.646)" font-size="0.212">Zi 31/32-03 F 20.47m² U 18.40m</text>
-    <text x="190.561" y="265.201" transform="rotate(0 190.561 265.201)" font-size="0.212">Di/Gard 31/32-05 F 7.98m² U 14.93m</text>
-    <text x="188.448" y="271.291" transform="rotate(0 188.448 271.291)" font-size="0.212">HWR/AR 31/32-07 F 2.53m² U 6.37m</text>
-    <text x="191.384" y="271.301" transform="rotate(0 191.384 271.301)" font-size="0.212">Bad 31/32-08 F 7.10m² U 14.15m</text>
-    <text x="191.9" y="271.162" transform="rotate(0 191.9 271.162)" font-size="0.212">Du-Bad 31/32-10 F 4.67m² U 10.84m</text>
-    <text x="194.936" y="273.027" transform="rotate(0 194.936 273.027)" font-size="0.212">Zi 31/32-04 F 12.56m² U 16.67m</text>
-    <text x="199.768" y="270" transform="rotate(0 199.768 270)" font-size="0.212">Flur 31/32-09 F 2.68m² U 6.78m</text>
+    <text x="187.244" y="265.17" transform="rotate(0 187.244 265.17)" font-size="0.255">WE 28 121.85m²</text>
+    <text x="185.359" y="265.17" transform="rotate(0 185.359 265.17)" font-size="0.255">WE 27 122.42m²</text>
+    <text x="184.08" y="261.6" transform="rotate(0 184.08 261.6)" font-size="0.212">Zi 27-01 F 17.04m² U 16.98m</text>
+    <text x="179.432" y="263.646" transform="rotate(0 179.432 263.646)" font-size="0.212">Zi 27-02 F 20.13m² U 18.64m</text>
+    <text x="176.82" y="263.646" transform="rotate(0 176.82 263.646)" font-size="0.212">Zi 27-03 F 20.35m² U 18.32m</text>
+    <text x="177.125" y="266.784" transform="rotate(0 177.125 266.784)" font-size="0.212">K�/Es 27-06 F 23.94m² U 21.59m</text>
+    <text x="182.307" y="264.835" transform="rotate(0 182.307 264.835)" font-size="0.212">Di/Gard 27-05 F 8.11m² U 15.05m</text>
+    <text x="184.331" y="271.411" transform="rotate(0 184.331 271.411)" font-size="0.212">HWR/AR 27-07 F 2.55m² U 6.36m</text>
+    <text x="182.812" y="271.396" transform="rotate(0 182.812 271.396)" font-size="0.212">Bad 27-08 F 7.72m² U 15.07m</text>
+    <text x="174.731" y="269.899" transform="rotate(0 174.731 269.899)" font-size="0.212">Flur 27-09 F 2.56m² U 6.58m</text>
+    <text x="180.5" y="271.349" transform="rotate(0 180.5 271.349)" font-size="0.212">Du-B 27-10 F 4.76m² U 10.97m</text>
+    <text x="178.23" y="273.027" transform="rotate(0 178.23 273.027)" font-size="0.212">Zi 27-04 F 12.41m² U 16.56m</text>
+    <text x="189.339" y="261.712" transform="rotate(0 189.339 261.712)" font-size="0.212">Zi 28-01 F 16.71m² U 16.70m</text>
+    <text x="193.038" y="263.646" transform="rotate(0 193.038 263.646)" font-size="0.212">Zi 28-02 F 19.72m² U 18.10m</text>
+    <text x="196.978" y="263.646" transform="rotate(0 196.978 263.646)" font-size="0.212">Zi 28-03 F 20.47m² U 18.40m</text>
+    <text x="190.561" y="265.201" transform="rotate(0 190.561 265.201)" font-size="0.212">Di/Gard 28-05 F 7.98m² U 14.93m</text>
+    <text x="188.448" y="271.291" transform="rotate(0 188.448 271.291)" font-size="0.212">HWR/AR 28-07 F 2.53m² U 6.37m</text>
+    <text x="191.384" y="271.301" transform="rotate(0 191.384 271.301)" font-size="0.212">Bad 28-08 F 7.10m² U 14.15m</text>
+    <text x="191.9" y="271.162" transform="rotate(0 191.9 271.162)" font-size="0.212">Du-Bad 28-10 F 4.67m² U 10.84m</text>
+    <text x="194.936" y="273.027" transform="rotate(0 194.936 273.027)" font-size="0.212">Zi 28-04 F 12.56m² U 16.67m</text>
+    <text x="199.768" y="270" transform="rotate(0 199.768 270)" font-size="0.212">Flur 28-09 F 2.68m² U 6.78m</text>
     <text x="186.386" y="266.707" transform="rotate(0 186.386 266.707)" font-size="0.34">TRH 3</text>
     <text x="176.919" y="274.917" transform="rotate(0 176.919 274.917)" font-size="0.34">TRH 2</text>
     <text x="196.014" y="274.922" transform="rotate(0 196.014 274.922)" font-size="0.34">TRH 4</text>
-    <text x="195.068" y="266.784" transform="rotate(0 195.068 266.784)" font-size="0.212">K�/Es 31/32-06 F 24.58m² U 21.88m</text>
-    <text x="187.244" y="290.05" transform="rotate(0 187.244 290.05)" font-size="0.255">WE 12/13 171.54m²</text>
-    <text x="185.255" y="290.049" transform="rotate(0 185.255 290.049)" font-size="0.255">WE 10/11 170.19m²</text>
+    <text x="195.068" y="266.784" transform="rotate(0 195.068 266.784)" font-size="0.212">K�/Es 28-06 F 24.58m² U 21.88m</text>
+    <text x="187.244" y="290.05" transform="rotate(0 187.244 290.05)" font-size="0.255">WE 12 171.54m²</text>
+    <text x="185.255" y="290.049" transform="rotate(0 185.255 290.049)" font-size="0.255">WE 11 170.19m²</text>
     <text x="184.433" y="297.773" transform="rotate(0 184.433 297.773)" font-size="0.212">Balkon 4.40/2 =2.20m²</text>
     <text x="188.168" y="297.773" transform="rotate(0 188.168 297.773)" font-size="0.212">Balkon 4.40/2 =2.20m²</text>
-    <text x="175.089" y="293.509" transform="rotate(0 175.089 293.509)" font-size="0.212">Zi 10/11-03 F 31.07m² U 23.74m</text>
-    <text x="195.714" y="293.503" transform="rotate(0 195.714 293.503)" font-size="0.212">Zi 12/13-03 F 31.66m² U 23.84m</text>
-    <text x="191.202" y="293.537" transform="rotate(0 191.202 293.537)" font-size="0.212">Zi 12/13-02 F 28.84m² U 22.97m</text>
-    <text x="188.272" y="293.503" transform="rotate(0 188.272 293.503)" font-size="0.212">Zi 12/13-01 F 20.38m² U 19.24m</text>
-    <text x="184.285" y="293.503" transform="rotate(0 184.285 293.503)" font-size="0.212">Zi 10/11-01 F 20.51m² U 19.48m</text>
-    <text x="180.308" y="292.873" transform="rotate(0 180.308 292.873)" font-size="0.212">Zi 10/11-02 F 29.27m² U 23.02m</text>
-    <text x="181.821" y="283.79" transform="rotate(0 181.821 283.79)" font-size="0.212">Bad 10/11-08 F 6.52m² U 14.24 m</text>
-    <text x="189.307" y="283.03" transform="rotate(0 189.307 283.03)" font-size="0.212">Zi 12/13-04 F 5.74m² U 10.12m</text>
-    <text x="180.701" y="283.79" transform="rotate(0 180.701 283.79)" font-size="0.212">AR 10/11-09 F 2.52m² U 7.18m</text>
-    <text x="191.854" y="283.864" transform="rotate(0 191.854 283.864)" font-size="0.212">Bad 12/13-09 F 9.30m² U 17.88m</text>
-    <text x="180.75" y="289.117" transform="rotate(0 180.75 289.117)" font-size="0.212">Diele/Gard 10/11-06 F 17.34m² U 22.78m</text>
-    <text x="175.986" y="287.542" transform="rotate(0 175.986 287.542)" font-size="0.212">K�/Es 10/11-07 F 31.13m² U 23.18m</text>
-    <text x="172.328" y="280.583" transform="rotate(0 172.328 280.583)" font-size="0.212">Flur 10/11-10 F 2.50m² U 6.61m</text>
-    <text x="176.456" y="278.003" transform="rotate(0 176.456 278.003)" font-size="0.212">Zi 10/11-05 F 13.17m² U 16.32m</text>
-    <text x="180.954" y="280.732" transform="rotate(0 180.954 280.732)" font-size="0.212">Du-Bad/HWR 10/11-11 F 7.41m² U 15.38m</text>
-    <text x="191.037" y="288.963" transform="rotate(0 191.037 288.963)" font-size="0.212">Diele/Gard 12/13-06 F 16.23m² U 17.48m</text>
-    <text x="194.349" y="278.432" transform="rotate(0 194.349 278.432)" font-size="0.212">Zi 12/13-05 F 13.81m² U 16.40m</text>
-    <text x="191.508" y="281.299" transform="rotate(0 191.508 281.299)" font-size="0.212">Du-B/HWR 12/13-11 F 6.92m² U 14.92m</text>
-    <text x="199.782" y="280.427" transform="rotate(0 199.782 280.427)" font-size="0.212">Flur 12/13-10 F 2.15m² U 6.10m</text>
-    <text x="196.589" y="287.612" transform="rotate(0 196.589 287.612)" font-size="0.212">K�/Es 12/13-07 F 31.98m² U 23.40m</text>
-    <text x="190.587" y="287.529" transform="rotate(0 190.587 287.529)" font-size="0.212">AR 12/13-08 F 2.33m² U 6.35m</text>
-    <text x="183.824" y="285.395" transform="rotate(0 183.824 285.395)" font-size="0.212">Zi 10/11-04 F 6.55m² U 11.08m</text>
+    <text x="175.089" y="293.509" transform="rotate(0 175.089 293.509)" font-size="0.212">Zi 11-03 F 31.07m² U 23.74m</text>
+    <text x="195.714" y="293.503" transform="rotate(0 195.714 293.503)" font-size="0.212">Zi 12-03 F 31.66m² U 23.84m</text>
+    <text x="191.202" y="293.537" transform="rotate(0 191.202 293.537)" font-size="0.212">Zi 12-02 F 28.84m² U 22.97m</text>
+    <text x="188.272" y="293.503" transform="rotate(0 188.272 293.503)" font-size="0.212">Zi 12-01 F 20.38m² U 19.24m</text>
+    <text x="184.285" y="293.503" transform="rotate(0 184.285 293.503)" font-size="0.212">Zi 11-01 F 20.51m² U 19.48m</text>
+    <text x="180.308" y="292.873" transform="rotate(0 180.308 292.873)" font-size="0.212">Zi 11-02 F 29.27m² U 23.02m</text>
+    <text x="181.821" y="283.79" transform="rotate(0 181.821 283.79)" font-size="0.212">Bad 11-08 F 6.52m² U 14.24 m</text>
+    <text x="189.307" y="283.03" transform="rotate(0 189.307 283.03)" font-size="0.212">Zi 12-04 F 5.74m² U 10.12m</text>
+    <text x="180.701" y="283.79" transform="rotate(0 180.701 283.79)" font-size="0.212">AR 11-09 F 2.52m² U 7.18m</text>
+    <text x="191.854" y="283.864" transform="rotate(0 191.854 283.864)" font-size="0.212">Bad 12-09 F 9.30m² U 17.88m</text>
+    <text x="180.75" y="289.117" transform="rotate(0 180.75 289.117)" font-size="0.212">Diele/Gard 11-06 F 17.34m² U 22.78m</text>
+    <text x="175.986" y="287.542" transform="rotate(0 175.986 287.542)" font-size="0.212">K�/Es 11-07 F 31.13m² U 23.18m</text>
+    <text x="172.328" y="280.583" transform="rotate(0 172.328 280.583)" font-size="0.212">Flur 11-10 F 2.50m² U 6.61m</text>
+    <text x="176.456" y="278.003" transform="rotate(0 176.456 278.003)" font-size="0.212">Zi 11-05 F 13.17m² U 16.32m</text>
+    <text x="180.954" y="280.732" transform="rotate(0 180.954 280.732)" font-size="0.212">Du-Bad/HWR 11-11 F 7.41m² U 15.38m</text>
+    <text x="191.037" y="288.963" transform="rotate(0 191.037 288.963)" font-size="0.212">Diele/Gard 12-06 F 16.23m² U 17.48m</text>
+    <text x="194.349" y="278.432" transform="rotate(0 194.349 278.432)" font-size="0.212">Zi 12-05 F 13.81m² U 16.40m</text>
+    <text x="191.508" y="281.299" transform="rotate(0 191.508 281.299)" font-size="0.212">Du-B/HWR 12-11 F 6.92m² U 14.92m</text>
+    <text x="199.782" y="280.427" transform="rotate(0 199.782 280.427)" font-size="0.212">Flur 12-10 F 2.15m² U 6.10m</text>
+    <text x="196.589" y="287.612" transform="rotate(0 196.589 287.612)" font-size="0.212">K�/Es 12-07 F 31.98m² U 23.40m</text>
+    <text x="190.587" y="287.529" transform="rotate(0 190.587 287.529)" font-size="0.212">AR 12-08 F 2.33m² U 6.35m</text>
+    <text x="183.824" y="285.395" transform="rotate(0 183.824 285.395)" font-size="0.212">Zi 11-04 F 6.55m² U 11.08m</text>
     <text x="186.352" y="288.505" transform="rotate(0 186.352 288.505)" font-size="0.34">TRH 1</text>
     <text x="196.045" y="276.709" transform="rotate(0 196.045 276.709)" font-size="0.34">TRH 4</text>
     <text x="176.919" y="276.714" transform="rotate(0 176.919 276.714)" font-size="0.34">TRH 2</text>

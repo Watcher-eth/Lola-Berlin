@@ -11,6 +11,7 @@ export function ApartmentInquirySection({
 }: ApartmentInquirySectionProps) {
   return (
     <section
+      id="kontakt"
       className={`border-t border-[var(--accent)]/14 px-6 py-20 sm:px-8 lg:px-10 lg:py-28 ${backgroundClassName}`}
     >
       <div className="mx-auto w-full max-w-5xl">
@@ -27,6 +28,28 @@ export function ApartmentInquirySection({
             eine kurze Nachricht. Wir melden uns mit weiteren Informationen,
             Grundrissen und passenden Wohnungen.
           </p>
+          <div className="mt-7 text-sm leading-7 text-black/64 sm:text-base">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--accent)]/58">
+              Hausverwaltung Jeremy Zimmer
+            </p>
+            <p className="mt-2">
+              Fon:{" "}
+              <a
+                href="tel:+4915170364845"
+                className="text-[var(--accent)] underline decoration-[var(--accent)]/30 underline-offset-4 hover:text-black"
+              >
+                +49 151 70364845
+              </a>
+              <br />
+              Mail:{" "}
+              <a
+                href="mailto:LOLA@jeremyzimmer-immobilien.de"
+                className="text-[var(--accent)] underline decoration-[var(--accent)]/30 underline-offset-4 hover:text-black"
+              >
+                LOLA@jeremyzimmer-immobilien.de
+              </a>
+            </p>
+          </div>
         </div>
 
         <div className="mx-auto mt-12 max-w-4xl">
@@ -45,7 +68,7 @@ export function ApartmentInquirySection({
             </p>
             <div className="mt-8">
               <a
-                href="mailto:hello@lola.berlin"
+                href="mailto:LOLA@jeremyzimmer-immobilien.de"
                 className="flex w-full justify-center bg-[var(--accent)] px-7 py-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] !text-white transition-colors duration-300 hover:bg-black"
               >
                 Besichtigung vereinbaren

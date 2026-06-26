@@ -28,6 +28,7 @@ export type ApartmentUnit = {
   bedrooms: number;
   bathrooms: number;
   availability: ApartmentStatus;
+  coldRent?: number;
   balcony: boolean;
   gardenAccess: boolean;
   note: string;
@@ -54,6 +55,7 @@ type ApartmentSeed = Omit<
   "id" | "floorId" | "floorLabel" | "availability" | "highlight"
 > & {
   availability?: ApartmentStatus;
+  highlightCode?: string;
 };
 
 const cadRoot = "/cad-floorplans";
@@ -100,7 +102,8 @@ function seed(input: ApartmentSeed): ApartmentSeed {
 
 const floor1Apartments = [
   seed({
-    code: "WE 03.1",
+    code: "WE 03",
+    highlightCode: "WE 03.1",
     title: "2-Zimmer-Wohnung im Vorderhaus",
     section: "Vorderhaus",
     position: "Vorderhaus rechts",
@@ -108,6 +111,7 @@ const floor1Apartments = [
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 2466.8,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -116,7 +120,8 @@ const floor1Apartments = [
     modelLabel: "Typologie Vorderhaus rechts, 1. Obergeschoss",
   }),
   seed({
-    code: "WE 03.2",
+    code: "WE 04",
+    highlightCode: "WE 03.2",
     title: "2-Zimmer-Wohnung Vorderhaus und Seitenflügel",
     section: "Vorderhaus",
     position: "linker Seitenflügel + Vorderhaus links",
@@ -124,6 +129,7 @@ const floor1Apartments = [
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 2427.6,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -132,7 +138,8 @@ const floor1Apartments = [
     modelLabel: "Typologie Vorderhaus plus linker Seitenflügel",
   }),
   seed({
-    code: "WE 04",
+    code: "WE 05",
+    highlightCode: "WE 04",
     title: "2-Zimmer-Wohnung im Vorderhaus",
     section: "Vorderhaus",
     position: "Vorderhaus links",
@@ -140,6 +147,7 @@ const floor1Apartments = [
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 2464,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -148,7 +156,8 @@ const floor1Apartments = [
     modelLabel: "Vorderhaus links, 1. Obergeschoss",
   }),
   seed({
-    code: "WE 05",
+    code: "WE 06",
+    highlightCode: "WE 05",
     title: "2-Zimmer-Wohnung im Seitenflügel",
     section: "Seitenflügel",
     position: "rechter Seitenflügel rechts",
@@ -156,6 +165,7 @@ const floor1Apartments = [
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 2335.5,
     balcony: false,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -164,7 +174,8 @@ const floor1Apartments = [
     modelLabel: "Typologie rechter Seitenflügel",
   }),
   seed({
-    code: "WE 22",
+    code: "WE 19",
+    highlightCode: "WE 22",
     title: "2-Zimmer-Wohnung im Seitenflügel",
     section: "Seitenflügel",
     position: "linker Seitenflügel rechts",
@@ -172,6 +183,7 @@ const floor1Apartments = [
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 1749.6,
     balcony: false,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -180,7 +192,8 @@ const floor1Apartments = [
     modelLabel: "Typologie linker Seitenflügel",
   }),
   seed({
-    code: "WE 23",
+    code: "WE 20",
+    highlightCode: "WE 23",
     title: "2-Zimmer-Wohnung im Hinterhaus",
     section: "Hinterhaus",
     position: "Hinterhaus links",
@@ -188,6 +201,7 @@ const floor1Apartments = [
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 1611.9,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -196,7 +210,8 @@ const floor1Apartments = [
     modelLabel: "Hinterhaus links, 1. Obergeschoss",
   }),
   seed({
-    code: "WE 24",
+    code: "WE 21",
+    highlightCode: "WE 24",
     title: "3-Zimmer-Wohnung im Seitenflügel",
     section: "Seitenflügel",
     position: "rechter Seitenflügel links",
@@ -204,6 +219,7 @@ const floor1Apartments = [
     rooms: 3,
     bedrooms: 2,
     bathrooms: 1,
+    coldRent: 2139.8,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -212,7 +228,8 @@ const floor1Apartments = [
     modelLabel: "Typologie rechter Seitenflügel",
   }),
   seed({
-    code: "WE 25",
+    code: "WE 22",
+    highlightCode: "WE 25",
     title: "1-Zimmer-Wohnung im Hinterhaus",
     section: "Hinterhaus",
     position: "Hinterhaus rechts",
@@ -220,6 +237,7 @@ const floor1Apartments = [
     rooms: 1,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 1033.2,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -231,7 +249,8 @@ const floor1Apartments = [
 
 const floor2Apartments = [
   seed({
-    code: "WE 08",
+    code: "WE 09",
+    highlightCode: "WE 08",
     title: "3-Zimmer-Wohnung im Vorderhaus",
     section: "Vorderhaus",
     position: "Vorderhaus links",
@@ -239,6 +258,7 @@ const floor2Apartments = [
     rooms: 3,
     bedrooms: 2,
     bathrooms: 2,
+    coldRent: 3234.6,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -247,7 +267,8 @@ const floor2Apartments = [
     modelLabel: "Vorderhaus links, 2. Obergeschoss",
   }),
   seed({
-    code: "WE 07",
+    code: "WE 08",
+    highlightCode: "WE 07",
     title: "3-Zimmer-Wohnung im Vorderhaus",
     section: "Vorderhaus",
     position: "Vorderhaus rechts",
@@ -255,6 +276,7 @@ const floor2Apartments = [
     rooms: 3,
     bedrooms: 2,
     bathrooms: 2,
+    coldRent: 3072.6,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -263,7 +285,8 @@ const floor2Apartments = [
     modelLabel: "Typologie Vorderhaus rechts, 2. Obergeschoss",
   }),
   seed({
-    code: "WE 06",
+    code: "WE 07",
+    highlightCode: "WE 06",
     title: "1-Zimmer-Wohnung im Seitenflügel",
     section: "Seitenflügel",
     position: "linker Seitenflügel links",
@@ -271,6 +294,7 @@ const floor2Apartments = [
     rooms: 1,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 1537.2,
     balcony: false,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -279,7 +303,8 @@ const floor2Apartments = [
     modelLabel: "linker Seitenflügel, 2. Obergeschoss",
   }),
   seed({
-    code: "WE 26",
+    code: "WE 23",
+    highlightCode: "WE 26",
     title: "1-Zimmer-Wohnung im Seitenflügel",
     section: "Seitenflügel",
     position: "linker Seitenflügel rechts",
@@ -287,6 +312,7 @@ const floor2Apartments = [
     rooms: 1,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 1282.4,
     balcony: false,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -295,7 +321,8 @@ const floor2Apartments = [
     modelLabel: "Typologie kompakte 1-Zimmer-Wohnung",
   }),
   seed({
-    code: "WE 27",
+    code: "WE 24",
+    highlightCode: "WE 27",
     title: "3-Zimmer-Wohnung im Hinterhaus",
     section: "Hinterhaus",
     position: "Hinterhaus links",
@@ -303,6 +330,7 @@ const floor2Apartments = [
     rooms: 3,
     bedrooms: 2,
     bathrooms: 1,
+    coldRent: 2124.2,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -312,7 +340,8 @@ const floor2Apartments = [
     availability: "Vermietet",
   }),
   seed({
-    code: "WE 28",
+    code: "WE 25",
+    highlightCode: "WE 28",
     title: "2-Zimmer-Wohnung im Hinterhaus",
     section: "Hinterhaus",
     position: "Hinterhaus rechts",
@@ -320,6 +349,7 @@ const floor2Apartments = [
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 1628.1,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -328,7 +358,8 @@ const floor2Apartments = [
     modelLabel: "Typologie Hinterhaus rechts",
   }),
   seed({
-    code: "WE 09",
+    code: "WE 10",
+    highlightCode: "WE 09",
     title: "1-Zimmer-Wohnung im Seitenflügel",
     section: "Seitenflügel",
     position: "rechter Seitenflügel rechts",
@@ -336,6 +367,7 @@ const floor2Apartments = [
     rooms: 1,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 1587.6,
     balcony: false,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -344,7 +376,8 @@ const floor2Apartments = [
     modelLabel: "rechter Seitenflügel, 2. Obergeschoss",
   }),
   seed({
-    code: "WE 29",
+    code: "WE 26",
+    highlightCode: "WE 29",
     title: "2-Zimmer-Wohnung im Seitenflügel",
     section: "Seitenflügel",
     position: "rechter Seitenflügel links",
@@ -352,6 +385,7 @@ const floor2Apartments = [
     rooms: 2,
     bedrooms: 1,
     bathrooms: 1,
+    coldRent: 1865.7,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -363,7 +397,8 @@ const floor2Apartments = [
 
 const floor3Apartments = [
   seed({
-    code: "WE 12/13",
+    code: "WE 12",
+    highlightCode: "WE 12/13",
     title: "5-Zimmer-Wohnung Vorderhaus und Seitenflügel",
     section: "Vorderhaus",
     position: "Vorderhaus + rechter Seitenflügel links",
@@ -371,6 +406,7 @@ const floor3Apartments = [
     rooms: 5,
     bedrooms: 4,
     bathrooms: 2,
+    coldRent: 4472.5,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -379,7 +415,8 @@ const floor3Apartments = [
     modelLabel: "Vorderhaus plus rechter Seitenflügel links",
   }),
   seed({
-    code: "WE 10/11",
+    code: "WE 11",
+    highlightCode: "WE 10/11",
     title: "5-Zimmer-Wohnung Vorderhaus und Seitenflügel",
     section: "Vorderhaus",
     position: "Vorderhaus + linker Seitenflügel rechts",
@@ -387,6 +424,7 @@ const floor3Apartments = [
     rooms: 5,
     bedrooms: 4,
     bathrooms: 2,
+    coldRent: 4477.5,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -395,7 +433,8 @@ const floor3Apartments = [
     modelLabel: "Typologie Vorderhaus plus linker Seitenflügel rechts",
   }),
   seed({
-    code: "WE 30",
+    code: "WE 27",
+    highlightCode: "WE 30",
     title: "4-Zimmer-Wohnung im Hinterhaus",
     section: "Hinterhaus",
     position: "Hinterhaus + linker Seitenflügel links",
@@ -403,6 +442,7 @@ const floor3Apartments = [
     rooms: 4,
     bedrooms: 3,
     bathrooms: 2,
+    coldRent: 3185,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -411,7 +451,8 @@ const floor3Apartments = [
     modelLabel: "Hinterhaus links plus linker Seitenflügel",
   }),
   seed({
-    code: "WE 31/32",
+    code: "WE 28",
+    highlightCode: "WE 31/32",
     title: "4-Zimmer-Wohnung im Hinterhaus",
     section: "Hinterhaus",
     position: "Hinterhaus + rechter Seitenflügel rechts",
@@ -419,6 +460,7 @@ const floor3Apartments = [
     rooms: 4,
     bedrooms: 3,
     bathrooms: 2,
+    coldRent: 3152.5,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -430,7 +472,8 @@ const floor3Apartments = [
 
 const floor4Apartments = [
   seed({
-    code: "WE 14/15",
+    code: "WE 13",
+    highlightCode: "WE 14/15",
     title: "5-Zimmer-Wohnung Vorderhaus und Seitenflügel",
     section: "Vorderhaus",
     position: "Vorderhaus + linker Seitenflügel rechts",
@@ -438,6 +481,7 @@ const floor4Apartments = [
     rooms: 5,
     bedrooms: 4,
     bathrooms: 2,
+    coldRent: 4310,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -446,7 +490,8 @@ const floor4Apartments = [
     modelLabel: "Vorderhaus plus linker Seitenflügel rechts",
   }),
   seed({
-    code: "WE 16/17",
+    code: "WE 14",
+    highlightCode: "WE 16/17",
     title: "5-Zimmer-Wohnung Vorderhaus und Seitenflügel",
     section: "Vorderhaus",
     position: "Vorderhaus + rechter Seitenflügel links",
@@ -454,6 +499,7 @@ const floor4Apartments = [
     rooms: 5,
     bedrooms: 4,
     bathrooms: 2,
+    coldRent: 4282.5,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -462,7 +508,8 @@ const floor4Apartments = [
     modelLabel: "Typologie Vorderhaus plus rechter Seitenflügel links",
   }),
   seed({
-    code: "WE 33/34",
+    code: "WE 29",
+    highlightCode: "WE 33/34",
     title: "4-Zimmer-Wohnung im Hinterhaus",
     section: "Hinterhaus",
     position: "Hinterhaus + linker Seitenflügel links",
@@ -470,6 +517,7 @@ const floor4Apartments = [
     rooms: 4,
     bedrooms: 3,
     bathrooms: 2,
+    coldRent: 3232.5,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -478,7 +526,8 @@ const floor4Apartments = [
     modelLabel: "Typologie Hinterhaus links plus linker Seitenflügel",
   }),
   seed({
-    code: "WE 35/36",
+    code: "WE 30",
+    highlightCode: "WE 35/36",
     title: "4-Zimmer-Wohnung im Hinterhaus",
     section: "Hinterhaus",
     position: "Hinterhaus + rechter Seitenflügel rechts",
@@ -486,6 +535,7 @@ const floor4Apartments = [
     rooms: 4,
     bedrooms: 3,
     bathrooms: 2,
+    coldRent: 3232.5,
     balcony: true,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
@@ -519,7 +569,10 @@ function createFloor(
       floorId: id,
       floorLabel,
       availability: apartment.availability ?? "Auf Anfrage",
-      highlight: cadHighlightManifest.apartments[id][apartment.code],
+      highlight:
+        cadHighlightManifest.apartments[id][
+          apartment.highlightCode ?? apartment.code
+        ],
     })),
   };
 }
@@ -575,14 +628,6 @@ export const apartmentRenderGallery = [
     imageSrc: "/rooms/livingroom.jpg",
     description:
       "Die Wohnräume bleiben unmöbliert und bewusst offen lesbar. Proportion, Tageslicht und Materialität sollen die Qualität des Altbaus tragen, ohne dekorativ zu werden.",
-  },
-  {
-    id: "kitchen",
-    title: "Küche",
-    subtitle: "Einrichtungsbeispiel für kleinere Apartments",
-    imageSrc: "/rooms/kitchen.jpg",
-    description:
-      "Die Visualisierung zeigt, wie die Küche in den kleineren Apartments aussehen könnte – kompakt, funktional und auf die Anforderungen modernen Wohnens abgestimmt.",
   },
   {
     id: "bathroom",

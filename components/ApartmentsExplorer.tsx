@@ -38,6 +38,17 @@ function ApartmentFact({
   );
 }
 
+function formatColdRent(apartment: ApartmentUnit) {
+  if (!apartment.coldRent) return "Auf Anfrage";
+
+  return `${apartment.coldRent.toLocaleString("de-DE", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })} kalt`;
+}
+
 function getOutdoorSpaceLabel(apartment: ApartmentUnit) {
   if (apartment.gardenAccess) return "Gartenzugang";
   if (apartment.balcony) return "Balkon";
@@ -293,7 +304,11 @@ function ApartmentDetailsPanel({
                 value={getOutdoorSpaceLabel(activeApartment)}
               />
               <ApartmentFact
-                label="Status"
+                label="Kaltmiete"
+                value={formatColdRent(activeApartment)}
+              />
+              <ApartmentFact
+                label="Verfügbarkeit"
                 value={
                   <span
                     className={`inline-flex border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] ${
@@ -404,6 +419,8 @@ function ApartmentDetailsPanel({
                 </span>
                 <span className="mt-2 block text-xs leading-5 text-black/54">
                   {apartment.sqm.toLocaleString("de-DE")} m²
+                  {" · "}
+                  {formatColdRent(apartment)}
                 </span>
               </motion.button>
             );

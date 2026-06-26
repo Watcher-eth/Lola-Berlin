@@ -2,10 +2,11 @@ import { motion } from "motion/react";
 
 const apartmentStandards = [
   "Fernwärme und Fußbodenheizung für effiziente, angenehme Wärme",
-  "Energieeffizienzklasse A und energetisch saniertes Haus auf Neubaustandard",
+  "Energieeffizienzklasse A+ und energetisch saniertes Haus auf Neubaustandard",
   "Glasfaser- und Highspeed-Internet für einen zeitgemäßen Alltag",
-  "Moderne, voll geflieste Badezimmer und großzügige Berliner Zimmer",
-  "Zertifizierter Bio-Boden oder Parkett mit ruhiger, hochwertiger Haptik",
+  "Moderne Design-Bäder und großzügige Berliner Zimmer",
+  "Nachhaltige Innenausbaumaterialien und Bio-Farben",
+  "Parkett und zertifizierte Bio-Böden mit ruhiger, hochwertiger Haptik",
 ];
 
 const houseConveniences = [
@@ -31,7 +32,7 @@ export function ApartmentFeaturesSection() {
               Wohnstandard
             </p>
             <h2 className="mt-4 max-w-4xl font-serif text-3xl leading-none tracking-[-0.05em] text-[var(--accent)] sm:text-5xl lg:text-[4rem]">
-              Altbaucharme, technisch auf aktuellem Stand.
+              Altbaucharme - Neubaustandard.
             </h2>
             <div className="mt-6 space-y-5 text-sm leading-7 text-black/66 sm:text-base sm:leading-8 md:text-lg">
               <p>
