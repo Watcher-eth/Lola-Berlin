@@ -5,27 +5,87 @@ type ResponseData = {
   message: string;
 };
 
-function getTransport() {
-  if (process.env.SMTP_HOST && process.env.SMTP_PORT) {
-    return nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: process.env.SMTP_SECURE === "true",
-      auth:
-        process.env.SMTP_USER && process.env.SMTP_PASS
-          ? {
-              user: process.env.SMTP_USER,
-              pass: process.env.SMTP_PASS,
-            }
-          : undefined,
-    });
-  }
+type InquiryEmail = {
+  to: string[];
+  bcc: string[];
+  from: string;
+  replyTo: string;
+  subject: string;
+  text: string;
+};
+
+function parseEmailList(value: string | undefined, fallback: string[] = []) {
+  return (
+    value
+      ?.split(",")
+      .map((email) => email.trim())
+      .filter(Boolean) ?? fallback
+  );
+}
+
+function getSmtpTransport() {
+  if (!process.env.SMTP_HOST || !process.env.SMTP_PORT) return null;
 
   return nodemailer.createTransport({
-    sendmail: true,
-    newline: "unix",
-    path: "/usr/sbin/sendmail",
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: process.env.SMTP_SECURE === "true",
+    auth:
+      process.env.SMTP_USER && process.env.SMTP_PASS
+        ? {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+          }
+        : undefined,
   });
+}
+
+async function sendWithResend(email: InquiryEmail) {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: email.from,
+      to: email.to,
+      bcc: email.bcc.length > 0 ? email.bcc : undefined,
+      reply_to: email.replyTo,
+      subject: email.subject,
+      text: email.text,
+    }),
+  });
+
+  if (!response.ok) {
+    const details = await response.text();
+    throw new Error(`Resend failed with ${response.status}: ${details}`);
+  }
+}
+
+async function sendInquiryEmail(email: InquiryEmail) {
+  if (process.env.RESEND_API_KEY) {
+    await sendWithResend(email);
+    return;
+  }
+
+  const smtpTransport = getSmtpTransport();
+
+  if (smtpTransport) {
+    await smtpTransport.sendMail({
+      to: email.to,
+      bcc: email.bcc.length > 0 ? email.bcc : undefined,
+      from: email.from,
+      replyTo: email.replyTo,
+      subject: email.subject,
+      text: email.text,
+    });
+    return;
+  }
+
+  throw new Error(
+    "No email provider configured. Set RESEND_API_KEY or SMTP_HOST/SMTP_PORT.",
+  );
 }
 
 export default async function handler(
@@ -69,10 +129,12 @@ export default async function handler(
       .json({ message: "Die Datenschutzhinweise müssen bestätigt werden." });
   }
 
-  const transport = getTransport();
-  const to =
-    process.env.INQUIRY_TO_EMAIL || "LOLA@jeremyzimmer-immobilien.de";
-  const bcc = process.env.INQUIRY_BCC_EMAIL;
+  const to = parseEmailList(process.env.INQUIRY_TO_EMAILS, [
+    process.env.INQUIRY_TO_EMAIL || "LOLA@jeremyzimmer-immobilien.de",
+  ]);
+  const bcc = parseEmailList(
+    process.env.INQUIRY_BCC_EMAILS || process.env.INQUIRY_BCC_EMAIL,
+  );
   const from =
     process.env.INQUIRY_FROM_EMAIL ||
     process.env.SMTP_USER ||
@@ -96,7 +158,7 @@ export default async function handler(
   ].join("\n");
 
   try {
-    await transport.sendMail({
+    await sendInquiryEmail({
       to,
       bcc,
       from,
@@ -105,7 +167,7 @@ export default async function handler(
       text,
     });
 
-    return res.status(200).json({ message: "Inquiry sent." });
+    return res.status(200).json({ message: "Anfrage wurde versendet." });
   } catch (error) {
     console.error("Apartment inquiry failed", error);
     return res.status(500).json({
