@@ -642,6 +642,22 @@ export const apartmentRenderGallery = [
       "Auch die Bäder sind vollständig eingebaut. Die Gestaltung bleibt bewusst zurückgenommen, damit Nutzung, Pflege und Dauerhaftigkeit im Vordergrund stehen.",
   },
   {
+    id: "kitchen",
+    title: "Küchenbeispiel",
+    subtitle: "Mögliche Küchenwirkung",
+    imageSrc: "/rooms/kitchen.jpg",
+    description:
+      "Die Abbildungen zeigen beispielhaft, wie eine Küche in den Wohnungen wirken könnte. Küchen sind nicht als feste Einbauten enthalten.",
+  },
+  {
+    id: "kitchen2",
+    title: "Küchenbeispiel",
+    subtitle: "Weitere mögliche Ausführung",
+    imageSrc: "/rooms/kitchen2.png",
+    description:
+      "Die konkrete Küchenplanung bleibt den Mieterinnen und Mietern überlassen. Die Bilder dienen nur als Orientierung für Proportion, Licht und Materialstimmung.",
+  },
+  {
     id: "bedroom",
     title: "Schlafzimmer",
     subtitle: "Rückzug, Ruhe und klare Proportion",

@@ -23,7 +23,8 @@ function RowReveal({
 }
 
 export function ApartmentRenderGallery() {
-  const [livingroom, bathroom, bedroom] = apartmentRenderGallery;
+  const [livingroom, bathroom, kitchen, kitchen2, bedroom] =
+    apartmentRenderGallery;
 
   return (
     <section className="border-t border-[var(--accent)]/14 bg-white px-6 py-16 sm:px-8 lg:px-10 lg:py-24">
@@ -89,6 +90,45 @@ export function ApartmentRenderGallery() {
           </RowReveal>
 
           <RowReveal delay={0.2}>
+            <div className="grid gap-8 lg:grid-cols-[minmax(320px,0.88fr)_minmax(0,1.12fr)] lg:items-center">
+              <div className="order-2 lg:order-1 lg:pr-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent)]/58">
+                  {kitchen.subtitle}
+                </p>
+                <h3 className="mt-4 font-serif text-3xl leading-none tracking-[-0.05em] text-[var(--accent)] sm:text-4xl">
+                  Küche als Beispiel
+                </h3>
+                <p className="mt-5 text-sm leading-7 text-black/64 sm:text-base sm:leading-8">
+                  {kitchen.description}
+                </p>
+                <p className="mt-4 text-sm leading-7 text-black/64 sm:text-base sm:leading-8">
+                  {kitchen2.description}
+                </p>
+              </div>
+              <div className="order-1 grid gap-4 sm:grid-cols-2 lg:order-2">
+                <div className="relative aspect-[1.12/1] overflow-hidden bg-[#f2eee5]">
+                  <Image
+                    src={kitchen.imageSrc}
+                    alt={kitchen.title}
+                    fill
+                    sizes="(min-width: 1024px) 28vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative aspect-[1.12/1] overflow-hidden bg-[#f2eee5]">
+                  <Image
+                    src={kitchen2.imageSrc}
+                    alt={kitchen2.title}
+                    fill
+                    sizes="(min-width: 1024px) 28vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </RowReveal>
+
+          <RowReveal delay={0.26}>
             <div className="grid gap-8 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:items-center">
               <div className="order-2 lg:order-1 lg:pr-6">
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent)]/58">

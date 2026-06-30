@@ -24,7 +24,9 @@ function parseEmailList(value: string | undefined, fallback: string[] = []) {
 }
 
 function getSmtpTransport() {
-  if (!process.env.SMTP_HOST || !process.env.SMTP_PORT) return null;
+  if (!process.env.SMTP_HOST || !process.env.SMTP_PORT) {
+    throw new Error("SMTP is not configured. Set SMTP_HOST and SMTP_PORT.");
+  }
 
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -40,52 +42,17 @@ function getSmtpTransport() {
   });
 }
 
-async function sendWithResend(email: InquiryEmail) {
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: email.from,
-      to: email.to,
-      bcc: email.bcc.length > 0 ? email.bcc : undefined,
-      reply_to: email.replyTo,
-      subject: email.subject,
-      text: email.text,
-    }),
-  });
-
-  if (!response.ok) {
-    const details = await response.text();
-    throw new Error(`Resend failed with ${response.status}: ${details}`);
-  }
-}
-
 async function sendInquiryEmail(email: InquiryEmail) {
-  if (process.env.RESEND_API_KEY) {
-    await sendWithResend(email);
-    return;
-  }
-
   const smtpTransport = getSmtpTransport();
 
-  if (smtpTransport) {
-    await smtpTransport.sendMail({
-      to: email.to,
-      bcc: email.bcc.length > 0 ? email.bcc : undefined,
-      from: email.from,
-      replyTo: email.replyTo,
-      subject: email.subject,
-      text: email.text,
-    });
-    return;
-  }
-
-  throw new Error(
-    "No email provider configured. Set RESEND_API_KEY or SMTP_HOST/SMTP_PORT.",
-  );
+  await smtpTransport.sendMail({
+    to: email.to,
+    bcc: email.bcc.length > 0 ? email.bcc : undefined,
+    from: email.from,
+    replyTo: email.replyTo,
+    subject: email.subject,
+    text: email.text,
+  });
 }
 
 export default async function handler(
