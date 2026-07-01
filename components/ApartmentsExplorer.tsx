@@ -123,7 +123,6 @@ function ApartmentFloorOverlay({
               onFocus={() => onPreview(apartment.id)}
               onBlur={onPreviewEnd}
               onPointerEnter={() => onPreview(apartment.id)}
-              onPointerMove={() => onPreview(apartment.id)}
               onPointerLeave={onPreviewEnd}
               onClick={() => onSelect(apartment.id)}
               onKeyDown={(event) =>
@@ -385,11 +384,7 @@ function ApartmentDetailsPanel({
                 onFocus={() => onPreview(apartment.id)}
                 onBlur={onPreviewEnd}
                 onPointerEnter={() => onPreview(apartment.id)}
-                onPointerMove={() => onPreview(apartment.id)}
                 onPointerLeave={onPreviewEnd}
-                onMouseEnter={() => onPreview(apartment.id)}
-                onMouseMove={() => onPreview(apartment.id)}
-                onMouseLeave={onPreviewEnd}
                 onClick={() => onSelect(apartment.id)}
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
@@ -454,7 +449,6 @@ export function ApartmentsExplorer() {
     selectedFloor.apartments.find(
       (apartment) => apartment.id === previewApartmentId,
     ) ?? null;
-  const displayedApartment = hoverApartment ?? activeApartment;
 
   const selectFloor = (floorId: string) => {
     setSelectedFloorId(floorId);
@@ -529,7 +523,7 @@ export function ApartmentsExplorer() {
 
             <ApartmentDetailsPanel
               floor={selectedFloor}
-              activeApartment={displayedApartment}
+              activeApartment={activeApartment}
               previewApartmentId={previewApartmentId}
               onSelect={selectApartment}
               onPreview={setPreviewApartmentId}
@@ -542,9 +536,9 @@ export function ApartmentsExplorer() {
         <ApartmentInquiryDialog
           open={inquiryOpen}
           onOpenChange={setInquiryOpen}
-          apartmentCode={displayedApartment?.code}
-          apartmentTitle={displayedApartment?.title}
-          floorLabel={displayedApartment?.floorLabel}
+          apartmentCode={activeApartment?.code}
+          apartmentTitle={activeApartment?.title}
+          floorLabel={activeApartment?.floorLabel}
         />
       </section>
     </LayoutGroup>
