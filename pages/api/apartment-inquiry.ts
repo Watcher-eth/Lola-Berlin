@@ -101,18 +101,19 @@ export default async function handler(
   ]);
   const bcc = parseEmailList(
     process.env.INQUIRY_BCC_EMAILS || process.env.INQUIRY_BCC_EMAIL,
+    ["afg@afg-ia.de"],
   );
   const from =
     process.env.INQUIRY_FROM_EMAIL ||
     process.env.SMTP_USER ||
-    "no-reply@lola.berlin";
+    "LOLA <no-reply@lola.berlin>";
 
   const subject = apartmentCode
-    ? `Lola Anfrage: ${apartmentCode} / ${floorLabel ?? "ohne Etage"}`
-    : "Lola Anfrage";
+    ? `LOLA Anfrage: ${apartmentCode} / ${floorLabel ?? "ohne Etage"}`
+    : "LOLA Anfrage";
 
   const text = [
-    "Neue Anfrage von der Lola Apartments-Seite",
+    "Neue Anfrage von der LOLA Website",
     "",
     `Name: ${name.trim()}`,
     `E-Mail: ${email.trim()}`,
@@ -121,6 +122,7 @@ export default async function handler(
     `Wohnung: ${apartmentCode?.trim() || "Allgemeine Anfrage"}`,
     `Titel: ${apartmentTitle?.trim() || "-"}`,
     `Etage: ${floorLabel?.trim() || "-"}`,
+    "",
     "Datenschutz bestätigt: ja",
   ].join("\n");
 
