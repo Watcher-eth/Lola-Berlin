@@ -539,6 +539,7 @@ export function ApartmentsExplorer() {
           apartmentCode={activeApartment?.code}
           apartmentTitle={activeApartment?.title}
           floorLabel={activeApartment?.floorLabel}
+          defaultRooms={activeApartment?.rooms}
         />
       </section>
     </LayoutGroup>

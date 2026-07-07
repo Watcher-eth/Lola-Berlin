@@ -7,7 +7,7 @@ type SeoHeadProps = {
 };
 
 const siteName = "Lola";
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://lola.berlin";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.lolaliving.de";
 const ogImagePath = "/Lola.jpg";
 
 export function SeoHead({

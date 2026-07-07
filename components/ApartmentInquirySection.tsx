@@ -43,10 +43,10 @@ export function ApartmentInquirySection({
               <br />
               Mail:{" "}
               <a
-                href="mailto:LOLA@jeremyzimmer-immobilien.de"
+                href="mailto:h18@jeremyzimmer-immobilien.de"
                 className="text-[var(--accent)] underline decoration-[var(--accent)]/30 underline-offset-4 hover:text-black"
               >
-                LOLA@jeremyzimmer-immobilien.de
+                h18@jeremyzimmer-immobilien.de
               </a>
             </p>
           </div>
@@ -68,7 +68,7 @@ export function ApartmentInquirySection({
             </p>
             <div className="mt-8">
               <a
-                href="mailto:LOLA@jeremyzimmer-immobilien.de"
+                href="mailto:h18@jeremyzimmer-immobilien.de"
                 className="flex w-full justify-center bg-[var(--accent)] px-7 py-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] !text-white transition-colors duration-300 hover:bg-black"
               >
                 Besichtigung vereinbaren

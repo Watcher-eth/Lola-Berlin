@@ -14,6 +14,15 @@ type InquiryEmail = {
   text: string;
 };
 
+type OutboundEmail = {
+  to: string[];
+  bcc?: string[];
+  from: string;
+  replyTo?: string;
+  subject: string;
+  text: string;
+};
+
 function parseEmailList(value: string | undefined, fallback: string[] = []) {
   return (
     value
@@ -42,17 +51,21 @@ function getSmtpTransport() {
   });
 }
 
-async function sendInquiryEmail(email: InquiryEmail) {
+async function sendEmail(email: OutboundEmail) {
   const smtpTransport = getSmtpTransport();
 
   await smtpTransport.sendMail({
     to: email.to,
-    bcc: email.bcc.length > 0 ? email.bcc : undefined,
+    bcc: email.bcc && email.bcc.length > 0 ? email.bcc : undefined,
     from: email.from,
     replyTo: email.replyTo,
     subject: email.subject,
     text: email.text,
   });
+}
+
+async function sendInquiryEmail(email: InquiryEmail) {
+  await sendEmail(email);
 }
 
 export default async function handler(
@@ -97,7 +110,7 @@ export default async function handler(
   }
 
   const to = parseEmailList(process.env.INQUIRY_TO_EMAILS, [
-    process.env.INQUIRY_TO_EMAIL || "LOLA@jeremyzimmer-immobilien.de",
+    process.env.INQUIRY_TO_EMAIL || "h18@jeremyzimmer-immobilien.de",
   ]);
   const bcc = parseEmailList(
     process.env.INQUIRY_BCC_EMAILS || process.env.INQUIRY_BCC_EMAIL,
@@ -106,7 +119,7 @@ export default async function handler(
   const from =
     process.env.INQUIRY_FROM_EMAIL ||
     process.env.SMTP_USER ||
-    "LOLA <no-reply@lola.berlin>";
+    "LOLA <no-reply@lolaliving.de>";
 
   const subject = apartmentCode
     ? `LOLA Anfrage: ${apartmentCode} / ${floorLabel ?? "ohne Etage"}`
@@ -125,6 +138,17 @@ export default async function handler(
     "",
     "Datenschutz bestätigt: ja",
   ].join("\n");
+  const trimmedName = name.trim();
+  const firstName = trimmedName.split(/\s+/)[0] || trimmedName;
+  const confirmationText = [
+    `Hallo ${firstName},`,
+    "",
+    "vielen Dank für Ihre Anfrage und willkommen bei LOLA.",
+    "Wir bearbeiten sie nun und melden uns so bald wie möglich mit weiteren Informationen zurück.",
+    "",
+    "Herzliche Grüße",
+    "Ihr LOLA Team",
+  ].join("\n");
 
   try {
     await sendInquiryEmail({
@@ -135,6 +159,18 @@ export default async function handler(
       subject,
       text,
     });
+
+    try {
+      await sendEmail({
+        to: [email.trim()],
+        from,
+        replyTo: to[0],
+        subject: "Ihre Anfrage bei LOLA",
+        text: confirmationText,
+      });
+    } catch (confirmationError) {
+      console.error("Apartment inquiry confirmation failed", confirmationError);
+    }
 
     return res.status(200).json({ message: "Anfrage wurde versendet." });
   } catch (error) {

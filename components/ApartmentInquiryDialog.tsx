@@ -13,6 +13,7 @@ type ApartmentInquiryDialogProps = {
   apartmentCode?: string;
   apartmentTitle?: string;
   floorLabel?: string;
+  defaultRooms?: number;
 };
 
 export function ApartmentInquiryDialog({
@@ -21,6 +22,7 @@ export function ApartmentInquiryDialog({
   apartmentCode,
   apartmentTitle,
   floorLabel,
+  defaultRooms,
 }: ApartmentInquiryDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -38,9 +40,11 @@ export function ApartmentInquiryDialog({
 
         <div className="mt-8">
           <ApartmentInquiryForm
+            key={`${apartmentCode ?? "general"}-${defaultRooms ?? "rooms"}`}
             apartmentCode={apartmentCode}
             apartmentTitle={apartmentTitle}
             floorLabel={floorLabel}
+            defaultRooms={defaultRooms}
             submitLabel="Anfrage senden"
             onSuccess={() => onOpenChange(false)}
           />

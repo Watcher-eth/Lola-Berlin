@@ -5,6 +5,7 @@ type ApartmentInquiryFormProps = {
   apartmentCode?: string;
   apartmentTitle?: string;
   floorLabel?: string;
+  defaultRooms?: number;
   submitLabel?: string;
   onSuccess?: () => void;
 };
@@ -13,12 +14,13 @@ export function ApartmentInquiryForm({
   apartmentCode,
   apartmentTitle,
   floorLabel,
+  defaultRooms,
   submitLabel = "Anfrage senden",
   onSuccess,
 }: ApartmentInquiryFormProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [rooms, setRooms] = useState("");
+  const [rooms, setRooms] = useState(defaultRooms ? String(defaultRooms) : "");
   const [message, setMessage] = useState("");
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -69,7 +71,7 @@ export function ApartmentInquiryForm({
       });
       setName("");
       setEmail("");
-      setRooms("");
+      setRooms(defaultRooms ? String(defaultRooms) : "");
       setMessage("");
       setPrivacyAccepted(false);
       onSuccess?.();
