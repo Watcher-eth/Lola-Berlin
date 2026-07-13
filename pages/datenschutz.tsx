@@ -60,10 +60,10 @@ export default function DatenschutzPage() {
                 <p>
                   E-Mail:{" "}
                   <a
-                    href="mailto:h18@jeremyzimmer-immobilien.de"
+                    href="mailto:Jeremyzimmer@gmx.de"
                     className="text-[#3f422d] underline decoration-[#3f422d]/30 underline-offset-4"
                   >
-                    h18@jeremyzimmer-immobilien.de
+                    Jeremyzimmer@gmx.de
                   </a>
                 </p>
               </PrivacySection>

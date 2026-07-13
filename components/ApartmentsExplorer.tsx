@@ -39,6 +39,7 @@ function ApartmentFact({
 }
 
 function formatColdRent(apartment: ApartmentUnit) {
+  if (apartment.availability === "Vermietet") return null;
   if (!apartment.coldRent) return "Auf Anfrage";
 
   return `${apartment.coldRent.toLocaleString("de-DE", {
@@ -124,14 +125,19 @@ function ApartmentFloorOverlay({
               onBlur={onPreviewEnd}
               onPointerEnter={() => onPreview(apartment.id)}
               onPointerLeave={onPreviewEnd}
+              onPointerDown={(event) => {
+                event.preventDefault();
+                onSelect(apartment.id);
+              }}
               onClick={() => onSelect(apartment.id)}
               onKeyDown={(event) =>
                 handlePlanKeySelect(event, apartment.id, onSelect)
               }
               fill="transparent"
               stroke="transparent"
-              strokeWidth="0"
+              strokeWidth="2.2"
               vectorEffect="non-scaling-stroke"
+              style={{ pointerEvents: "all", touchAction: "none" }}
               className="cursor-pointer outline-none"
             />
           );
@@ -302,10 +308,12 @@ function ApartmentDetailsPanel({
                 label="Balkon/Garten"
                 value={getOutdoorSpaceLabel(activeApartment)}
               />
-              <ApartmentFact
-                label="Kaltmiete"
-                value={formatColdRent(activeApartment)}
-              />
+              {activeApartment.availability !== "Vermietet" ? (
+                <ApartmentFact
+                  label="Kaltmiete"
+                  value={formatColdRent(activeApartment)}
+                />
+              ) : null}
               <ApartmentFact
                 label="Verfügbarkeit"
                 value={
@@ -414,8 +422,7 @@ function ApartmentDetailsPanel({
                 </span>
                 <span className="mt-2 block text-xs leading-5 text-black/54">
                   {apartment.sqm.toLocaleString("de-DE")} m²
-                  {" · "}
-                  {formatColdRent(apartment)}
+                  {sold ? null : <> · {formatColdRent(apartment)}</>}
                 </span>
               </motion.button>
             );

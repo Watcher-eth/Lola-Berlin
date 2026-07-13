@@ -1,7 +1,7 @@
 import generatedCadApartmentHighlights from "@/data/generated-cad-apartment-highlights.json";
 
 export type ApartmentStatus = "Auf Anfrage" | "Vermietet";
-export type HouseSection = "Vorderhaus" | "Hinterhaus";
+export type HouseSection = "Vorderhaus" | "Hinterhaus" | "Seitenflügel";
 export type PlanQuality = "exact" | "typology";
 
 export type ApartmentHighlight = {
@@ -130,7 +130,7 @@ const floor1Apartments = [
     bedrooms: 1,
     bathrooms: 1,
     coldRent: 2427.6,
-    balcony: true,
+    balcony: false,
     gardenAccess: false,
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt1VhLeft,
@@ -227,6 +227,7 @@ const floor1Apartments = [
     cadPlanSrc: cadPlans.floor1,
     planQuality: "typology",
     modelLabel: "Typologie Hinterhaus rechts",
+    availability: "Vermietet",
   }),
   seed({
     code: "WE 22",
@@ -291,9 +292,9 @@ const floor2Apartments = [
   seed({
     code: "WE 07",
     highlightCode: "WE 06",
-    title: "1-Zimmer-Wohnung im Vorderhaus",
-    section: "Vorderhaus",
-    position: "Vorderhaus links",
+    title: "1-Zimmer-Wohnung im Seitenflügel",
+    section: "Seitenflügel",
+    position: "Seitenflügel links",
     sqm: 54.9,
     rooms: 1,
     bedrooms: 1,
@@ -304,7 +305,7 @@ const floor2Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt2SflLeft,
     planQuality: "exact",
-    modelLabel: "Vorderhaus links, 2. Obergeschoss",
+    modelLabel: "Seitenflügel links, 2. Obergeschoss",
   }),
   seed({
     code: "WE 23",

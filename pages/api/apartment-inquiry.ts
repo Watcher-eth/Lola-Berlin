@@ -110,11 +110,11 @@ export default async function handler(
   }
 
   const to = parseEmailList(process.env.INQUIRY_TO_EMAILS, [
-    process.env.INQUIRY_TO_EMAIL || "h18@jeremyzimmer-immobilien.de",
+    process.env.INQUIRY_TO_EMAIL || "Jeremyzimmer@gmx.de",
   ]);
   const bcc = parseEmailList(
     process.env.INQUIRY_BCC_EMAILS || process.env.INQUIRY_BCC_EMAIL,
-    ["afg@afg-ia.de"],
+    ["Jeremyzimmer@gmx.de", "afg@afg-ia.de"],
   );
   const from =
     process.env.INQUIRY_FROM_EMAIL ||
