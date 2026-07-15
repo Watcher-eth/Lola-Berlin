@@ -80,6 +80,7 @@ export default async function handler(
   const {
     name,
     email,
+    phone,
     rooms,
     message,
     apartmentCode,
@@ -89,6 +90,7 @@ export default async function handler(
   } = req.body as {
     name?: string;
     email?: string;
+    phone?: string;
     rooms?: string;
     message?: string;
     apartmentCode?: string;
@@ -130,6 +132,7 @@ export default async function handler(
     "",
     `Name: ${name.trim()}`,
     `E-Mail: ${email.trim()}`,
+    `Telefon: ${phone?.trim() || "-"}`,
     `Größe/Zimmer: ${rooms?.trim() || "-"}`,
     `Nachricht: ${message?.trim() || "-"}`,
     `Wohnung: ${apartmentCode?.trim() || "Allgemeine Anfrage"}`,

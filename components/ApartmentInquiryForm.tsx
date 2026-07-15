@@ -20,6 +20,7 @@ export function ApartmentInquiryForm({
 }: ApartmentInquiryFormProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [rooms, setRooms] = useState(defaultRooms ? String(defaultRooms) : "");
   const [message, setMessage] = useState("");
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
@@ -50,6 +51,7 @@ export function ApartmentInquiryForm({
         body: JSON.stringify({
           name,
           email,
+          phone,
           rooms,
           message,
           apartmentCode,
@@ -71,6 +73,7 @@ export function ApartmentInquiryForm({
       });
       setName("");
       setEmail("");
+      setPhone("");
       setRooms(defaultRooms ? String(defaultRooms) : "");
       setMessage("");
       setPrivacyAccepted(false);
@@ -125,6 +128,21 @@ export function ApartmentInquiryForm({
             onChange={(event) => setEmail(event.target.value)}
             required
             placeholder="E-Mail*"
+            className="w-full border border-[var(--accent)]/44 bg-transparent px-4 py-4 text-base text-[var(--ink)] outline-none transition-colors duration-300 placeholder:text-black/54 focus:border-[var(--accent)]"
+          />
+        </label>
+      </div>
+
+      <div className="mt-4">
+        <label className="block">
+          <span className="sr-only">Telefonnummer optional</span>
+          <input
+            type="tel"
+            name="phone"
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
+            placeholder="Telefonnummer (optional)"
+            autoComplete="tel"
             className="w-full border border-[var(--accent)]/44 bg-transparent px-4 py-4 text-base text-[var(--ink)] outline-none transition-colors duration-300 placeholder:text-black/54 focus:border-[var(--accent)]"
           />
         </label>
