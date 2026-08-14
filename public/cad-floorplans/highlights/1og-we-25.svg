@@ -4,7 +4,7 @@
     path,
     circle {
       fill: none;
-      stroke: #FF3B30;
+      stroke: #007AFF;
       stroke-width: 1.55;
       stroke-linecap: round;
       stroke-linejoin: round;

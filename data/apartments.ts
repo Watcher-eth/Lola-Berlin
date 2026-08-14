@@ -1,12 +1,13 @@
 import generatedCadApartmentHighlights from "@/data/generated-cad-apartment-highlights.json";
 
 export type ApartmentStatus = "Auf Anfrage" | "Vermietet";
-export type HouseSection = "Vorderhaus" | "Hinterhaus" | "Seitenflügel";
+export type HouseSection = "Vorderhaus" | "Gartenhaus" | "Seitenflügel";
 export type PlanQuality = "exact" | "typology";
 
 export type ApartmentHighlight = {
   overlaySrc: string;
   hitPath: string;
+  outlinePath?: string;
   label: {
     x: number;
     y: number;
@@ -154,6 +155,7 @@ const floor1Apartments = [
     cadPlanSrc: cadPlans.apt1VhLeft,
     planQuality: "exact",
     modelLabel: "Vorderhaus links, 1. Obergeschoss",
+    availability: "Vermietet",
   }),
   seed({
     code: "WE 06",
@@ -176,9 +178,9 @@ const floor1Apartments = [
   seed({
     code: "WE 19",
     highlightCode: "WE 22",
-    title: "2-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus links",
+    title: "2-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus links",
     sqm: 64.8,
     rooms: 2,
     bedrooms: 1,
@@ -189,14 +191,14 @@ const floor1Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.floor1,
     planQuality: "typology",
-    modelLabel: "Typologie Hinterhaus links",
+    modelLabel: "Typologie Gartenhaus links",
   }),
   seed({
     code: "WE 20",
     highlightCode: "WE 23",
-    title: "2-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus links",
+    title: "2-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus links",
     sqm: 59.7,
     rooms: 2,
     bedrooms: 1,
@@ -207,15 +209,15 @@ const floor1Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt1GhLeft,
     planQuality: "exact",
-    modelLabel: "Hinterhaus links, 1. Obergeschoss",
+    modelLabel: "Gartenhaus links, 1. Obergeschoss",
     availability: "Vermietet",
   }),
   seed({
     code: "WE 21",
     highlightCode: "WE 24",
-    title: "3-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus rechts",
+    title: "3-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus rechts",
     sqm: 82.3,
     rooms: 3,
     bedrooms: 2,
@@ -226,15 +228,15 @@ const floor1Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.floor1,
     planQuality: "typology",
-    modelLabel: "Typologie Hinterhaus rechts",
+    modelLabel: "Typologie Gartenhaus rechts",
     availability: "Vermietet",
   }),
   seed({
     code: "WE 22",
     highlightCode: "WE 25",
-    title: "1-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus rechts",
+    title: "1-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus links",
     sqm: 36.9,
     rooms: 1,
     bedrooms: 1,
@@ -245,8 +247,7 @@ const floor1Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt1GhRight,
     planQuality: "exact",
-    modelLabel: "Hinterhaus rechts, 1. Obergeschoss",
-    availability: "Vermietet",
+    modelLabel: "Gartenhaus links, 1. Obergeschoss",
   }),
 ];
 
@@ -268,7 +269,6 @@ const floor2Apartments = [
     cadPlanSrc: cadPlans.apt2VhLeft,
     planQuality: "exact",
     modelLabel: "Vorderhaus links, 2. Obergeschoss",
-    availability: "Vermietet",
   }),
   seed({
     code: "WE 08",
@@ -310,9 +310,9 @@ const floor2Apartments = [
   seed({
     code: "WE 23",
     highlightCode: "WE 26",
-    title: "1-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus links",
+    title: "1-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus links",
     sqm: 45.8,
     rooms: 1,
     bedrooms: 1,
@@ -323,14 +323,14 @@ const floor2Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt2SflRight,
     planQuality: "typology",
-    modelLabel: "Typologie Hinterhaus links",
+    modelLabel: "Typologie Gartenhaus links",
   }),
   seed({
     code: "WE 24",
     highlightCode: "WE 27",
-    title: "3-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus links",
+    title: "3-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus links",
     sqm: 81.7,
     rooms: 3,
     bedrooms: 2,
@@ -341,15 +341,15 @@ const floor2Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.floor2,
     planQuality: "typology",
-    modelLabel: "Typologie Hinterhaus links",
+    modelLabel: "Typologie Gartenhaus links",
     availability: "Vermietet",
   }),
   seed({
     code: "WE 25",
     highlightCode: "WE 28",
-    title: "2-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus rechts",
+    title: "2-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus rechts",
     sqm: 60.3,
     rooms: 2,
     bedrooms: 1,
@@ -360,7 +360,7 @@ const floor2Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.floor2,
     planQuality: "typology",
-    modelLabel: "Typologie Hinterhaus rechts",
+    modelLabel: "Typologie Gartenhaus rechts",
   }),
   seed({
     code: "WE 10",
@@ -383,9 +383,9 @@ const floor2Apartments = [
   seed({
     code: "WE 26",
     highlightCode: "WE 29",
-    title: "2-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus rechts",
+    title: "2-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus rechts",
     sqm: 69.1,
     rooms: 2,
     bedrooms: 1,
@@ -396,7 +396,7 @@ const floor2Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt2SflInnerLeft,
     planQuality: "exact",
-    modelLabel: "Hinterhaus rechts, 2. Obergeschoss",
+    modelLabel: "Gartenhaus rechts, 2. Obergeschoss",
   }),
 ];
 
@@ -440,9 +440,9 @@ const floor3Apartments = [
   seed({
     code: "WE 27",
     highlightCode: "WE 30",
-    title: "4-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus links",
+    title: "4-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus links",
     sqm: 127.4,
     rooms: 4,
     bedrooms: 3,
@@ -453,14 +453,14 @@ const floor3Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt3Left,
     planQuality: "exact",
-    modelLabel: "Hinterhaus links",
+    modelLabel: "Gartenhaus links",
   }),
   seed({
     code: "WE 28",
     highlightCode: "WE 31/32",
-    title: "4-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus rechts",
+    title: "4-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus rechts",
     sqm: 126.1,
     rooms: 4,
     bedrooms: 3,
@@ -471,7 +471,7 @@ const floor3Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt3Right,
     planQuality: "typology",
-    modelLabel: "Typologie Hinterhaus rechts",
+    modelLabel: "Typologie Gartenhaus rechts",
   }),
 ];
 
@@ -515,9 +515,9 @@ const floor4Apartments = [
   seed({
     code: "WE 29",
     highlightCode: "WE 33/34",
-    title: "4-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus links",
+    title: "4-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus links",
     sqm: 129.3,
     rooms: 4,
     bedrooms: 3,
@@ -528,14 +528,14 @@ const floor4Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt4Left,
     planQuality: "typology",
-    modelLabel: "Typologie Hinterhaus links",
+    modelLabel: "Typologie Gartenhaus links",
   }),
   seed({
     code: "WE 30",
     highlightCode: "WE 35/36",
-    title: "4-Zimmer-Wohnung im Hinterhaus",
-    section: "Hinterhaus",
-    position: "Hinterhaus rechts",
+    title: "4-Zimmer-Wohnung im Gartenhaus",
+    section: "Gartenhaus",
+    position: "Gartenhaus rechts",
     sqm: 129.3,
     rooms: 4,
     bedrooms: 3,
@@ -546,7 +546,7 @@ const floor4Apartments = [
     note: "Die Wohnung wird im vollständigen Geschossgrundriss verortet.",
     cadPlanSrc: cadPlans.apt4Right,
     planQuality: "exact",
-    modelLabel: "Hinterhaus rechts",
+    modelLabel: "Gartenhaus rechts",
   }),
 ];
 

@@ -153,6 +153,17 @@ function ApartmentFloorOverlay({
               transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
               className="pointer-events-none"
             >
+              <path
+                d={
+                  highlightedApartment.highlight.outlinePath ??
+                  highlightedApartment.highlight.hitPath
+                }
+                fill="transparent"
+                stroke={apartmentHighlightValue(highlightedApartment)}
+                strokeWidth="1.55"
+                vectorEffect="non-scaling-stroke"
+                className="opacity-90"
+              />
               <text
                 x={highlightedApartment.highlight.label.x}
                 y={highlightedApartment.highlight.label.y}
@@ -203,7 +214,7 @@ function CadPlanSurface({
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-3 z-30 text-center font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--accent)]/62 sm:top-4"
         >
-          Hinterhaus / Garten
+          Gartenhaus / Garten
         </div>
         <div
           aria-hidden="true"

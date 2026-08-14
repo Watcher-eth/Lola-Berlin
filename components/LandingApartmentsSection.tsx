@@ -124,7 +124,7 @@ export function LandingApartmentsSection() {
                 />
               </div>
               <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.18em] text-black/42">
-                Nur Hinterhaus zum Garten.
+                Nur Gartenhaus zum Garten.
               </p>
             </div>
 
